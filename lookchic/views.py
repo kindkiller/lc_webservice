@@ -51,12 +51,12 @@ class Views:
     @view_config(route_name='login')
     def login(self):
         request = self.request
-        from sys import exc_info
+        #from sys import exc_info
         try:
-            a=10
-            print(a)
-            user = sess.query(Userinfo).filter(Userinfo.Email =='yao@yao.com').first()# request.json_body.get('email')).first()
+            a=0
+            user = sess.query(Userinfo).filter(Userinfo.Email == request.json_body.get('email')).first() # request.json_body.get('email')).first()
             if user is None:
+                a=1
                 return Response(json=dict(rc=400, msg="Login Error: no such user"), status_code=400)
             if user.Password == request.json_body.get('password'):
                 #user.pwhash == bcrypt.hashpw(bytes(request.POST.get('password'), 'utf-8'), user.salt):
@@ -64,15 +64,17 @@ class Views:
                 #request.session.save()
                 headers = remember(request, request.json_body.get('email'))
                 #headers.append(('X-CSRF-token', request.session.new_csrf_token()))
-                return Response(headers=headers, json=dict(rc=200, msg="Login: Login Successful", user=user.email), status_code=200)
+                a=2
+                return Response(headers=headers, json=dict(rc=200, msg="Login: Login Successful", user=user.Email), status_code=200)
     
             sess.remove()
+            a=3
             return Response(json=dict(rc=400, msg="Login Error: Email and password don't match"), status_code=400)
         except DBAPIError:
             return Response(conn_err_msg, content_type='text/plain', status_int=400)
         except:
-            print (exc_info())
-            return Response(json=dict(rc=400, msg="Login Error: unknow error"), status_code=400)
+            #print (exc_info())
+            return Response(json=dict(rc=400, msg="Login Error: unknown error"), status_code=400)
 
     #Signup
     @view_config(route_name='signup')

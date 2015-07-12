@@ -4,7 +4,6 @@ pyramid_debugtoolbar
 pyramid_tm
 SQLAlchemy
 transaction
-zope.sqlalchemy
 waitress
 pyramid_beaker
 pyramid_storage

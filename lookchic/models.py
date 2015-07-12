@@ -9,8 +9,9 @@ import mysql.connector
 from sqlalchemy import create_engine
 
 db_uri = "mysql+mysqlconnector://{user}:{password}@{host}:{port}/{db}"
-engine = create_engine(db_uri.format(user='allen', password='yao0702', host='192.168.1.103', port='3306', db='userdb'), encoding='utf8', connect_args={'time_zone':'+00:00'})
-#engine = create_engine('sqlite:///feed.db', echo=True)
+#engine = create_engine(db_uri.format(user='allen', password='yao0702', host='192.168.1.103', port='3306', db='userdb'), encoding='utf8', connect_args={'time_zone':'+00:00'})
+engine = create_engine(db_uri.format(user='yy', password='qwer4321', host='localhost', port='3306', db='userdb'), encoding='utf8', connect_args={'time_zone':'+00:00'})#
+# engine = create_engine('sqlite:///feed.db', echo=True)
 
 from sqlalchemy.ext.declarative import declarative_base
 
