@@ -325,3 +325,22 @@ for u in user:
 # #sess.execute("select * from test_usertable")
 # #Base.metadata.create_all(engine)
 #
+
+from mysql.connector import MySQLConnection, Error
+
+def AddPhoto(PName, PDesc, PPath, FiName):
+    conn = mysql.connector.connect(user="root",password="qwer4321",host="localhost",database="userdb")
+    cursor = conn.cursor()
+    try:
+        #db_config = read_db_config()
+        args = [PName, PDesc, PPath, FiName,0]
+        result_args = cursor.callproc('uspAddPhoto', args)
+        conn.commit()
+        print(result_args[4])
+    except Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+AddPhoto('TestInsert1','','TestPath:','')

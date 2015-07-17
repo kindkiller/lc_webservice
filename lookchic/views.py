@@ -6,6 +6,10 @@ from sqlalchemy.exc import DBAPIError
 import mysql.connector
 import bcrypt, datetime
 
+import os
+import uuid
+import shutil
+
 import cgi
 import re
 #from docutils.core import publish_parts
@@ -51,12 +55,10 @@ class Views:
     @view_config(route_name='login')
     def login(self):
         request = self.request
-        #from sys import exc_info
+        from sys import exc_info
         try:
-            a=0
             user = sess.query(Userinfo).filter(Userinfo.Email == request.json_body.get('email')).first() # request.json_body.get('email')).first()
             if user is None:
-                a=1
                 return Response(json=dict(rc=400, msg="Login Error: no such user"), status_code=400)
             if user.Password == request.json_body.get('password'):
                 #user.pwhash == bcrypt.hashpw(bytes(request.POST.get('password'), 'utf-8'), user.salt):
@@ -64,16 +66,14 @@ class Views:
                 #request.session.save()
                 headers = remember(request, request.json_body.get('email'))
                 #headers.append(('X-CSRF-token', request.session.new_csrf_token()))
-                a=2
                 return Response(headers=headers, json=dict(rc=200, msg="Login: Login Successful", user=user.Email), status_code=200)
     
             sess.remove()
-            a=3
             return Response(json=dict(rc=400, msg="Login Error: Email and password don't match"), status_code=400)
         except DBAPIError:
             return Response(conn_err_msg, content_type='text/plain', status_int=400)
         except:
-            #print (exc_info())
+            print (exc_info())
             return Response(json=dict(rc=400, msg="Login Error: unknown error"), status_code=400)
 
     #Signup
@@ -103,11 +103,50 @@ class Views:
         sess.remove()
         return Response(json=dict(rc=200, msg="Sign up: Sign up successful"), status_code=200)
 
-    #test
-    @view_config(route_name='test')
-    def test(self):
+    #save a posted image
+    @view_config(route_name='post')
+    def post(self):
         request = self.request
-        return Response(json=dict(email=request.json_body.get('email'), pwd=request.json_body.get('password'), msg="Test: TEST API RESPONSE"), status_code=200)
+        from sys import exc_info
+        # ``filename`` contains the name of the file in string format.
+        #
+        # WARNING: this example does not deal with the fact that IE sends an
+        # absolute file *path* as the filename.  This example is naive; it
+        # trusts user input.
+        try:
+            filename = request.POST['file'].filename
+
+            # ``input_file`` contains the actual file data which needs to be
+            # stored somewhere.
+
+            input_file = request.POST['file'].file
+
+            # Note that we are generating our own filename instead of trusting
+            # the incoming filename since that might result in insecure paths.
+            # Please note that in a real application you would not use /tmp,
+            # and if you write to an untrusted location you will need to do
+            # some extra work to prevent symlink attacks.
+
+            file_path = os.path.join('../static/img', '%s.png' % uuid.uuid4())
+
+            # We first write to a temporary file to prevent incomplete files from
+            # being used.
+
+            temp_file_path = file_path + '~'
+
+            # Finally write the data to a temporary file
+            input_file.seek(0)
+            with open(temp_file_path, 'wb') as output_file:
+                shutil.copyfileobj(input_file, output_file)
+
+            # Now that we know the file has been fully saved to disk move it into place.
+
+            os.rename(temp_file_path, file_path)
+
+            return Response('OK')
+        except:
+            print (exc_info())
+            return Response(json=dict(rc=400, msg="Login Error: unknown error"), status_code=400)
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
