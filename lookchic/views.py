@@ -122,7 +122,7 @@ class Views:
                 input_file = request.POST['file'].file
 
                 # strip leading path from file name to avoid directory traversal attacks
-                fn = os.path.basename(input_file.name)
+                fn = os.path.basename(filename)
                 #open('../static/img/' + fn, 'wb').write(input_file.file.read())
 
                 # Note that we are generating our own filename instead of trusting
@@ -131,7 +131,7 @@ class Views:
                 # and if you write to an untrusted location you will need to do
                 # some extra work to prevent symlink attacks.
 
-                file_path = os.path.join('C:\\virtualenvs\\lc_env\\lookchic\\lookchic\\static\\img', '%s.png' % uuid.uuid4())
+                file_path = os.path.join('C:\\virtualenvs\\lc_env\\lookchic\\lookchic\\static\\img', '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2])
 
                 # We first write to a temporary file to prevent incomplete files from
                 # being used.
