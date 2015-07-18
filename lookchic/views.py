@@ -118,32 +118,38 @@ class Views:
 
             # ``input_file`` contains the actual file data which needs to be
             # stored somewhere.
+            if (filename):
+                input_file = request.POST['file'].file
 
-            input_file = request.POST['file'].file
+                # strip leading path from file name to avoid directory traversal attacks
+                fn = os.path.basename(input_file.name)
+                #open('../static/img/' + fn, 'wb').write(input_file.file.read())
 
-            # Note that we are generating our own filename instead of trusting
-            # the incoming filename since that might result in insecure paths.
-            # Please note that in a real application you would not use /tmp,
-            # and if you write to an untrusted location you will need to do
-            # some extra work to prevent symlink attacks.
+                # Note that we are generating our own filename instead of trusting
+                # the incoming filename since that might result in insecure paths.
+                # Please note that in a real application you would not use /tmp,
+                # and if you write to an untrusted location you will need to do
+                # some extra work to prevent symlink attacks.
 
-            file_path = os.path.join('../static/img', '%s.png' % uuid.uuid4())
+                file_path = os.path.join('C:\\virtualenvs\\lc_env\\lookchic\\lookchic\\static\\img', '%s.png' % uuid.uuid4())
 
-            # We first write to a temporary file to prevent incomplete files from
-            # being used.
+                # We first write to a temporary file to prevent incomplete files from
+                # being used.
 
-            temp_file_path = file_path + '~'
+                temp_file_path = file_path + '~'
 
-            # Finally write the data to a temporary file
-            input_file.seek(0)
-            with open(temp_file_path, 'wb') as output_file:
-                shutil.copyfileobj(input_file, output_file)
+                # Finally write the data to a temporary file
+                input_file.seek(0)
+                with open(temp_file_path, 'wb') as output_file:
+                    shutil.copyfileobj(input_file, output_file)
 
-            # Now that we know the file has been fully saved to disk move it into place.
+                # Now that we know the file has been fully saved to disk move it into place.
 
-            os.rename(temp_file_path, file_path)
+                os.rename(temp_file_path, file_path)
 
-            return Response('OK')
+                return Response(json=dict(rc=200, msg="File uploaded"), status_code=200)
+            else:
+                return Response(json=dict(rc=400, msg="no file name"), status_code=400)
         except:
             print (exc_info())
             return Response(json=dict(rc=400, msg="Login Error: unknown error"), status_code=400)

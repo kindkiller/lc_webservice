@@ -328,13 +328,30 @@ for u in user:
 
 from mysql.connector import MySQLConnection, Error
 
-def AddPhoto(PName, PDesc, PPath, FiName):
-    conn = mysql.connector.connect(user="root",password="qwer4321",host="localhost",database="userdb")
-    cursor = conn.cursor()
+'''
+
+from mysql.connector import MySQLConnection, Error
+conn = mysql.connector.connect(user="root",password="qwer4321",host="localhost",database="userdb")
+cursor = conn.cursor()
+
+def AddPhoto(UID, PName, PDesc, PPath, FiName):
     try:
-        #db_config = read_db_config()
-        args = [PName, PDesc, PPath, FiName,0]
+        args = [UID, PName, PDesc, PPath, FiName,0]
         result_args = cursor.callproc('uspAddPhoto', args)
+        conn.commit()
+        print(result_args[5])
+    except Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+#AddPhoto('TestInsert1','','TestPath:','')
+
+def AddComment(CText, UID, PID):
+    try:
+        args = [CText, UID, PID,0]
+        result_args = cursor.callproc('uspAddComment', args)
         conn.commit()
         print(result_args[4])
     except Error as e:
@@ -343,4 +360,42 @@ def AddPhoto(PName, PDesc, PPath, FiName):
         cursor.close()
         conn.close()
 
-AddPhoto('TestInsert1','','TestPath:','')
+def AddLike(UID, PID):
+    try:
+        args = [UID, PID,0]
+        result_args = cursor.callproc('uspAddLike', args)
+        conn.commit()
+        #print(result_args[3])
+    except Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+
+def AddUserRelation(U1ID, U2ID, Rtype):
+    try:
+        args = [U1ID, U2ID,Rtype,0]
+        result_args = cursor.callproc('uspAddLike', args)
+        conn.commit()
+        #print(result_args[3])
+    except Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+def GetPassword(UID):
+    try:
+        args = [UID,0]
+        result_args = cursor.callproc('uspGetPassword', args)
+        conn.commit()
+        print(result_args[1])
+    except Error as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+'''
+
