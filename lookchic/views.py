@@ -66,7 +66,7 @@ class Views:
                 #request.session.save()
                 headers = remember(request, request.json_body.get('email'))
                 #headers.append(('X-CSRF-token', request.session.new_csrf_token()))
-                return Response(headers=headers, json=dict(rc=200, msg="Login: Login Successful", user=user.Email), status_code=200)
+                return Response(headers=headers, json=dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID), status_code=200)
     
             sess.remove()
             return Response(json=dict(rc=400, msg="Login Error: Email and password don't match"), status_code=400)
