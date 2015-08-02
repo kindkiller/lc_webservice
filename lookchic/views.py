@@ -1,4 +1,4 @@
-from pyramid.response import Response
+from pyramid.request import Response
 from pyramid.request import Request
 from pyramid.view import view_config, view_defaults, notfound_view_config
 
@@ -52,9 +52,10 @@ class Views:
         return True
         
     #login 
-    @view_config(route_name='login')
+    @view_config(route_name='login',  request_method='POST')
     def login(self):
         request = self.request
+        resp = request.response
         from sys import exc_info
         try:
             user = sess.query(Userinfo).filter(Userinfo.Email == request.json_body.get('email')).first() # request.json_body.get('email')).first()
@@ -64,12 +65,17 @@ class Views:
                 #user.pwhash == bcrypt.hashpw(bytes(request.POST.get('password'), 'utf-8'), user.salt):
                 #request.sess[request.POST.get('email')] = 'sessionstart'
                 #request.session.save()
-                headers = remember(request, request.json_body.get('email'))
+                #headers = remember(request, request.json_body.get('email'))
                 #headers.append(('X-CSRF-token', request.session.new_csrf_token()))
-                return Response(headers=headers, json=dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID), status_code=200)
+
+                resp.status_code = 200
+                #(json=dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID), status_code=200)
+                #resp.headerlist.append(('Access-Control-Allow-Origin', '*'))
+                return dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID)
     
             sess.remove()
-            return Response(json=dict(rc=400, msg="Login Error: Email and password don't match"), status_code=400)
+            #resp.status_code = 400
+            return resp(json=dict(rc=400, msg="Login Error: Email and password don't match"), status_code=400)
         except DBAPIError:
             return Response(conn_err_msg, content_type='text/plain', status_int=400)
         except:
@@ -80,11 +86,11 @@ class Views:
     @view_config(route_name='signup')
     def signup(self):
         request = self.request
-
+        resp = request.response
         user = Userinfo()
         user.email = request.json_body.get('email')
         user.pwd = request.json_body.get('password')
-        #user.salt = bcrypt.gensalt()
+        user.salt = bcrypt.gensalt()
         #user.pwhash = bcrypt.hashpw(bytes(request.POST.get('password'), 'utf-8'), user.salt)
         #user.active = False
 
@@ -104,9 +110,22 @@ class Views:
         return Response(json=dict(rc=200, msg="Sign up: Sign up successful"), status_code=200)
 
     #save a posted image
+
+    @view_config(route_name='options', request_method='OPTIONS')
+    def post_options(self):
+        return Response(json=dict(rc=200, msg="Options Successful"), status_code=200)
+
+
+    @view_config(route_name='post', request_method='OPTIONS')
+    def post_options(self):
+        resp = self.request.response #(json=dict(rc=200, msg="Options Successful"), status_code=200)
+        #resp.headerlist.append(('Access-Control-Allow-Origin', 'http://localhost:8000'))
+        return resp
+
     @view_config(route_name='post')
     def post(self):
         request = self.request
+        resp = request.response
         from sys import exc_info
         # ``filename`` contains the name of the file in string format.
         #
@@ -146,13 +165,21 @@ class Views:
                 # Now that we know the file has been fully saved to disk move it into place.
 
                 os.rename(temp_file_path, file_path)
+                resp.status_code = 200
 
-                return Response(json=dict(rc=200, msg="File uploaded"), status_code=200)
+                return dict(rc=200, msg="File uploaded")
             else:
-                return Response(json=dict(rc=400, msg="no file name"), status_code=400)
+                resp.status_code = 400
+                return dict(rc=400, msg="no file name")
         except:
             print (exc_info())
-            return Response(json=dict(rc=400, msg="Login Error: unknown error"), status_code=400)
+            resp.status_code = 400
+            return dict(rc=400, msg="Post Error: unknown error")
+
+    #save a posted image
+    @view_config(route_name='main')
+    def main(self):
+        request = self.request
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem

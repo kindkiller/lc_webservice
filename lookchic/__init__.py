@@ -12,6 +12,28 @@ from .models import (
     Base
     )
 
+from pyramid.request import Request
+from pyramid.request import Response
+
+def request_factory(environ):
+    request = Request(environ)
+    #if request.is_xhr:
+    #if request.method == 'OPTIONS':
+    request.response = Response()
+    #request.response.headerlist = []
+    request.response.headerlist.extend(
+        (
+            ('Access-Control-Allow-Origin', 'http://localhost:8000'),
+            ("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE"),
+            ("Access-Control-Expose-Headers", "X-CSRF-token"),
+            #("Access-Control-Allow-Credentials", 'true'),
+            ("Access-Control-Allow-Headers", 'X-CSRF-token')
+        )
+    )
+    return request
+
+
+
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
@@ -36,16 +58,24 @@ def main(global_config, **settings):
     config.include('pyramid_chameleon')
     
     config.add_static_view('static', 'static', cache_max_age=3600)
-    
+
+    config.set_request_factory(request_factory)
+
     config.add_route('home', '/')
+
     config.add_route('post', '/post')
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
     config.add_route('signup', '/signup')
-    config.add_route('add_page', '/add_page/{pagename}')
-    config.add_route('edit_page', '/{pagename}/edit_page')
+    config.add_route('main', '/main')
+    config.add_route('options', '/post', request_method='OPTIONS')
+    #config.add_route('add_page', '/add_page/{pagename}')
+    #config.add_route('edit_page', '/{pagename}/edit_page')
     
     #config.add_route('home', '/')
+
+    #config.scan(".utility_views")
     config.scan(".views")
-    config.scan(".events")
+    #config.scan(".events")
+
     return config.make_wsgi_app()
