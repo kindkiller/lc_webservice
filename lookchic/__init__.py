@@ -23,11 +23,11 @@ def request_factory(environ):
     #request.response.headerlist = []
     request.response.headerlist.extend(
         (
-            ('Access-Control-Allow-Origin', 'http://localhost:8000'),
-            ("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE"),
-            ("Access-Control-Expose-Headers", "X-CSRF-token"),
+            ("Access-Control-Allow-Origin", "http://localhost:8000"),
+            #("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE"),
+            #("Access-Control-Expose-Headers", "X-CSRF-token"),
             #("Access-Control-Allow-Credentials", 'true'),
-            ("Access-Control-Allow-Headers", 'X-CSRF-token')
+            #("Access-Control-Allow-Headers", 'X-CSRF-token')
         )
     )
     return request

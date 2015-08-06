@@ -72,7 +72,7 @@ class Views:
                 #(json=dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID), status_code=200)
                 #resp.headerlist.append(('Access-Control-Allow-Origin', '*'))
                 return dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID)
-    
+
             sess.remove()
             #resp.status_code = 400
             return resp(json=dict(rc=400, msg="Login Error: Email and password don't match"), status_code=400)
@@ -122,7 +122,7 @@ class Views:
         #resp.headerlist.append(('Access-Control-Allow-Origin', 'http://localhost:8000'))
         return resp
 
-    @view_config(route_name='post')
+    @view_config(route_name='post', request_method='POST')
     def post(self):
         request = self.request
         resp = request.response
@@ -150,7 +150,7 @@ class Views:
                 # and if you write to an untrusted location you will need to do
                 # some extra work to prevent symlink attacks.
 
-                file_path = os.path.join('C:\\virtualenvs\\lc_env\\lookchic\\lookchic\\static\\img', '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2])
+                file_path = os.path.join('lookchic/static/img', '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2])
 
                 # We first write to a temporary file to prevent incomplete files from
                 # being used.
@@ -166,6 +166,17 @@ class Views:
 
                 os.rename(temp_file_path, file_path)
                 resp.status_code = 200
+                import json
+                user_object=json.loads(request.POST.get('username'))
+                userid=user_object['userid']
+                from models import AddPhoto
+                pic_id=AddPhoto(userid,'photoname','photoDescription',file_path,file_path)
+                from pin_feed import User
+                user_pin=User(userid)
+                user_pin.add_pic(pic_id)
+                from feed_managers import manager
+                feeds=manager.get_feeds(1)['normal']
+                print (feeds[:])
 
                 return dict(rc=200, msg="File uploaded")
             else:
