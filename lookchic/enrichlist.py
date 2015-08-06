@@ -8,13 +8,26 @@ class richPicture(object):
     pic_id=0
     pic_url=''
     pic_uid=0
+    pic_userName=''
+    pic_time=''
     commentList=list()
     def __init__(self,id,url,UID):
         self.pic_id=id
         self.pic_url=url
         self.pic_uid=UID
+        self.pic_userName=self.getUsername()
+        self.pic_time=self.getTime()
         self.commentList=self.getPicComments()
 
+    def getUsername(self):
+        username=sess.query(Userinfo).filter(Userinfo.ID==self.pic_uid).first()
+        if username is not None:
+            return username.Username
+
+    def getTime(self):
+        time=sess.query(Photos).filter(Photos.ID==self.pic_id).first()
+        if time is not None:
+            return time.PAddDate
 
     def getPicComments(self):
         comments=sess.query(Comments).filter(Comments.PhotoID==self.pic_id).all()
@@ -59,12 +72,14 @@ class UserContent(object):
 
     def __init__(self, user_id):
         self.userID=user_id
+        #pics=list()
+
         feeds=manager.get_feeds(user_id)['normal']
         #feeds.delete()
         self.ContentList=list()
         for feed in list(feeds[:25]):
             from stream_framework.activity import  Activity
-            if feed.verb.id==5:
+            if feed.verb.id==4:
                 #print feed
                 self.ContentList.append(feed.object_id)
 
@@ -77,7 +92,7 @@ from models import AddPhoto, AddComment
 #AddPhoto(UID=1,PName='pic',PDesc='picDesc',PPath='\df',FiName='filename')
 
 
-userContent=UserContent(2)
+userContent=UserContent(1)
 pics=richUserPictures(userContent.Pop())
 for pic in pics.pics:
     print pic

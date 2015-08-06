@@ -13,6 +13,7 @@ engine=create_engine(db_uri.format(user='allen',password='yao0702',host='localho
 
 from sqlalchemy.ext.declarative import declarative_base
 
+#Used for enRichPictures, do not delete
 Base = declarative_base()
 from sqlalchemy.orm import sessionmaker
 Session=sessionmaker(bind=engine)

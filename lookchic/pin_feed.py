@@ -19,6 +19,17 @@ class UserPinFeed(PinFeed):
 
 class User(UserPinFeed):
 
+    def add_pic(self, pic_id):
+        activity=Activity(
+            self.user_id,
+            Add,
+            pic_id,
+            self.user_id,
+            time=None
+        )
+        return activity
+
+
     def create_pic(self,pic_id):
         self.pic_id=pic_id
 
