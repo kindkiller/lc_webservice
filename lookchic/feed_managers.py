@@ -53,6 +53,7 @@ class PinManager(Manager):
 
 manager = PinManager()
 
+
 testpin=Pin(id=1,user_id=1,item_id=18,message='testpin')
 #user2=UserPinFeed(user_id=2)
 #active=testpin.create_activity()

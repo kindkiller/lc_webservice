@@ -162,8 +162,9 @@ class Views:
                 pic_id=AddPhoto(userid,'photoname','photoDescription',file_path,file_path)
                 from pin_feed import User
                 user_pin=User(userid)
-                user_pin.add_pic(pic_id)
+                #user_pin.add_pic(pic_id)
                 from feed_managers import manager
+                manager.add_user_activity(userid,user_pin.add_pic(pic_id))
                 feeds=manager.get_feeds(1)['normal']
                 print (feeds[:])
 
@@ -189,18 +190,18 @@ class Views:
 
         userid = request.json_body.get('userid')
         result=list()
-        fake1 = dict(username="Yuan",url="images/test_img/sample2.jpg",time="June 18 2015")
-        fake2 = dict(username="Allen",url="images/test_img/sample4.jpg",time="August 18 2015")
-        result.append(fake1)
-        result.append(fake2)
-        '''
-        from enrichlist import userContent,richUserPictures
-        user=userContent(userid)
+        #fake1 = dict(username="Yuan",url="images/test_img/sample2.jpg",time="June 18 2015")
+        #fake2 = dict(username="Allen",url="images/test_img/sample4.jpg",time="August 18 2015")
+        #result.append(fake1)
+        #result.append(fake2)
+
+        from enrichlist import UserContent,richUserPictures
+        user=UserContent(userid)
         content=richUserPictures(user.Pop())
-        for pic in content:
+        for pic in content.pics:
             feed=dict(username=pic.pic_userName,url=pic.pic_url,time=pic.pic_time)
             result.append(feed)
-            '''
+
         from sys import exc_info
         try:
             #fetch feeds by using userid here

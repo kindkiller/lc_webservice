@@ -20,14 +20,16 @@ class richPicture(object):
         self.commentList=self.getPicComments()
 
     def getUsername(self):
+
         username=sess.query(Userinfo).filter(Userinfo.ID==self.pic_uid).first()
+
         if username is not None:
             return username.Username
 
     def getTime(self):
         time=sess.query(Photos).filter(Photos.ID==self.pic_id).first()
         if time is not None:
-            return time.PAddDate
+            return time.PAddDate.strftime("%B,%d,%Y")
 
     def getPicComments(self):
         comments=sess.query(Comments).filter(Comments.PhotoID==self.pic_id).all()
@@ -53,6 +55,7 @@ class richUserPictures(object):
         self.pics=self.enrichPictures(pic_ids)
 
     def enrichPicture(self,pic_id):
+        print pic_id
         Pics=sess.query(Photos).filter(Photos.ID==pic_id).all()
         if len(Pics)>0:
             for pic in Pics:
@@ -92,7 +95,4 @@ from models import AddPhoto, AddComment
 #AddPhoto(UID=1,PName='pic',PDesc='picDesc',PPath='\df',FiName='filename')
 
 
-userContent=UserContent(1)
-pics=richUserPictures(userContent.Pop())
-for pic in pics.pics:
-    print pic
+
