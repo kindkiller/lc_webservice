@@ -88,27 +88,21 @@ class Views:
         request = self.request
         resp = request.response
         user = Userinfo()
-        user.email = request.json_body.get('email')
-        user.pwd = request.json_body.get('password')
-        user.salt = bcrypt.gensalt()
+        username=request.json_body.get('username')
+        email = request.json_body.get('email')
+        pwd = request.json_body.get('password')
+        salt = bcrypt.gensalt()
         #user.pwhash = bcrypt.hashpw(bytes(request.POST.get('password'), 'utf-8'), user.salt)
         #user.active = False
 
         #user.key = bcrypt.hashpw(bytes(request.POST.get('email'), 'utf-8'), bcrypt.gensalt())
 
-        sess.add(user)
-
-        # TODO: replace all try except with trap function from kommons
-        #PREDICATE: unique user
-        try:
-            sess.flush()
-        except DBAPIError as e:
-            return Response(json=dict(rc=400, msg="Sign up Error: User already signed up"), status_code=400)
-
-        sess.commit()
-        sess.remove()
-        return Response(json=dict(rc=200, msg="Sign up: Sign up successful"), status_code=200)
-
+        from models import AddNewUser
+        Uid=AddNewUser(username,pwd,email,salt)
+        if (Uid>0):
+            return Response(json=dict(rc=200, msg="Sign up: Sign up successful"), status_code=200)
+        else:
+            return Response(json=dict(rc=200, msg="Sign up: Sign up fail"), status_code=200)
     #save a posted image
 
     @view_config(route_name='options', request_method='OPTIONS')
@@ -187,10 +181,35 @@ class Views:
             resp.status_code = 400
             return dict(rc=400, msg="Post Error: unknown error")
 
-    #save a posted image
+    #fetch feeds
+    @view_config(route_name='main', request_method='OPTIONS')
+    def post_options(self):
+        resp = self.request.response
+        return resp
+
     @view_config(route_name='main')
     def main(self):
         request = self.request
+        resp = request.response
+
+        userid = request.json_body.get('userid')
+        result=list()
+        from enrichlist import userContent, richUserPictures
+        content=userContent(userid)
+        pics=richUserPictures(content.Pop())
+        for pic in pics.pics:
+            div=dict(username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time)
+            result.append(div)
+
+
+        from sys import exc_info
+        try:
+            #fetch feeds by using userid here
+            return dict(rc=200, msg="Fetch Feeds Successful", feeds=result)
+        except:
+            print (exc_info())
+            resp.status_code = 400
+            return dict(rc=400, msg="Fetch Feeds Error: unknown error")
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
