@@ -190,12 +190,20 @@ class Views:
     @view_config(route_name='main')
     def main(self):
         request = self.request
+        resp = request.response
 
         userid = request.json_body.get('userid')
+        result=list()
+        from enrichlist import userContent,richUserPictures
+        user=userContent(userid)
+        content=richUserPictures(user.Pop())
+        for pic in content:
+            feed=dict(username=pic.pic_userName,url=pic.pic_url,time=pic.pic_time)
+            result.append(feed)
         from sys import exc_info
         try:
             #fetch feeds by using userid here
-            return dict(rc=200, msg="Fetch Feeds Successful")
+            return dict(rc=200, msg="Fetch Feeds Successful", feeds=result)
         except:
             print (exc_info())
             resp.status_code = 400
