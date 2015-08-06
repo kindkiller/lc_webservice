@@ -25,9 +25,9 @@ def request_factory(environ):
         (
             ("Access-Control-Allow-Origin", "http://localhost:8000"),
             #("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE"),
-            #("Access-Control-Expose-Headers", "X-CSRF-token"),
+            #("Access-Control-Expose-Headers", "Authorization"),
             #("Access-Control-Allow-Credentials", 'true'),
-            #("Access-Control-Allow-Headers", 'X-CSRF-token')
+            ("Access-Control-Allow-Headers", "Authorization")
         )
     )
     return request
@@ -61,7 +61,7 @@ def main(global_config, **settings):
 
     config.set_request_factory(request_factory)
 
-    config.add_route('home', '/')
+    #config.add_route('home', '/')
 
     config.add_route('post', '/post')
     config.add_route('login', '/login')
@@ -69,7 +69,7 @@ def main(global_config, **settings):
     config.add_route('signup', '/signup')
     config.add_route('main', '/main')
     config.add_route('logout', '/logout')
-    config.add_route('options', '/post', request_method='OPTIONS')
+
     #config.add_route('add_page', '/add_page/{pagename}')
     #config.add_route('edit_page', '/{pagename}/edit_page')
     
