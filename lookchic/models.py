@@ -220,8 +220,9 @@ cursor = conn.cursor()
 
 def AddPhoto(UID, PName, PDesc, PPath, FiName):
     try:
+        newCursor=conn.cursor();
         args = [UID, PName, PDesc, PPath, FiName,0]
-        result_args = cursor.callproc('uspAddPhoto', args)
+        result_args = newCursor.callproc('uspAddPhoto', args)
         conn.commit()
         print(result_args[5])
     except Error as e:
@@ -229,6 +230,7 @@ def AddPhoto(UID, PName, PDesc, PPath, FiName):
     finally:
         cursor.close()
         conn.close()
+    return result_args[5];
 
 #AddPhoto('TestInsert1','','TestPath:','')
 
