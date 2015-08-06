@@ -105,11 +105,6 @@ class Views:
             return Response(json=dict(rc=200, msg="Sign up: Sign up fail"), status_code=200)
     #save a posted image
 
-    @view_config(route_name='options', request_method='OPTIONS')
-    def post_options(self):
-        return Response(json=dict(rc=200, msg="Options Successful"), status_code=200)
-
-
     @view_config(route_name='post', request_method='OPTIONS')
     def post_options(self):
         resp = self.request.response #(json=dict(rc=200, msg="Options Successful"), status_code=200)
@@ -183,7 +178,7 @@ class Views:
 
     #fetch feeds
     @view_config(route_name='main', request_method='OPTIONS')
-    def post_options(self):
+    def main_options(self):
         resp = self.request.response
         return resp
 
@@ -194,12 +189,18 @@ class Views:
 
         userid = request.json_body.get('userid')
         result=list()
+        fake1 = dict(username="Yuan",url="images/test_img/sample2.jpg",time="June 18 2015")
+        fake2 = dict(username="Allen",url="images/test_img/sample4.jpg",time="August 18 2015")
+        result.append(fake1)
+        result.append(fake2)
+        '''
         from enrichlist import userContent,richUserPictures
         user=userContent(userid)
         content=richUserPictures(user.Pop())
         for pic in content:
             feed=dict(username=pic.pic_userName,url=pic.pic_url,time=pic.pic_time)
             result.append(feed)
+            '''
         from sys import exc_info
         try:
             #fetch feeds by using userid here
