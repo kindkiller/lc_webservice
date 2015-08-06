@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0fec777d-b2d1-42e8-bf28-e171f87ae734" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lookchic/models.py" afterPath="$PROJECT_DIR$/lookchic/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lookchic/views.py" afterPath="$PROJECT_DIR$/lookchic/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="lookchic.iws" />
@@ -632,7 +630,13 @@
       <option name="project" value="LOCAL" />
       <updated>1438824265150</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="0805&#10;main page pic list">
+      <created>1438827252061</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1438827252061</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -676,7 +680,8 @@
     <MESSAGE value="0718" />
     <MESSAGE value="0718&#10;merge with backend" />
     <MESSAGE value="0805&#10;test" />
-    <option name="LAST_COMMIT_MESSAGE" value="0805&#10;test" />
+    <MESSAGE value="0805&#10;main page pic list" />
+    <option name="LAST_COMMIT_MESSAGE" value="0805&#10;main page pic list" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
