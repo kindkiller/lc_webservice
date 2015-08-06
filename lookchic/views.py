@@ -77,10 +77,10 @@ class Views:
             #resp.status_code = 400
             return resp(json=dict(rc=400, msg="Login Error: Email and password don't match"), status_code=400)
         except DBAPIError:
-            return Response(conn_err_msg, content_type='text/plain', status_int=400)
+            return resp(conn_err_msg, content_type='text/plain', status_int=400)
         except:
             print (exc_info())
-            return Response(json=dict(rc=400, msg="Login Error: unknown error"), status_code=400)
+            return resp(json=dict(rc=400, msg="Login Error: unknown error"), status_code=400)
 
     #Signup
     @view_config(route_name='signup')
@@ -190,28 +190,18 @@ class Views:
     @view_config(route_name='main')
     def main(self):
         request = self.request
-        resp = request.response
 
         userid = request.json_body.get('userid')
-        result=list()
-        from enrichlist import userContent, richUserPictures
-        content=userContent(userid)
-        pics=richUserPictures(content.Pop())
-        for pic in pics.pics:
-            div=dict(username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time)
-            result.append(div)
-
-
         from sys import exc_info
         try:
             #fetch feeds by using userid here
-            return dict(rc=200, msg="Fetch Feeds Successful", feeds=result)
+            return dict(rc=200, msg="Fetch Feeds Successful")
         except:
             print (exc_info())
             resp.status_code = 400
             return dict(rc=400, msg="Fetch Feeds Error: unknown error")
 
-conn_err_msg = """\
+conn_err_msg = """
 Pyramid is having a problem using your SQL database.  The problem
 might be caused by one of the following things:
 
