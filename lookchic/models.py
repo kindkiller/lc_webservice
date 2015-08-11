@@ -8,7 +8,7 @@ import pytz
 import mysql.connector
 from sqlalchemy import create_engine
 db_uri="mysql+mysqlconnector://{user}:{password}@{host}:{port}/{db}"
-engine=create_engine(db_uri.format(user='allen',password='yao0702',host='localhost',port='3306',db='userdb'),encoding='utf8',connect_args={'time_zone':'+00:00'})
+engine=create_engine(db_uri.format(user='allen',password='yao0702',host='localhost',port='3306',db='userdb'),encoding='utf8',connect_args={'time_zone':'+00:00'},pool_size=100, pool_recycle=1800)
 #engine=create_engine(db_uri.format(user='yy', password='qwer4321', host='localhost', port='3306', db='userdb'), encoding='utf8', connect_args={'time_zone':'+00:00'})
 #engine = create_engine('sqlite:///feed.db', echo=True)
 
@@ -22,8 +22,9 @@ sess=Session()
 
 from mysql.connector import MySQLConnection, Error
 conn = mysql.connector.connect(user="allen",password="yao0702",host="localhost",database="userdb")
+conn.autocommit=true
 #conn = mysql.connector.connect(user="yy",password="qwer4321",host="localhost",database="userdb")
-cursor = conn.cursor()
+#cursor = conn.cursor()
 
 
 class Userinfo(Base):
@@ -50,7 +51,11 @@ def AddNewUser(Username, Pword):
     return True
 
 def CheckUser(Username, Pword):
-    user=sess.query(Userinfo).filter(Userinfo.Username==Username).all()
+    checksess=Session();
+    user=checksess.query(Userinfo).filter(Userinfo.Username==Username).all()
+    checksess.commit()
+    checksess.close()
+
     if len(user)>0:
         if (Pword==user[0].Password):
             return True
@@ -230,64 +235,74 @@ def AddPhoto(UID, PName, PDesc, PPath, FiName):
         args = [UID, PName, PDesc, PPath, FiName,0]
         result_args = newCursor.callproc('uspAddPhoto', args)
         conn.commit()
+
         print(result_args[5])
     except Error as e:
+        conn.rollback()
         print(e)
     finally:
-        cursor.close()
-        conn.close()
+        newCursor.close()
+        #conn.close()
     return result_args[5];
 
 #AddPhoto('TestInsert1','','TestPath:','')
 
 def AddComment(CText, UID, PID):
     try:
+        cursor=conn.cursor()
         args = [CText, UID, PID,0]
         result_args = cursor.callproc('uspAddComment', args)
         conn.commit()
         print(result_args[4])
     except Error as e:
+        conn.rollback()
         print(e)
     finally:
         cursor.close()
-        conn.close()
+        #conn.close()
 
 def AddLike(UID, PID):
     try:
+        cursor=conn.cursor()
         args = [UID, PID,0]
         result_args = cursor.callproc('uspAddLike', args)
         conn.commit()
         #print(result_args[3])
     except Error as e:
+        conn.rollback()
         print(e)
     finally:
         cursor.close()
-        conn.close()
+        #conn.close()
 
 
 def AddUserRelation(U1ID, U2ID, Rtype):
     try:
+        cursor=conn.cursor()
         args = [U1ID, U2ID,Rtype,0]
         result_args = cursor.callproc('uspAddLike', args)
         conn.commit()
         #print(result_args[3])
     except Error as e:
+        conn.rollback()
         print(e)
     finally:
         cursor.close()
-        conn.close()
+        #conn.close()
 
 def GetPassword(UID):
     try:
+        cursor=conn.cursor()
         args = [UID,0]
         result_args = cursor.callproc('uspGetPassword', args)
         conn.commit()
         print(result_args[1])
     except Error as e:
+        conn.rollback()
         print(e)
     finally:
         cursor.close()
-        conn.close()
+        #conn.close()
 
 
 # a=sess.query(Photos).all()

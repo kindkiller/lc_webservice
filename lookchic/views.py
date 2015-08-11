@@ -138,9 +138,11 @@ class Views:
                 # Please note that in a real application you would not use /tmp,
                 # and if you write to an untrusted location you will need to do
                 # some extra work to prevent symlink attacks.
-
-                file_path = os.path.join('lookchic/static/img', '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2])
-
+                RealPath='/Users/zoe/Desktop/Projects/lc_frontend/app/lookchic/static/img'
+                RelativePath='lookchic/static/img'
+                Saved_file_name='%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2]
+                file_path = os.path.join(RealPath, Saved_file_name)
+                Relative_file_path=os.path.join(RelativePath, Saved_file_name)
                 # We first write to a temporary file to prevent incomplete files from
                 # being used.
 
@@ -159,7 +161,7 @@ class Views:
                 user_object=json.loads(request.POST.get('username'))
                 userid=user_object['userid']
                 from models import AddPhoto
-                pic_id=AddPhoto(userid,'photoname','photoDescription',file_path,file_path)
+                pic_id=AddPhoto(userid,'photoname','photoDescription',RelativePath,Saved_file_name)
                 from pin_feed import User
                 user_pin=User(userid)
                 #user_pin.add_pic(pic_id)
@@ -189,6 +191,8 @@ class Views:
         resp = request.response
 
         userid = request.json_body.get('userid')
+
+
         result=list()
         #fake1 = dict(username="Yuan",url="images/test_img/sample2.jpg",time="June 18 2015")
         #fake2 = dict(username="Allen",url="images/test_img/sample4.jpg",time="August 18 2015")

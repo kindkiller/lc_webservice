@@ -2,6 +2,8 @@ __author__ = 'zoe'
 
 from models import *
 from feed_managers import manager
+from sys import exc_info
+
 
 
 class richPicture(object):
@@ -15,24 +17,36 @@ class richPicture(object):
         self.pic_id=id
         self.pic_url=url
         self.pic_uid=UID
+        print self.pic_id
         self.pic_userName=self.getUsername()
         self.pic_time=self.getTime()
         self.commentList=self.getPicComments()
 
     def getUsername(self):
-
-        username=sess.query(Userinfo).filter(Userinfo.ID==self.pic_uid).first()
-
+        try:
+            picSession=Session()
+            username=picSession.query(Userinfo).filter(Userinfo.ID==self.pic_uid).first()
+        except:
+            print (exc_info())
         if username is not None:
             return username.Username
 
     def getTime(self):
-        time=sess.query(Photos).filter(Photos.ID==self.pic_id).first()
+        try:
+            picSession=Session()
+            time=picSession.query(Photos).filter(Photos.ID==self.pic_id).first()
+        except:
+            print (exc_info())
+
         if time is not None:
             return time.PAddDate.strftime("%B,%d,%Y")
 
     def getPicComments(self):
-        comments=sess.query(Comments).filter(Comments.PhotoID==self.pic_id).all()
+        try:
+            picSession=Session()
+            comments=picSession.query(Comments).filter(Comments.PhotoID==self.pic_id).all()
+        except:
+            print (exc_info())
         if len(comments) >0:
             for comment in comments:
                 com=richComment(comment.UserID,comment.Context,comment.AddDate)
@@ -50,16 +64,28 @@ class richComment(object):
 
 class richUserPictures(object):
 
+
     def __init__(self, pic_ids):
         self.pics=list()
-        self.pics=self.enrichPictures(pic_ids)
+        from sys import exc_info
+        try:
+            self.pics=self.enrichPictures(pic_ids)
+        except:
+            print (exc_info())
+
 
     def enrichPicture(self,pic_id):
-        print pic_id
-        Pics=sess.query(Photos).filter(Photos.ID==pic_id).all()
+        try:
+            picSession=Session()
+            Pics=picSession.query(Photos).filter(Photos.ID==pic_id).all()
+        except:
+            print (exc_info())
+
         if len(Pics)>0:
             for pic in Pics:
-                picture=richPicture(pic.ID,pic.Path,pic.UID)
+                import os
+                url=os.path.join(pic.Path,pic.Filename)
+                picture=richPicture(pic.ID,url,pic.UID)
                 return picture
 
     def enrichPictures(self,pic_ids):
