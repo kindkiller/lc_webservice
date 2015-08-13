@@ -18,39 +18,57 @@ class richPicture(object):
         self.pic_url=url
         self.pic_uid=UID
         print self.pic_id
+
         self.pic_userName=self.getUsername()
         self.pic_time=self.getTime()
         self.commentList=self.getPicComments()
 
     def getUsername(self):
         try:
-            picSession=Session()
-            username=picSession.query(Userinfo).filter(Userinfo.ID==self.pic_uid).first()
+            cursor = conn.cursor()
+            sql = ("select username from userdb.userinfo where ID = %(uid)s")
+            data = {'uid':self.pic_uid}
+            cursor.execute(sql,data)
+            usernames=cursor.fetchall()
+            cursor.close()
+            if usernames is not None:
+                username=usernames.pop()
+                return username[0]
         except:
             print (exc_info())
-        if username is not None:
-            return username.Username
+
 
     def getTime(self):
         try:
-            picSession=Session()
-            time=picSession.query(Photos).filter(Photos.ID==self.pic_id).first()
+            cursor = conn.cursor()
+            sql = ("select PAddDate from userdb.photos where ID = %(pid)s")
+            data = {'pid':self.pic_id}
+            cursor.execute(sql,data)
+            times=cursor.fetchall()
+            cursor.close()
+            if times is not None:
+                time=times.pop()
+                return time[0].strftime("%B,%d,%Y")
         except:
             print (exc_info())
-
-        if time is not None:
-            return time.PAddDate.strftime("%B,%d,%Y")
+            return null
 
     def getPicComments(self):
         try:
-            picSession=Session()
-            comments=picSession.query(Comments).filter(Comments.PhotoID==self.pic_id).all()
+            cursor = conn.cursor()
+            sql = ("select UserID, Context, AddDate from userdb.comments where PhotoID = %(pid)s")
+            data = {'pid':self.pic_id}
+            cursor.execute(sql,data)
+            comments=cursor.fetchall()
+            cursor.close()
+            if len(comments) >0:
+                for comment in comments:
+                    com=richComment(comment[0],comment[1],comment[2].strftime("%B,%d,%Y"))
+                    self.commentList.append(com)
         except:
             print (exc_info())
-        if len(comments) >0:
-            for comment in comments:
-                com=richComment(comment.UserID,comment.Context,comment.AddDate)
-                self.commentList.append(com)
+            self.commentList=list()
+
 
 
 class richComment(object):
@@ -76,15 +94,19 @@ class richUserPictures(object):
 
     def enrichPicture(self,pic_id):
         try:
-            picSession=Session()
-            Pics=picSession.query(Photos).filter(Photos.ID==pic_id).all()
+            cursor = conn.cursor()
+            sql = ("select Path, Filename from userdb.photos where ID = %(pid)s")
+            data = {'pid':self.pic_id}
+            cursor.execute(sql,data)
+            Pics=cursor.fetchall()
+            cursor.close()
         except:
             print (exc_info())
 
         if len(Pics)>0:
             for pic in Pics:
                 import os
-                url=os.path.join(pic.Path,pic.Filename)
+                url=os.path.join(pic[0],pic[1])
                 picture=richPicture(pic.ID,url,pic.UID)
                 return picture
 
