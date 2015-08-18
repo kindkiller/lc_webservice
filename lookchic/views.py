@@ -51,12 +51,7 @@ class Views:
             #return False
         return True
         
-    #login
-    @view_config(route_name='login', request_method='OPTIONS')
-    def login_options(self):
-        resp = self.request.response
-        return resp
-
+    #login 
     @view_config(route_name='login',  request_method='POST')
     def login(self):
         request = self.request
@@ -78,23 +73,16 @@ class Views:
                 #resp.headerlist.append(('Access-Control-Allow-Origin', '*'))
                 return dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID)
 
-            #sess.remove()
-            resp.status_code = 400
-            return dict(rc=400, msg="Login Error: Email and password don't match")
+            sess.remove()
+            #resp.status_code = 400
+            return resp(json=dict(rc=400, msg="Login Error: Email and password don't match"), status_code=400)
         except DBAPIError:
-            resp.status_code = 400
-            return dict(msg=conn_err_msg, content_type='text/plain')
+            return resp(conn_err_msg, content_type='text/plain', status_int=400)
         except:
             print (exc_info())
-            resp.status_code = 400
-            return dict(rc=400, msg="Login Error: unknown error")
+            return resp(json=dict(rc=400, msg="Login Error: unknown error"), status_code=400)
 
     #Signup
-    @view_config(route_name='signup', request_method='OPTIONS')
-    def signup_options(self):
-        resp = self.request.response
-        return resp
-
     @view_config(route_name='signup')
     def signup(self):
         request = self.request
@@ -151,7 +139,7 @@ class Views:
                 # and if you write to an untrusted location you will need to do
                 # some extra work to prevent symlink attacks.
 
-                file_path = os.path.join('C:\\LC\\lc_ng\\app\\images\\uploaded', '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2])
+                file_path = os.path.join('lookchic/static/img', '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2])
 
                 # We first write to a temporary file to prevent incomplete files from
                 # being used.

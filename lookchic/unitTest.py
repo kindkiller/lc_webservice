@@ -143,10 +143,10 @@ PinDB=Pin(id=12,user_id=1)
 
 itemDB=Item(id=102,user_id=2,image='img2', pin_count=0)
 #session.add(itemDB)
-feeds= manager.get_feeds(1)['normal']
-feeds.delete()
-feeds= manager.get_feeds(2)['normal']
-feeds.delete()
+#feeds= manager.get_feeds(1)['normal']
+#feeds.delete()
+#feeds= manager.get_feeds(2)['normal']
+#feeds.delete()
 
 from pin_feed import User
 user1=User(1)
@@ -175,8 +175,8 @@ user2.create_comment(101,11)
 #manager.follow(user1, user4)
 
 
-manager.add_user_activity(user1.user_id,user1.add_pic(63))
-manager.add_user_activity(user2.user_id,user2.add_pic(64))
+#manager.add_user_activity(user1.user_id,user1.add_pic(63))
+#manager.add_user_activity(user2.user_id,user2.add_pic(64))
 #manager.add_pin(user3)
 #manager.add_pin(user4)
 #manager.add_pin(user5)
@@ -187,6 +187,8 @@ feeds= manager.get_feeds(1)['normal']
 feeds2=manager.get_feeds(2)['normal']
 #activities=list(feeds[1])
 #print activities
+#feeds.delete()
+#feeds2.delete()
 
 print 'output'
 print feeds[:]

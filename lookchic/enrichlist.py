@@ -2,6 +2,8 @@ __author__ = 'zoe'
 
 from models import *
 from feed_managers import manager
+from sys import exc_info
+
 
 
 class richPicture(object):
@@ -15,28 +17,58 @@ class richPicture(object):
         self.pic_id=id
         self.pic_url=url
         self.pic_uid=UID
+        print self.pic_id
+
         self.pic_userName=self.getUsername()
         self.pic_time=self.getTime()
         self.commentList=self.getPicComments()
 
     def getUsername(self):
+        try:
+            cursor = conn.cursor()
+            sql = ("select username from userdb.userinfo where ID = %(uid)s")
+            data = {'uid':self.pic_uid}
+            cursor.execute(sql,data)
+            usernames=cursor.fetchall()
+            cursor.close()
+            if usernames is not None:
+                username=usernames.pop()
+                return username[0]
+        except:
+            print (exc_info())
 
-        username=sess.query(Userinfo).filter(Userinfo.ID==self.pic_uid).first()
-
-        if username is not None:
-            return username.Username
 
     def getTime(self):
-        time=sess.query(Photos).filter(Photos.ID==self.pic_id).first()
-        if time is not None:
-            return time.PAddDate.strftime("%B,%d,%Y")
+        try:
+            cursor = conn.cursor()
+            sql = ("select PAddDate from userdb.photos where ID = %(pid)s")
+            data = {'pid':self.pic_id}
+            cursor.execute(sql,data)
+            times=cursor.fetchall()
+            cursor.close()
+            if times is not None:
+                time=times.pop()
+                return time[0].strftime("%B,%d,%Y")
+        except:
+            print (exc_info())
+            return null
 
     def getPicComments(self):
-        comments=sess.query(Comments).filter(Comments.PhotoID==self.pic_id).all()
-        if len(comments) >0:
-            for comment in comments:
-                com=richComment(comment.UserID,comment.Context,comment.AddDate)
-                self.commentList.append(com)
+        try:
+            cursor = conn.cursor()
+            sql = ("select UserID, Context, AddDate from userdb.comments where PhotoID = %(pid)s")
+            data = {'pid':self.pic_id}
+            cursor.execute(sql,data)
+            comments=cursor.fetchall()
+            cursor.close()
+            if len(comments) >0:
+                for comment in comments:
+                    com=richComment(comment[0],comment[1],comment[2].strftime("%B,%d,%Y"))
+                    self.commentList.append(com)
+        except:
+            print (exc_info())
+            self.commentList=list()
+
 
 
 class richComment(object):
@@ -50,16 +82,32 @@ class richComment(object):
 
 class richUserPictures(object):
 
+
     def __init__(self, pic_ids):
         self.pics=list()
-        self.pics=self.enrichPictures(pic_ids)
+        from sys import exc_info
+        try:
+            self.pics=self.enrichPictures(pic_ids)
+        except:
+            print (exc_info())
+
 
     def enrichPicture(self,pic_id):
-        print pic_id
-        Pics=sess.query(Photos).filter(Photos.ID==pic_id).all()
+        try:
+            cursor = conn.cursor()
+            sql = ("select Path, Filename from userdb.photos where ID = %(pid)s")
+            data = {'pid':self.pic_id}
+            cursor.execute(sql,data)
+            Pics=cursor.fetchall()
+            cursor.close()
+        except:
+            print (exc_info())
+
         if len(Pics)>0:
             for pic in Pics:
-                picture=richPicture(pic.ID,pic.Path,pic.UID)
+                import os
+                url=os.path.join(pic[0],pic[1])
+                picture=richPicture(pic.ID,url,pic.UID)
                 return picture
 
     def enrichPictures(self,pic_ids):
@@ -90,9 +138,9 @@ class UserContent(object):
         return self.ContentList
 
 
-from models import AddPhoto, AddComment
+from models import addphoto, AddComment
 
-#AddPhoto(UID=1,PName='pic',PDesc='picDesc',PPath='\df',FiName='filename')
+#addphoto(UID=1,PName='pic',PDesc='picDesc',PPath='\df',FiName='filename')
 
 
 

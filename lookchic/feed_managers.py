@@ -12,7 +12,6 @@ class PinManager(Manager):
     # how facebook or wanelo uses feeds)
     Session = sessionmaker()
     Session.configure(bind=engine)
-    session = Session()
 
     feed_classes = dict(
         normal=PinFeed,
@@ -43,7 +42,9 @@ class PinManager(Manager):
 
 
     def get_user_follower_ids(self,user_id):
-        query=self.session.query(UserRelation).filter(UserRelation.User2ID==user_id).all()
+        session=Session()
+
+        query=session.query(UserRelation).filter(UserRelation.User2ID==user_id).all()
         follower_ids=[]
         for row in query:
             follower_ids.append(row.User1ID)
