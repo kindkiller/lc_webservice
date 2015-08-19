@@ -18,18 +18,11 @@ class Product(object):
             self._brand=brand[0]
 
         self._pic=''
-
+        self._webUrl=[]
         from models import get_product_link
         urls=get_product_link(id)
         for url in urls:
             self._webUrl.append(url)
-
-
-    def __init__(self):
-        self._productName = ''
-        self._price = 0
-        self.pic = ''
-        self._webUrl = ''
 
 
 class Products(object):
@@ -46,9 +39,17 @@ def SearchProductByKeyword(keyword):
     if (keyword is None):
         return None
 
-    keys=keyword.split(' ')
+    keys=keyword.split()
 
     if (len(keys)>0 and len(keys)==1):
         from models import searchProduct
         #Column: ID, Brand_id, ProductType_ID, Name
-        productResult=searchProduct(keys)
+        productResult=searchProduct(keys[0])
+        if (productResult is not None and len(productResult)>0):
+            for item in productResult:
+                product=Product(item[3],item[0],item[2])
+                resultList.append(product)
+
+    return resultList
+
+SearchProductByKeyword('shoes')
