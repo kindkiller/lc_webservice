@@ -12,7 +12,7 @@ from pin_feed import AggregatedPinFeed
 from pin_feed import UserPinFeed
 from feed_managers import manager
 from stream_framework.verbs.base import Follow as verbFollow,Add,Love,Comment
-from models import User as UserModel,Item, Pin, Follow,engine, Userdetails,UserRelation,sess
+from models import User as UserModel,Item, Pin, Follow,userDB_engine, Userdetails,UserRelation,sess
 from models import *
 from sqlalchemy.orm import sessionmaker
 from celery import Celery
@@ -125,7 +125,7 @@ class PinManager(Manager):
                 return {FanoutPriority.HIGH:follower_ids}
 '''
 
-print engine
+print userDB_engine
 print sess
 
 
