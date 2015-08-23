@@ -52,4 +52,3 @@ def SearchProductByKeyword(keyword):
 
     return resultList
 
-SearchProductByKeyword('shoes')
