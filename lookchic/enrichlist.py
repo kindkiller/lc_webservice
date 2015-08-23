@@ -138,7 +138,7 @@ class UserContent(object):
         return self.ContentList
 
 
-from models import addphoto, AddComment
+
 
 #addphoto(UID=1,PName='pic',PDesc='picDesc',PPath='\df',FiName='filename')
 

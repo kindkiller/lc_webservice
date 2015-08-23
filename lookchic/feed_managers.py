@@ -54,7 +54,7 @@ manager = PinManager()
 
 
 
-testpin=Pin(id=1,user_id=1,item_id=18,message='testpin')
+#testpin=Pin(id=1,user_id=1,item_id=18,message='testpin')
 #user2=UserPinFeed(user_id=2)
 #active=testpin.create_activity()
 
@@ -71,7 +71,7 @@ testpin=Pin(id=1,user_id=1,item_id=18,message='testpin')
 
 
 #print manager.get_user_follower_ids(1)
-manager.add_pin(testpin)
+#manager.add_pin(testpin)
 
 
 
