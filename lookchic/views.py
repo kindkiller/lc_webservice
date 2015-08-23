@@ -12,7 +12,7 @@ import shutil
 
 import cgi
 import re
-#from docutils.core import publish_parts
+# from docutils.core import publish_parts
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -22,59 +22,61 @@ from pyramid.httpexceptions import (
 from .models import (
     sess,
     Userinfo,
-    )
+)
 
 from pyramid.view import (
     view_config,
     forbidden_view_config,
-    )
+)
 
 from pyramid.security import (
     remember,
     forget,
-    )
+)
 
 from .security import USERS
+
 
 @view_defaults(renderer='json')
 class Views:
     def __init__(self, request):
         self.request = request
         self.logged_in = request.authenticated_userid
-    
+
     # CUSTOM PREDICATES: LOGIN: account verified form confirm/{key}
     def verified(context, request):
-        user = sess.query(Userinfo).filter(Userinfo.email==request.POST.get('email')).first()
+        user = sess.query(Userinfo).filter(Userinfo.email == request.POST.get('email')).first()
         if user is None:
             return False
-        #elif user.created is None:  
-            #return False
+            # elif user.created is None:
+            # return False
         return True
-        
-    #login 
-    @view_config(route_name='login',  request_method='POST')
+
+    # login
+    @view_config(route_name='login', request_method='POST')
     def login(self):
         request = self.request
         resp = request.response
         from sys import exc_info
         try:
-            user = sess.query(Userinfo).filter(Userinfo.Email == request.json_body.get('email')).first() # request.json_body.get('email')).first()
+            user = sess.query(Userinfo).filter(
+                Userinfo.Email == request.json_body.get('email')).first()  # request.json_body.get('email')).first()
             if user is None:
                 return Response(json=dict(rc=400, msg="Login Error: no such user"), status_code=400)
             if user.Password == request.json_body.get('password'):
-                #user.pwhash == bcrypt.hashpw(bytes(request.POST.get('password'), 'utf-8'), user.salt):
-                #request.sess[request.POST.get('email')] = 'sessionstart'
-                #request.session.save()
-                #headers = remember(request, request.json_body.get('email'))
-                #headers.append(('X-CSRF-token', request.session.new_csrf_token()))
+                # user.pwhash == bcrypt.hashpw(bytes(request.POST.get('password'), 'utf-8'), user.salt):
+                # request.sess[request.POST.get('email')] = 'sessionstart'
+                # request.session.save()
+                # headers = remember(request, request.json_body.get('email'))
+                # headers.append(('X-CSRF-token', request.session.new_csrf_token()))
 
                 resp.status_code = 200
-                #(json=dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID), status_code=200)
-                #resp.headerlist.append(('Access-Control-Allow-Origin', '*'))
+                # (json=dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID), status_code=200)
+                # resp.headerlist.append(('Access-Control-Allow-Origin', '*'))
                 return dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID)
 
             sess.remove()
-            #resp.status_code = 400
+            # resp.status_code = 400
             return resp(json=dict(rc=400, msg="Login Error: Email and password don't match"), status_code=400)
         except DBAPIError:
             return resp(conn_err_msg, content_type='text/plain', status_int=400)
@@ -82,33 +84,34 @@ class Views:
             print (exc_info())
             return resp(json=dict(rc=400, msg="Login Error: unknown error"), status_code=400)
 
-    #Signup
+    # Signup
     @view_config(route_name='signup')
     def signup(self):
         request = self.request
         resp = request.response
         user = Userinfo()
-        username=request.json_body.get('username')
+        username = request.json_body.get('username')
         email = request.json_body.get('email')
         pwd = request.json_body.get('password')
         salt = bcrypt.gensalt()
-        #user.pwhash = bcrypt.hashpw(bytes(request.POST.get('password'), 'utf-8'), user.salt)
-        #user.active = False
+        # user.pwhash = bcrypt.hashpw(bytes(request.POST.get('password'), 'utf-8'), user.salt)
+        # user.active = False
 
-        #user.key = bcrypt.hashpw(bytes(request.POST.get('email'), 'utf-8'), bcrypt.gensalt())
+        # user.key = bcrypt.hashpw(bytes(request.POST.get('email'), 'utf-8'), bcrypt.gensalt())
 
         from models import AddNewUser
-        Uid=AddNewUser(username,pwd,email,salt)
-        if (Uid>0):
+        Uid = AddNewUser(username, pwd, email, salt)
+        if (Uid > 0):
             return Response(json=dict(rc=200, msg="Sign up: Sign up successful"), status_code=200)
         else:
             return Response(json=dict(rc=200, msg="Sign up: Sign up fail"), status_code=200)
-    #save a posted image
+
+    # save a posted image
 
     @view_config(route_name='post', request_method='OPTIONS')
     def post_options(self):
-        resp = self.request.response #(json=dict(rc=200, msg="Options Successful"), status_code=200)
-        #resp.headerlist.append(('Access-Control-Allow-Origin', 'http://localhost:8000'))
+        resp = self.request.response  # (json=dict(rc=200, msg="Options Successful"), status_code=200)
+        # resp.headerlist.append(('Access-Control-Allow-Origin', 'http://localhost:8000'))
         return resp
 
     @view_config(route_name='post', request_method='POST')
@@ -131,16 +134,18 @@ class Views:
 
                 # strip leading path from file name to avoid directory traversal attacks
                 fn = os.path.basename(filename)
-                #open('../static/img/' + fn, 'wb').write(input_file.file.read())
+                # open('../static/img/' + fn, 'wb').write(input_file.file.read())
 
                 # Note that we are generating our own filename instead of trusting
                 # the incoming filename since that might result in insecure paths.
                 # Please note that in a real application you would not use /tmp,
                 # and if you write to an untrusted location you will need to do
                 # some extra work to prevent symlink attacks.
-
-                file_path = os.path.join('lookchic/static/img', '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2])
-
+                RealPath = '/Users/zoe/Desktop/Projects/lc_frontend/app/lookchic/static/img'
+                RelativePath = 'lookchic/static/img'
+                Saved_file_name = '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2]
+                file_path = os.path.join(RealPath, Saved_file_name)
+                Relative_file_path = os.path.join(RelativePath, Saved_file_name)
                 # We first write to a temporary file to prevent incomplete files from
                 # being used.
 
@@ -156,16 +161,16 @@ class Views:
                 os.rename(temp_file_path, file_path)
                 resp.status_code = 200
                 import json
-                user_object=json.loads(request.POST.get('username'))
-                userid=user_object['userid']
-                from models import AddPhoto
-                pic_id=AddPhoto(userid,'photoname','photoDescription',file_path,file_path)
+                user_object = json.loads(request.POST.get('username'))
+                userid = user_object['userid']
+                from models import addphoto
+                pic_id = addphoto(userid, 'photoname', 'photoDescription', RelativePath, Saved_file_name)
                 from pin_feed import User
-                user_pin=User(userid)
-                #user_pin.add_pic(pic_id)
+                user_pin = User(userid)
+                # user_pin.add_pic(pic_id)
                 from feed_managers import manager
-                manager.add_user_activity(userid,user_pin.add_pic(pic_id))
-                feeds=manager.get_feeds(1)['normal']
+                manager.add_user_activity(userid, user_pin.add_pic(pic_id))
+                feeds = manager.get_feeds(1)['normal']
                 print (feeds[:])
 
                 return dict(rc=200, msg="File uploaded")
@@ -177,7 +182,7 @@ class Views:
             resp.status_code = 400
             return dict(rc=400, msg="Post Error: unknown error")
 
-    #fetch feeds
+    # fetch feeds
     @view_config(route_name='main', request_method='OPTIONS')
     def main_options(self):
         resp = self.request.response
@@ -189,27 +194,36 @@ class Views:
         resp = request.response
 
         userid = request.json_body.get('userid')
-        result=list()
-        #fake1 = dict(username="Yuan",url="images/test_img/sample2.jpg",time="June 18 2015")
-        #fake2 = dict(username="Allen",url="images/test_img/sample4.jpg",time="August 18 2015")
-        #result.append(fake1)
-        #result.append(fake2)
+        page = request.json_body.get('page')
 
-        from enrichlist import UserContent,richUserPictures
-        user=UserContent(userid)
-        content=richUserPictures(user.Pop())
-        for pic in content.pics:
-            feed=dict(username=pic.pic_userName,url=pic.pic_url,time=pic.pic_time)
-            result.append(feed)
-
+        result = list()
+        # fake1 = dict(username="Yuan",url="images/test_img/sample2.jpg",time="June 18 2015")
+        # fake2 = dict(username="Allen",url="images/test_img/sample4.jpg",time="August 18 2015")
+        # result.append(fake1)
+        # result.append(fake2)
+        from models import getFeedsFromDb
+        temp_list = getFeedsFromDb(userid)
+        print temp_list
+        if page == 1:
+            from enrichlist import UserContent, richUserPictures
+            user = UserContent(userid)
+            content = richUserPictures(user.Pop())
+            for pic in content.pics:
+                feed = dict(username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time)
+                result.append(feed)
+        else:
+            from models import getFeedsFromDb
+            db_feedList = getFeedsFromDb(userid)
+            result.append()
         from sys import exc_info
         try:
-            #fetch feeds by using userid here
+            # fetch feeds by using userid here
             return dict(rc=200, msg="Fetch Feeds Successful", feeds=result)
         except:
             print (exc_info())
             resp.status_code = 400
             return dict(rc=400, msg="Fetch Feeds Error: unknown error")
+
 
 conn_err_msg = """
 Pyramid is having a problem using your SQL database.  The problem
@@ -226,4 +240,3 @@ might be caused by one of the following things:
 After you fix the problem, please restart the Pyramid application to
 try it again.
 """
-

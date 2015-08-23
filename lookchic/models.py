@@ -10,7 +10,10 @@ from sqlalchemy import create_engine
 from sys import exc_info
 
 db_uri = "mysql+mysqlconnector://{user}:{password}@{host}:{port}/{db}"
-engine = create_engine(db_uri.format(user='allen', password='yao0702', host='localhost', port='3306', db='userdb'),
+userDB_engine = create_engine(db_uri.format(user='allen', password='yao0702', host='localhost', port='3306', db='userdb'),
+                       encoding='utf8', connect_args={'time_zone': '+00:00'}, pool_size=100, pool_recycle=1800)
+
+productDB_engine=create_engine(db_uri.format(user='allen', password='yao0702', host='localhost', port='3306', db='productdb'),
                        encoding='utf8', connect_args={'time_zone': '+00:00'}, pool_size=100, pool_recycle=1800)
 # engine=create_engine(db_uri.format(user='yy', password='qwer4321', host='localhost', port='3306', db='userdb'), encoding='utf8', connect_args={'time_zone':'+00:00'})
 # engine = create_engine('sqlite:///feed.db', echo=True)
@@ -21,7 +24,7 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 from sqlalchemy.orm import sessionmaker
 
-Session = sessionmaker(bind=engine)
+Session = sessionmaker(bind=userDB_engine)
 sess = Session()
 
 from mysql.connector import MySQLConnection, Error
@@ -62,6 +65,23 @@ def AddNewUser(Username, Pword):
         return False
     sess.close()
     return True
+
+def get_user_follower_ids_fromDB(uid):
+    if uid == 0:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql=("select user1ID from userrelation"
+             " where User2ID=%(uid)s")
+        data={"uid":uid}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+    except:
+        print (exc_info())
+    finally:
+        cursor.close()
+    if result is not None and len(result)>0:
+        return result
 
 
 def CheckUser(Username, Pword):
@@ -266,21 +286,29 @@ def addphoto(UID, PName, PDesc, PPath, FiName):
 # addphoto('TestInsert1','','TestPath:','')
 
 def AddComment(CText, UID, PID):
+    if UID==0 or PID==0 or CText is None:
+        return
+    if len(CText) <1:
+        return
+    cursor = conn.cursor()
     try:
-        cursor = conn.cursor()
+
         args = [CText, UID, PID, 0]
         result_args = cursor.callproc('uspAddComment', args)
         conn.commit()
         print(result_args[4])
+        return result_args[4]
     except Error as e:
         conn.rollback()
         print(e)
     finally:
         cursor.close()
-        # conn.close()
+
 
 
 def AddLike(UID, PID):
+    if UID==0 or PID==0:
+        return
     try:
         cursor = conn.cursor()
         args = [UID, PID, 0]
@@ -295,27 +323,32 @@ def AddLike(UID, PID):
         # conn.close()
 
 
-def AddUserRelation(U1ID, U2ID, Rtype):
+def AddUserRelation(u1id, u2id, Rtype):
+    if u1id ==0 or u2id==0:
+        return
+    success=False
     try:
         cursor = conn.cursor()
-        args = [U1ID, U2ID, Rtype, 0]
+        args = [u1id, u2id, Rtype, 0]
         result_args = cursor.callproc('uspAddLike', args)
         conn.commit()
         # print(result_args[3])
+        success=True
     except Error as e:
         conn.rollback()
         print(e)
     finally:
         cursor.close()
-        # conn.close()
+        return success
 
 
-def GetPassword(UID):
+def GetPassword(uid):
     try:
         cursor = conn.cursor()
-        args = [UID, 0]
+        args = [uid, 0]
         result_args = cursor.callproc('uspGetPassword', args)
         print(result_args[1])
+        return result_args[1]
     except Error as e:
         print(e)
     finally:
@@ -323,23 +356,30 @@ def GetPassword(UID):
         # conn.close()
 
 def getFeedsFromDb(uid):
+    result=list()
+    if uid ==0:
+        return None
     try:
         cursor = conn.cursor()
         sql=("select photos.id as PhotoId from photos where photos.uid in (select userrelation.user2ID from userrelation"
              " where User1ID=%(uid)s) order by PAddDate desc")
         data={"uid":uid}
         cursor.execute(sql,data)
-        result=cursor.fetchall()
+        rows=cursor.fetchall()
         cursor.close()
-        if result is not None:
-            return result
+        for row in rows:
+            if row[0] is not None:
+                result.append(row[0])
+        return result
     except:
             print (exc_info())
 
 def searchProduct(keyword):
     try:
         cursor=productConn.cursor()
-        sql=("select * from products where brand like %(key)s" )
+        sql=("select ID, Brand_id, ProductType_id, Name from productdb.Products where Brand_ID in (select ID from productdb.Brands where BrandName like CONCAT('%', %(key)s, '%'))"
+						"or	ProductType_ID in (select ProductType_ID from productdb.productTypes where TypeName like concat('%',%(key)s,'%')"
+                        "or  Name like concat('%',%(key)s,'%'))")
         data={"key":keyword}
         cursor.execute(sql,data)
         result=cursor.fetchall()
@@ -350,6 +390,51 @@ def searchProduct(keyword):
         print(exc_info())
         cursor.close()
 
+def get_product_detail(id):
+    if (id<1):
+        return
+    try:
+        cursor=productConn.cursor()
+        sql=("select Value as price from Productdb.productdetail where ProductID=%(pid)s")
+        data={"pid":id}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+        cursor.close()
+        return result;
+    except:
+        print (exc_info())
+        cursor.close()
+
+def get_product_brand(id):
+    if (id<1):
+        return
+    try:
+        cursor=productConn.cursor()
+        sql=("select brandname from productdb.brands where brand_id=%(bid)s")
+        data ={"bid":id}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+        cursor.close()
+        return result
+    except:
+        print (exc_info())
+        cursor.close()
+
+def get_product_link(id):
+
+    if (id<1):
+        return
+    try:
+        cursor=productConn.cursor()
+        sql=("select Url from Productdb.links where ProductID=%(pid)s")
+        data={"pid":id}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+        cursor.close()
+        return result;
+    except:
+        print (exc_info())
+        cursor.close()
 
 
 

@@ -11,7 +11,7 @@ class PinManager(Manager):
     # this example has both a normal feed and an aggregated feed (more like
     # how facebook or wanelo uses feeds)
     Session = sessionmaker()
-    Session.configure(bind=engine)
+    Session.configure(bind=userDB_engine)
 
     feed_classes = dict(
         normal=PinFeed,
@@ -42,17 +42,16 @@ class PinManager(Manager):
 
 
     def get_user_follower_ids(self,user_id):
-        session=Session()
-
-        query=session.query(UserRelation).filter(UserRelation.User2ID==user_id).all()
         follower_ids=[]
+        from models import get_user_follower_ids_fromDB
+        query=get_user_follower_ids_fromDB(user_id)
         for row in query:
-            follower_ids.append(row.User1ID)
-#        for follwer in follower_ids:
-#            print follwer
+            if (row[0] is not None):
+                follower_ids.append(row[0])
         return {FanoutPriority.HIGH:follower_ids}
 
 manager = PinManager()
+
 
 
 testpin=Pin(id=1,user_id=1,item_id=18,message='testpin')
