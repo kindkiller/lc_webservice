@@ -70,6 +70,7 @@ def main(global_config, **settings):
     config.add_route('main', '/main')
     config.add_route('logout', '/logout')
 
+
     #config.add_route('add_page', '/add_page/{pagename}')
     #config.add_route('edit_page', '/{pagename}/edit_page')
     

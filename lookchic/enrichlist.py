@@ -95,8 +95,8 @@ class richUserPictures(object):
     def enrichPicture(self,pic_id):
         try:
             cursor = conn.cursor()
-            sql = ("select Path, Filename from userdb.photos where ID = %(pid)s")
-            data = {'pid':self.pic_id}
+            sql = ("select Path, Filename,UID from userdb.photos where ID = %(pid)s")
+            data = {'pid':pic_id}
             cursor.execute(sql,data)
             Pics=cursor.fetchall()
             cursor.close()
@@ -107,7 +107,7 @@ class richUserPictures(object):
             for pic in Pics:
                 import os
                 url=os.path.join(pic[0],pic[1])
-                picture=richPicture(pic.ID,url,pic.UID)
+                picture=richPicture(pic_id,url,pic[2])
                 return picture
 
     def enrichPictures(self,pic_ids):

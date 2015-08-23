@@ -356,6 +356,7 @@ def GetPassword(uid):
         # conn.close()
 
 def getFeedsFromDb(uid):
+    result=list()
     if uid ==0:
         return None
     try:
@@ -364,10 +365,12 @@ def getFeedsFromDb(uid):
              " where User1ID=%(uid)s) order by PAddDate desc")
         data={"uid":uid}
         cursor.execute(sql,data)
-        result=cursor.fetchall()
+        rows=cursor.fetchall()
         cursor.close()
-        if result is not None:
-            return result
+        for row in rows:
+            if row[0] is not None:
+                result.append(row[0])
+        return result
     except:
             print (exc_info())
 
@@ -434,8 +437,6 @@ def get_product_link(id):
         cursor.close()
 
 
-result=searchProduct('Jeans')
-print(result)
 
 
 # a=sess.query(Photos).all()
