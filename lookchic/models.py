@@ -5,40 +5,10 @@ from sqlalchemy import *
 from sqlalchemy import Column, Integer, String, DateTime, func
 from sqlalchemy.orm import relationship
 import pytz
-import mysql.connector
-from sqlalchemy import create_engine
+from mysql.connector import MySQLConnection, Error
 from sys import exc_info
 
-db_uri = "mysql+mysqlconnector://{user}:{password}@{host}:{port}/{db}"
-userDB_engine = create_engine(db_uri.format(user='allen', password='yao0702', host='localhost', port='3306', db='userdb'),
-                       encoding='utf8', connect_args={'time_zone': '+00:00'}, pool_size=100, pool_recycle=1800)
-
-productDB_engine=create_engine(db_uri.format(user='allen', password='yao0702', host='localhost', port='3306', db='productdb'),
-                       encoding='utf8', connect_args={'time_zone': '+00:00'}, pool_size=100, pool_recycle=1800)
-# engine=create_engine(db_uri.format(user='yy', password='qwer4321', host='localhost', port='3306', db='userdb'), encoding='utf8', connect_args={'time_zone':'+00:00'})
-# engine = create_engine('sqlite:///feed.db', echo=True)
-
-from sqlalchemy.ext.declarative import declarative_base
-
-# Used for enRichPictures, do not delete
-Base = declarative_base()
-from sqlalchemy.orm import sessionmaker
-
-Session = sessionmaker(bind=userDB_engine)
-sess = Session()
-
-from mysql.connector import MySQLConnection, Error
-
-conn = mysql.connector.connect(user="allen", password="yao0702", host="localhost", database="userdb")
-conn.autocommit = true
-
-productConn=mysql.connector.connect(user="allen", password="yao0702", host="localhost", database="productdb")
-productConn.autocommit=true
-
-
-# conn = mysql.connector.connect(user="yy",password="qwer4321",host="localhost",database="userdb")
-# cursor = conn.cursor()
-
+from dbconnection import db_uri,userDB_engine, productDB_engine, Session, conn, productConn, Base
 
 class Userinfo(Base):
     __tablename__ = 'userinfo'
@@ -285,7 +255,7 @@ def addphoto(UID, PName, PDesc, PPath, FiName):
 
 # addphoto('TestInsert1','','TestPath:','')
 
-def AddComment(CText, UID, PID):
+def addcomment(CText, UID, PID):
     if UID==0 or PID==0 or CText is None:
         return
     if len(CText) <1:
