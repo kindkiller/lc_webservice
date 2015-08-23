@@ -129,7 +129,7 @@ class UserContent(object):
         #feeds.delete()
         self.ContentList=list()
         for feed in list(feeds[:25]):
-            from stream_framework.activity import  Activity
+            from stream_framework.activity import Activity
             if feed.verb.id==4:
                 #print feed
                 self.ContentList.append(feed.object_id)

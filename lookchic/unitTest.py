@@ -150,12 +150,15 @@ itemDB=Item(id=102,user_id=2,image='img2', pin_count=0)
 
 from pin_feed import User
 user1=User(1)
-user1.delete()
+#user1.delete()
 user1.create_pic(64)
 user2=User(2)
-user2.delete()
+#user2.delete()
 user2.create_pic(12)
 user2.create_comment(101,11)
+
+#manager.follow_user(user2.user_id,user1.user_id)
+#manager.follow_user(user1.user_id,user2.user_id)
 
 # user3=User(3)
 # user3.create_pic(13)

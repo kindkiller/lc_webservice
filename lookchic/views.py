@@ -224,7 +224,17 @@ class Views:
             resp.status_code = 400
             return dict(rc=400, msg="Fetch Feeds Error: unknown error")
 
+    # search
+    @view_config(route_name='search', request_method='OPTIONS')
+    def main_options(self):
+        resp = self.request.response
+        return resp
 
+    @view_config(route_name='search')
+    def main_options(self):
+        resp = self.request.response
+        keyword = self.request.params.get('keyword', 'No word Provided')
+        return resp
 conn_err_msg = """
 Pyramid is having a problem using your SQL database.  The problem
 might be caused by one of the following things:
