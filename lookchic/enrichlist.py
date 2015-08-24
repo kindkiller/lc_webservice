@@ -141,6 +141,7 @@ class UserContent(object):
 
 result=richPicture(87,'12311',1)
 print result
+####
 #addphoto(UID=1,PName='pic',PDesc='picDesc',PPath='\df',FiName='filename')
 
 
