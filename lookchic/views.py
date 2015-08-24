@@ -20,7 +20,6 @@ from pyramid.httpexceptions import (
 )
 
 from .models import (
-    sess,
     Userinfo,
     )
 
@@ -35,6 +34,9 @@ from pyramid.security import (
     )
 
 from .security import USERS
+
+from dbconnection import Session
+sess=Session()
 
 @view_defaults(renderer='json')
 class Views:
@@ -160,15 +162,9 @@ class Views:
                 import json
                 user_object=json.loads(request.POST.get('username'))
                 userid=user_object['userid']
-                from models import addphoto
-                pic_id=addphoto(userid,'photoname','photoDescription',RelativePath,Saved_file_name)
-                from pin_feed import User
-                user_pin=User(userid)
-                #user_pin.add_pic(pic_id)
-                from feed_managers import manager
-                manager.add_user_activity(userid,user_pin.add_pic(pic_id))
-                feeds=manager.get_feeds(1)['normal']
-                print (feeds[:])
+
+                from postevents import addphotoEvent
+                pic_id = addphotoEvent(userid, RelativePath,Saved_file_name)
 
                 return dict(rc=200, msg="File uploaded")
             else:
@@ -198,25 +194,8 @@ class Views:
         #fake2 = dict(username="Allen",url="images/test_img/sample4.jpg",time="August 18 2015")
         #result.append(fake1)
         #result.append(fake2)
-        from models import getFeedsFromDb
-        temp_list=getFeedsFromDb(userid)
-        print temp_list
-        if page == 1:
-            from enrichlist import UserContent,richUserPictures
-            user=UserContent(userid)
-            content=richUserPictures(user.Pop())
-            for pic in content.pics:
-                feed=dict(username=pic.pic_userName,url=pic.pic_url,time=pic.pic_time)
-                result.append(feed)
-        else:
-            from models import getFeedsFromDb
-            from enrichlist import UserContent,richUserPictures
-            db_feedList=getFeedsFromDb(userid)
-            content=richUserPictures(db_feedList)
-            for pic in content.pics:
-                feed=dict(username=pic.pic_userName,url=pic.pic_url,time=pic.pic_time)
-                result.append(feed)
-
+        from postevents import loaduserFeeds
+        result=loaduserFeeds(userid,page)
 
         from sys import exc_info
         try:

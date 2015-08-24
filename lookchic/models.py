@@ -266,14 +266,15 @@ def addcomment(CText, UID, PID):
         args = [CText, UID, PID, 0]
         result_args = cursor.callproc('uspAddComment', args)
         conn.commit()
-        print(result_args[4])
-        return result_args[4]
+        print(result_args[3])
+        return result_args[3]
     except Error as e:
         conn.rollback()
         print(e)
+    except:
+        print(exc_info())
     finally:
         cursor.close()
-
 
 
 def AddLike(UID, PID):
@@ -521,3 +522,5 @@ stmt = text("""select *
 
 # sess.execute("select * from test_usertable")
 # Base.metadata.create_all(engine)
+
+addcomment('test',1,87)
