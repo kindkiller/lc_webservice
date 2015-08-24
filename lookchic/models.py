@@ -274,7 +274,21 @@ def addcomment(CText, UID, PID):
     finally:
         cursor.close()
 
-
+def removeComment(userid, pic_id, comment_id):
+    if (userid<1 or pic_id<1):
+        return False;
+    try:
+        cursor=conn.cursor()
+        sql="Delete FROM userdb.comments where ID=%(c_id)s"
+        data={'c_id':comment_id}
+        cursor.execute(sql,data)
+        #result=cursor.fetchall()
+        cursor.close()
+        return True
+    except:
+        print (exc_info())
+        return False
+    return False
 
 def AddLike(UID, PID):
     if UID==0 or PID==0:
