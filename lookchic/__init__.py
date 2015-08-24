@@ -7,10 +7,6 @@ from pyramid.authorization import ACLAuthorizationPolicy
 
 from lookchic.security import groupfinder
 
-from .models import (
-    sess,
-    Base
-    )
 
 from pyramid.request import Request
 from pyramid.request import Response
