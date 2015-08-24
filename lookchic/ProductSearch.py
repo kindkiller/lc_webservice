@@ -24,19 +24,9 @@ class Product(object):
         for url in urls:
             self._webUrl.append(url)
 
-
-class Products(object):
-
-    def __init__(self):
-        self.products=None
-
-
-
-from models import *
-
 def SearchProductByKeyword(keyword):
     resultList=[]
-    if (keyword is None):
+    if (keyword is None) or (keyword is ''):
         return None
 
     keys=keyword.split()
@@ -48,7 +38,8 @@ def SearchProductByKeyword(keyword):
         if (productResult is not None and len(productResult)>0):
             for item in productResult:
                 product=Product(item[3],item[0],item[2])
-                resultList.append(product)
+                item=dict(name=product._productName,price=product._price,url=product._webUrl, brand=product._brand)
+                resultList.append(item)
 
     return resultList
 
