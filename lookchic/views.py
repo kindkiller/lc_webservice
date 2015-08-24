@@ -54,6 +54,11 @@ class Views:
         return True
 
     #login
+    @view_config(route_name='login', request_method='OPTIONS')
+    def login_options(self):
+        resp = self.request.response
+        return resp
+
     @view_config(route_name='login',  request_method='POST')
     def login(self):
         request = self.request
@@ -85,6 +90,11 @@ class Views:
             return resp(json=dict(rc=400, msg="Login Error: unknown error"), status_code=400)
 
     #Signup
+    @view_config(route_name='signup', request_method='OPTIONS')
+    def signup_options(self):
+        resp = self.request.response
+        return resp
+
     @view_config(route_name='signup')
     def signup(self):
         request = self.request
@@ -224,6 +234,9 @@ class Views:
             from ProductSearch import SearchProductByKeyword
             result=SearchProductByKeyword(keyword)
             return dict(rc=200, msg="result", results=result)
+
+        return dict(rc=200, msg="result")
+
 
 conn_err_msg = """
 Pyramid is having a problem using your SQL database.  The problem
