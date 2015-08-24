@@ -105,12 +105,13 @@ class Views:
             return Response(json=dict(rc=200, msg="Sign up: Sign up successful"), status_code=200)
         else:
             return Response(json=dict(rc=200, msg="Sign up: Sign up fail"), status_code=200)
-    #save a posted image
+
+    # save a posted image
 
     @view_config(route_name='post', request_method='OPTIONS')
     def post_options(self):
-        resp = self.request.response #(json=dict(rc=200, msg="Options Successful"), status_code=200)
-        #resp.headerlist.append(('Access-Control-Allow-Origin', 'http://localhost:8000'))
+        resp = self.request.response  # (json=dict(rc=200, msg="Options Successful"), status_code=200)
+        # resp.headerlist.append(('Access-Control-Allow-Origin', 'http://localhost:8000'))
         return resp
 
     @view_config(route_name='post', request_method='POST')
@@ -133,18 +134,18 @@ class Views:
 
                 # strip leading path from file name to avoid directory traversal attacks
                 fn = os.path.basename(filename)
-                #open('../static/img/' + fn, 'wb').write(input_file.file.read())
+                # open('../static/img/' + fn, 'wb').write(input_file.file.read())
 
                 # Note that we are generating our own filename instead of trusting
                 # the incoming filename since that might result in insecure paths.
                 # Please note that in a real application you would not use /tmp,
                 # and if you write to an untrusted location you will need to do
                 # some extra work to prevent symlink attacks.
-                RealPath='/Users/zoe/Desktop/Projects/lc_frontend/app/lookchic/static/img'
-                RelativePath='lookchic/static/img'
-                Saved_file_name='%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2]
+                RealPath = '/Users/zoe/Desktop/Projects/lc_frontend/app/lookchic/static/img'
+                RelativePath = 'lookchic/static/img'
+                Saved_file_name = '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2]
                 file_path = os.path.join(RealPath, Saved_file_name)
-                Relative_file_path=os.path.join(RelativePath, Saved_file_name)
+                Relative_file_path = os.path.join(RelativePath, Saved_file_name)
                 # We first write to a temporary file to prevent incomplete files from
                 # being used.
 
@@ -199,13 +200,24 @@ class Views:
 
         from sys import exc_info
         try:
-            #fetch feeds by using userid here
+            # fetch feeds by using userid here
             return dict(rc=200, msg="Fetch Feeds Successful", feeds=result)
         except:
             print (exc_info())
             resp.status_code = 400
             return dict(rc=400, msg="Fetch Feeds Error: unknown error")
 
+    # search
+    @view_config(route_name='search', request_method='OPTIONS')
+    def main_options(self):
+        resp = self.request.response
+        return resp
+
+    @view_config(route_name='search')
+    def main_options(self):
+        resp = self.request.response
+        keyword = self.request.params.get('keyword', 'No word Provided')
+        return resp
 conn_err_msg = """
 Pyramid is having a problem using your SQL database.  The problem
 might be caused by one of the following things:
@@ -221,4 +233,3 @@ might be caused by one of the following things:
 After you fix the problem, please restart the Pyramid application to
 try it again.
 """
-
