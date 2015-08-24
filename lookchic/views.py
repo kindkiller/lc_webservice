@@ -209,15 +209,22 @@ class Views:
 
     # search
     @view_config(route_name='search', request_method='OPTIONS')
-    def main_options(self):
+    def search_options(self):
         resp = self.request.response
         return resp
 
-    @view_config(route_name='search')
-    def main_options(self):
+    @view_config(route_name='search', request_method='GET')
+    def search(self):
+        request = self.request
         resp = self.request.response
         keyword = self.request.params.get('keyword', 'No word Provided')
-        return resp
+        if (keyword=='No word Provided'):
+            return dict(rc=200, msg="result")
+        else:
+            from ProductSearch import SearchProductByKeyword
+            result=SearchProductByKeyword(keyword)
+            return dict(rc=200, msg="result", results=result)
+
 conn_err_msg = """
 Pyramid is having a problem using your SQL database.  The problem
 might be caused by one of the following things:
