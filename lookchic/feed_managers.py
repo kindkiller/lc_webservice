@@ -11,7 +11,7 @@ class PinManager(Manager):
     # this example has both a normal feed and an aggregated feed (more like
     # how facebook or wanelo uses feeds)
     Session = sessionmaker()
-    Session.configure(bind=userDB_engine)
+    session = Session()
 
     feed_classes = dict(
         normal=PinFeed,
