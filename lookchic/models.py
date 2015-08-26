@@ -361,7 +361,7 @@ def getFeedsFromDb(uid):
 def searchProduct(keyword):
     try:
         cursor=productConn.cursor()
-        sql=("select ID, Brand_id, ProductType_id, Name from productdb.Products where Brand_ID in (select ID from productdb.Brands where BrandName like CONCAT('%', %(key)s, '%'))"
+        sql=("select ID, Brand_id, ProductType_id, Name from productdb.Products where Brand_ID in (select Brand_ID from productdb.Brands where BrandName like CONCAT('%', %(key)s, '%'))"
 						"or	ProductType_ID in (select ProductType_ID from productdb.productTypes where TypeName like concat('%',%(key)s,'%')"
                         "or  Name like concat('%',%(key)s,'%'))")
         data={"key":keyword}

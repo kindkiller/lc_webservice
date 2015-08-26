@@ -233,6 +233,7 @@ class Views:
         else:
             from ProductSearch import SearchProductByKeyword
             result=SearchProductByKeyword(keyword)
+            #dict(name=product._productName,price=product._price,url=product._webUrl, brand=product._brand)
             return dict(rc=200, msg="result", results=result)
 
         return dict(rc=200, msg="result")
