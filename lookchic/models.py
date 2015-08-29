@@ -21,20 +21,24 @@ class Userinfo(Base):
     LastLoginTime = Column(DateTime)
 
 
-def AddNewUser(Username, Pword):
+def AddNewUser(Username, Pword, salt, email):
     from datetime import datetime
-    newUser = Userinfo(Username=Username, Password=Pword, Active=1, LastLoginTime=datetime.utcnow())
     try:
-        sess = Session()
-        sess.add(newUser)
-        sess.commit()
-    except:
-        print "Unexpect Exception:", sys.exc_info()[0]
-        sess.rollback()
-        sess.close()
-        return False
-    sess.close()
-    return True
+        cursor=conn.cursor()
+        timeFormat='%Y-%m-%d %H:%M:%S'
+        args = [Username,Pword, 0, salt, email, datetime.utcnow().strftime(timeFormat),0]
+        result_args = cursor.callproc('uspAddUser', args)
+        conn.commit()
+        cursor.close()
+        print(result_args[6])
+        return result_args[6]
+    except Error as e:
+        conn.rollback()
+        cursor.close()
+        print(e)
+    return 0
+
+
 
 def get_user_follower_ids_fromDB(uid):
     if uid == 0:
@@ -520,6 +524,10 @@ stmt = text("""select *
             # s is instance of Session() class factory
             '''
 # results = sess.execute(stmt, params=dict(username=username))
+
+
+result=AddNewUser('username','123123','w13se123','asdf@asdf.com')
+print result
 
 
 #
