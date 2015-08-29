@@ -229,7 +229,7 @@ class Views:
         resp = self.request.response
         keyword = self.request.params.get('keyword', 'No word Provided')
         if (keyword=='No word Provided'):
-            return dict(rc=200, msg="result")
+            return dict(rc=200, msg="No keyword")
         else:
             from ProductSearch import SearchProductByKeyword
             result=SearchProductByKeyword(keyword)

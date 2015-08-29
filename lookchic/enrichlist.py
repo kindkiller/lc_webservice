@@ -12,6 +12,7 @@ class richPicture(object):
     pic_uid=0
     pic_userName=''
     pic_time=''
+    likeCount=0;
     commentList=list()
     def __init__(self,id,url,UID):
         self.pic_id=id
@@ -22,6 +23,7 @@ class richPicture(object):
         self.pic_userName=self.getUsername()
         self.pic_time=self.getTime()
         self.commentList=self.getPicComments()
+        self.likeCount=self.getlistcount()
 
     def getUsername(self):
         try:
@@ -69,6 +71,19 @@ class richPicture(object):
             print (exc_info())
             self.commentList=list()
 
+    def getlistcount(self):
+        try:
+            cursor=conn.cursor()
+            sql=("select count(id) from likes where PhotoID=%(pic)s")
+            data={'pic':self.pic_id}
+            cursor.execute(sql, data)
+            result=cursor.fetchall()
+            cursor.close
+            if (len(result))>0 and len(result)==1:
+                return result[0][0]
+        except:
+            print (exc_info())
+            return 0;
 
 
 class richComment(object):
@@ -136,6 +151,7 @@ class UserContent(object):
 
     def Pop(self):
         return self.ContentList
+
 
 
 
