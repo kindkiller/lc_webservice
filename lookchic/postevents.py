@@ -57,9 +57,16 @@ def loaduserFeeds(userid, page):
         db_feedList = getFeedsFromDb(userid)
         content = richUserPictures(db_feedList)
         for pic in content.pics:
-            feed = dict(picid=pic.pic_id, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount)
+            feed = dict(picid=pic.pic_id, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked)
             result.append(feed)
     return result
+
+def addPhotoFavorite(userid, photoid):
+    if userid <=0 or photoid<=0:
+        return False
+    else:
+        result=addPhotoFavoriteToDB(userid, photoid)
+        return result;
 
 
 ##result=removeuserComment(1,87,2)

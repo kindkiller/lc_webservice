@@ -341,7 +341,7 @@ def GetPassword(uid):
         cursor = conn.cursor()
         args = [uid, 0]
         result_args = cursor.callproc('uspGetPassword', args)
-        print(result_args[1])
+        #print(result_args[1])
         return result_args[1]
     except Error as e:
         print(e)
@@ -430,7 +430,34 @@ def get_product_link(id):
         print (exc_info())
         cursor.close()
 
+def addPhotoFavoriteToDB(userid, photoid):
+    cursor=conn.cursor()
+    from datetime import datetime
+    try:
+        if cursor is not None:
+            sql = ("select * from favorite where Userid=%(uid)s and Photoid=%(pic)s")
+            data={'uid':userid, 'pic':photoid}
+            cursor.execute(sql,data)
+            result=cursor.fetchall()
+            if (len(result)>0):
+                return true
+            else:
+                sql=("Insert into favorite "
+                     "Values(%(uid)s, %(pic)s, %(time)s)")
+                data={'uid':userid, 'pic':photoid,'time':datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+                cursor.execute(sql,data)
+                result=cursor.rowcount
+                cursor.close()
+                if (result>0):
+                    return true
+                else:
+                    return false;
+    except:
+        print (exc_info())
+        cursor.close()
+        return false
 
+addPhotoFavoriteToDB(2,91)
 
 
 # a=sess.query(Photos).all()

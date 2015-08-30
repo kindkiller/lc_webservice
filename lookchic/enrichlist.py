@@ -12,18 +12,21 @@ class richPicture(object):
     pic_uid=0
     pic_userName=''
     pic_time=''
-    likeCount=0;
+    likeCount=0
+    liked=0
     commentList=list()
-    def __init__(self,id,url,UID):
+    def __init__(self,id,url,UID, userid):
         self.pic_id=id
         self.pic_url=url
         self.pic_uid=UID
+        self.userid=userid
         #print self.pic_id
 
         self.pic_userName=self.getUsername()
         self.pic_time=self.getTime()
         self.commentList=self.getPicComments()
         self.likeCount=self.getlistcount()
+        self.liked=self.isLiked()
 
     def getUsername(self):
         try:
@@ -88,6 +91,19 @@ class richPicture(object):
             print (exc_info())
             return 0;
 
+    def isLiked(self):
+        try:
+            cursor=conn.cursor()
+            sql=("select count(id) from likes where PhotoID=%(pic)s and UserID=%(uid)s")
+            data={'pic':self.pic_id, 'uid':self.userid}
+            cursor.execute(sql, data)
+            result=cursor.fetchall()
+            cursor.close
+            if (len(result))>0 and len(result)==1:
+                return 1
+        except:
+            print (exc_info())
+            return 0;
 
 class richComment(object):
     UID=0
@@ -101,8 +117,9 @@ class richComment(object):
 class richUserPictures(object):
 
 
-    def __init__(self, pic_ids):
+    def __init__(self, pic_ids, userid):
         self.pics=list()
+        self.userid=userid
         from sys import exc_info
         try:
             self.pics=self.enrichPictures(pic_ids)
@@ -125,7 +142,7 @@ class richUserPictures(object):
             for pic in Pics:
                 import os
                 url=os.path.join(pic[0],pic[1])
-                picture=richPicture(pic_id,url,pic[2])
+                picture=richPicture(pic_id,url,pic[2], self.userid)
                 return picture
 
     def enrichPictures(self,pic_ids):
