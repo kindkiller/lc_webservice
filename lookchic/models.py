@@ -2,7 +2,7 @@
 import sys
 from sqlalchemy import Table, ForeignKey
 from sqlalchemy import *
-from sqlalchemy import Column, Integer, String, DateTime, func
+from sqlalchemy import Column, Integer, String, DateTime, func, FLOAT
 from sqlalchemy.orm import relationship
 import pytz
 from mysql.connector import MySQLConnection, Error
@@ -84,14 +84,22 @@ class Userdetails(Base):
     AgeRange = Column(Integer, ForeignKey('AgeRange.ID'))
     InterestArea = Column(Integer, ForeignKey('InterestArea.ID'))
     Update_Date = Column(DateTime)
+    Height=Column(Integer)
+    Weight=Column(FLOAT)
+    Brithday=Column(DateTime)
+    Gender=Column(INTEGER)
+    Occupation=Column(String(255))
 
 
-def AddUserDetail(UserId, UserNickName, Country, Aboutme, Age, InterestArea):
+def AddUserDetail(UserId, UserNickName, Country, Aboutme, Age, InterestArea,height,weight,isF,occupation):
     from datetime import datetime
     sess = Session()
+    birthFormat='%Y-%m-%d'
     ageRange = sess.query(AgeRange).filter(AgeRange.AgeRangeStart < Age and AgeRange.AgeRangeEnd < Age)
     detail = Userdetails(UserID=UserId, AliasName=UserNickName, Country=Country, About_me=Aboutme,
-                         Agerange=ageRange[0].ID, InterestArea=InterestArea, Update_Date=datetime.utcnow())
+                         Agerange=ageRange[0].ID, InterestArea=InterestArea, Update_Date=datetime.utcnow(),
+                         Height=height, Weight=weight, Brithday=datetime.strftime(birthFormat),Gender=(isF),
+                         Occupation=occupation)
     try:
         sess.add(detail)
         sess.commit()
@@ -526,8 +534,8 @@ stmt = text("""select *
 # results = sess.execute(stmt, params=dict(username=username))
 
 
-result=AddNewUser('username','123123','w13se123','asdf@asdf.com')
-print result
+##result=AddNewUser('username','123123','w13se123','asdf@asdf.com')
+#print result
 
 
 #

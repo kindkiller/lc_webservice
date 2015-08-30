@@ -57,19 +57,22 @@ class richPicture(object):
 
     def getPicComments(self):
         try:
+            pic_comments=list()
             cursor = conn.cursor()
-            sql = ("select UserID, Context, AddDate from userdb.comments where PhotoID = %(pid)s")
+            sql = ("select Username, Context, comments.AddDate from userdb.comments,userdb.userinfo "
+                   "where PhotoID = %(pid)s and userinfo.id=comments.UserID")
             data = {'pid':self.pic_id}
             cursor.execute(sql,data)
             comments=cursor.fetchall()
             cursor.close()
             if len(comments) >0:
                 for comment in comments:
-                    com=richComment(comment[0],comment[1],comment[2].strftime("%B,%d,%Y"))
-                    self.commentList.append(com)
+                    com=dict(username=comment[0],comment=comment[1],time=comment[2].strftime("%Y-%m-%d %H:%M:%S"))
+                    pic_comments.append(com)
         except:
             print (exc_info())
-            self.commentList=list()
+            pic_comments=list()
+        return pic_comments
 
     def getlistcount(self):
         try:
@@ -155,8 +158,8 @@ class UserContent(object):
 
 
 
-result=richPicture(87,'12311',1)
-print result
+#result=richPicture(87,'12311',1)
+#print result
 ####
 #addphoto(UID=1,PName='pic',PDesc='picDesc',PPath='\df',FiName='filename')
 

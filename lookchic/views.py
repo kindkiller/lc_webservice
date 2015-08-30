@@ -111,7 +111,7 @@ class Views:
 
         from models import AddNewUser
         Uid=AddNewUser(username,pwd,email,salt)
-        if (Uid>0):
+        if Uid>0:
             return Response(json=dict(rc=200, msg="Sign up: Sign up successful"), status_code=200)
         else:
             return Response(json=dict(rc=200, msg="Sign up: Sign up fail"), status_code=200)

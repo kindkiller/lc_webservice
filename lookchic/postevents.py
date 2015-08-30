@@ -48,7 +48,7 @@ def loaduserFeeds(userid, page):
         user = UserContent(userid)
         content = richUserPictures(user.Pop())
         for pic in content.pics:
-            feed = dict(username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time)
+            feed = dict(username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time,comments=pic.commentList, likeCount=pic.likeCount)
             result.append(feed)
     else:
         from models import getFeedsFromDb
@@ -56,7 +56,7 @@ def loaduserFeeds(userid, page):
         db_feedList = getFeedsFromDb(userid)
         content = richUserPictures(db_feedList)
         for pic in content.pics:
-            feed = dict(username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time)
+            feed = dict(picid=pic.pic_id, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount)
             result.append(feed)
     return result
 
