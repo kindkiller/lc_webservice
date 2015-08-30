@@ -6,13 +6,14 @@ def addphotoEvent(userid, RelativePath, Saved_file_name):
     if userid > 0 and RelativePath != '' and Saved_file_name != '':
         from models import addphoto
         pic_id = addphoto(userid, 'photoname', 'photoDescription', RelativePath, Saved_file_name)
-        from pin_feed import User
-        user_pin = User(userid)
-        # user_pin.add_pic(pic_id)
-        from feed_managers import manager
-        manager.add_user_activity(userid, user_pin.add_pic(pic_id))
-        #feeds = manager.get_feeds(1)['normal']
-        #print (feeds[:])
+        if pic_id>0:
+            from pin_feed import User
+            user_pin = User(userid)
+            # user_pin.add_pic(pic_id)
+            from feed_managers import manager
+            manager.add_user_activity(userid, user_pin.add_pic(pic_id))
+            #feeds = manager.get_feeds(1)['normal']
+            #print (feeds[:])
         return pic_id
     else:
         return 0
@@ -42,7 +43,7 @@ def loaduserFeeds(userid, page):
     result = list()
     from models import getFeedsFromDb
     temp_list = getFeedsFromDb(userid)
-    print temp_list
+    #print temp_list
     if page == 1:
         from enrichlist import UserContent, richUserPictures
         user = UserContent(userid)

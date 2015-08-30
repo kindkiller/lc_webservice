@@ -176,8 +176,10 @@ class Views:
 
                 from postevents import addphotoEvent
                 pic_id = addphotoEvent(userid, RelativePath,Saved_file_name)
-
-                return dict(rc=200, msg="File uploaded")
+                if (pic_id>0):
+                    return dict(rc=200, msg="File uploaded")
+                else:
+                    return dict(rc=400, msg="Error in Upload Picture")
             else:
                 resp.status_code = 400
                 return dict(rc=400, msg="no file name")

@@ -30,7 +30,7 @@ def AddNewUser(Username, Pword, salt, email):
         result_args = cursor.callproc('uspAddUser', args)
         conn.commit()
         cursor.close()
-        print(result_args[6])
+        #print(result_args[6])
         return result_args[6]
     except Error as e:
         conn.rollback()
@@ -249,20 +249,18 @@ class Pin(Base):
 
 
 def addphoto(UID, PName, PDesc, PPath, FiName):
+    newCursor = conn.cursor();
     try:
-        newCursor = conn.cursor();
         args = [UID, PName, PDesc, PPath, FiName, 0]
         result_args = newCursor.callproc('uspAddPhoto', args)
         conn.commit()
-
-        print(result_args[5])
+        newCursor.close()
+        return (result_args[5])
     except Error as e:
         conn.rollback()
         print(e)
-    finally:
         newCursor.close()
-        # conn.close()
-    return result_args[5];
+    return 0;
 
 
 # addphoto('TestInsert1','','TestPath:','')
@@ -278,7 +276,7 @@ def addcomment(CText, UID, PID):
         args = [CText, UID, PID, 0]
         result_args = cursor.callproc('uspAddComment', args)
         conn.commit()
-        print(result_args[4])
+        #print(result_args[4])
         return result_args[4]
     except Error as e:
         conn.rollback()

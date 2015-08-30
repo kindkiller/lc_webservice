@@ -18,7 +18,7 @@ class richPicture(object):
         self.pic_id=id
         self.pic_url=url
         self.pic_uid=UID
-        print self.pic_id
+        #print self.pic_id
 
         self.pic_userName=self.getUsername()
         self.pic_time=self.getTime()
