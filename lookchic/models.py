@@ -21,59 +21,6 @@ class Userinfo(Base):
     LastLoginTime = Column(DateTime)
 
 
-def AddNewUser(Username, Pword, salt, email):
-    from datetime import datetime
-    try:
-        cursor=conn.cursor()
-        timeFormat='%Y-%m-%d %H:%M:%S'
-        args = [Username,Pword, 0, salt, email, datetime.utcnow().strftime(timeFormat),0]
-        result_args = cursor.callproc('uspAddUser', args)
-        conn.commit()
-        cursor.close()
-        #print(result_args[6])
-        return result_args[6]
-    except Error as e:
-        conn.rollback()
-        cursor.close()
-        print(e)
-    return 0
-
-
-
-def get_user_follower_ids_fromDB(uid):
-    if uid == 0:
-        return None
-    cursor=conn.cursor()
-    try:
-        sql=("select user1ID from userrelation"
-             " where User2ID=%(uid)s")
-        data={"uid":uid}
-        cursor.execute(sql,data)
-        result=cursor.fetchall()
-    except:
-        print (exc_info())
-    finally:
-        cursor.close()
-    if result is not None and len(result)>0:
-        return result
-
-
-def CheckUser(Username, Pword):
-    checksess = Session();
-    user = checksess.query(Userinfo).filter(Userinfo.Username == Username).all()
-    checksess.commit()
-    checksess.close()
-
-    if len(user) > 0:
-        if (Pword == user[0].Password):
-            return True
-        else:
-            return False
-    else:
-        return False
-    return False
-
-
 class Userdetails(Base):
     __tablename__ = 'userdetails'
     ID = Column(Integer, primary_key=True, autoincrement=True)
@@ -90,26 +37,6 @@ class Userdetails(Base):
     Gender=Column(INTEGER)
     Occupation=Column(String(255))
 
-
-def AddUserDetail(UserId, UserNickName, Country, Aboutme, Age, InterestArea,height,weight,isF,occupation):
-    from datetime import datetime
-    sess = Session()
-    birthFormat='%Y-%m-%d'
-    ageRange = sess.query(AgeRange).filter(AgeRange.AgeRangeStart < Age and AgeRange.AgeRangeEnd < Age)
-    detail = Userdetails(UserID=UserId, AliasName=UserNickName, Country=Country, About_me=Aboutme,
-                         Agerange=ageRange[0].ID, InterestArea=InterestArea, Update_Date=datetime.utcnow(),
-                         Height=height, Weight=weight, Brithday=datetime.strftime(birthFormat),Gender=(isF),
-                         Occupation=occupation)
-    try:
-        sess.add(detail)
-        sess.commit()
-    except:
-        print "Unexpect Exception:", sys.exc_info()[0]
-        sess.rollback()
-        sess.close()
-        return False
-    sess.close()
-    return True
 
 
 class AgeRange(Base):
@@ -247,6 +174,102 @@ class Pin(Base):
 
         return activity
 
+#region: User Operation
+
+def AddNewUser(Username, Pword, salt, email):
+    from datetime import datetime
+    try:
+        cursor=conn.cursor()
+        timeFormat='%Y-%m-%d %H:%M:%S'
+        args = [Username,Pword, 0, salt, email, datetime.utcnow().strftime(timeFormat),0]
+        result_args = cursor.callproc('uspAddUser', args)
+        conn.commit()
+        cursor.close()
+        #print(result_args[6])
+        return result_args[6]
+    except Error as e:
+        conn.rollback()
+        cursor.close()
+        print(e)
+    return 0
+
+
+def AddUserDetail(UserId, UserNickName, Country, Aboutme, Age, InterestArea,height,weight,isF,occupation):
+    from datetime import datetime
+    sess = Session()
+    birthFormat='%Y-%m-%d'
+    ageRange = sess.query(AgeRange).filter(AgeRange.AgeRangeStart < Age and AgeRange.AgeRangeEnd < Age)
+    detail = Userdetails(UserID=UserId, AliasName=UserNickName, Country=Country, About_me=Aboutme,
+                         Agerange=ageRange[0].ID, InterestArea=InterestArea, Update_Date=datetime.utcnow(),
+                         Height=height, Weight=weight, Brithday=datetime.strftime(birthFormat),Gender=(isF),
+                         Occupation=occupation)
+    try:
+        sess.add(detail)
+        sess.commit()
+    except:
+        print "Unexpect Exception:", sys.exc_info()[0]
+        sess.rollback()
+        sess.close()
+        return False
+    sess.close()
+    return True
+
+
+def get_user_follower_ids_fromDB(uid):
+    if uid == 0:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql=("select user1ID from userrelation"
+             " where User2ID=%(uid)s")
+        data={"uid":uid}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+    except:
+        print (exc_info())
+    finally:
+        cursor.close()
+    if result is not None and len(result)>0:
+        return result
+
+def checkAvailableUsername(username):
+    if (username is None):
+        return False
+    else:
+        try:
+            cursor=conn.cursor()
+            sql="select username in userdb.userinfo where username ==%(user)s "
+            data={"user":username}
+            cursor.execute(sql,data)
+            if (cursor.rowcount>0):
+                cursor.close()
+                return False
+            else:
+                cursor.close()
+                return true;
+        except:
+            print(exc_info())
+            cursor.close()
+            return False;
+
+def CheckUser(Username, Pword):
+    checksess = Session();
+    user = checksess.query(Userinfo).filter(Userinfo.Username == Username).all()
+    checksess.commit()
+    checksess.close()
+
+    if len(user) > 0:
+        if (Pword == user[0].Password):
+            return True
+        else:
+            return False
+    else:
+        return False
+    return False
+#endregion
+
+
+#region: Photo and Comments
 
 def addphoto(UID, PName, PDesc, PPath, FiName):
     newCursor = conn.cursor();
@@ -277,7 +300,7 @@ def addcomment(CText, UID, PID):
         result_args = cursor.callproc('uspAddComment', args)
         conn.commit()
         #print(result_args[4])
-        return result_args[4]
+        return result_args[3]
     except Error as e:
         conn.rollback()
         print(e)
@@ -308,14 +331,34 @@ def AddLike(UID, PID):
         args = [UID, PID, 0]
         result_args = cursor.callproc('uspAddLike', args)
         conn.commit()
+        return True
         # print(result_args[3])
     except Error as e:
         conn.rollback()
         print(e)
+        return False
     finally:
         cursor.close()
         # conn.close()
 
+def UnlikePic(UID,PID):
+    if UID==0 or PID==0:
+        return False
+    try:
+        cursor = conn.cursor()
+        args = [UID, PID, 0]
+        result_args = cursor.callproc('uspAddLike', args)
+        conn.commit()
+        cursor.close()
+        return True
+        # print(result_args[3])
+    except Error as e:
+        conn.rollback()
+        print(e)
+        cursor.close()
+        return False
+
+#endregion
 
 def AddUserRelation(u1id, u2id, Rtype):
     if u1id ==0 or u2id==0:
@@ -324,7 +367,7 @@ def AddUserRelation(u1id, u2id, Rtype):
     try:
         cursor = conn.cursor()
         args = [u1id, u2id, Rtype, 0]
-        result_args = cursor.callproc('uspAddLike', args)
+        result_args = cursor.callproc('uspAddUserRelation', args)
         conn.commit()
         # print(result_args[3])
         success=True
@@ -341,7 +384,7 @@ def GetPassword(uid):
         cursor = conn.cursor()
         args = [uid, 0]
         result_args = cursor.callproc('uspGetPassword', args)
-        print(result_args[1])
+        #print(result_args[1])
         return result_args[1]
     except Error as e:
         print(e)
@@ -430,7 +473,34 @@ def get_product_link(id):
         print (exc_info())
         cursor.close()
 
+def addPhotoFavoriteToDB(userid, photoid):
+    cursor=conn.cursor()
+    from datetime import datetime
+    try:
+        if cursor is not None:
+            sql = ("select * from favorite where Userid=%(uid)s and Photoid=%(pic)s")
+            data={'uid':userid, 'pic':photoid}
+            cursor.execute(sql,data)
+            result=cursor.fetchall()
+            if (len(result)>0):
+                return true
+            else:
+                sql=("Insert into favorite "
+                     "Values(%(uid)s, %(pic)s, %(time)s)")
+                data={'uid':userid, 'pic':photoid,'time':datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+                cursor.execute(sql,data)
+                result=cursor.rowcount
+                cursor.close()
+                if (result>0):
+                    return true
+                else:
+                    return false;
+    except:
+        print (exc_info())
+        cursor.close()
+        return false
 
+#addPhotoFavoriteToDB(2,91)
 
 
 # a=sess.query(Photos).all()
@@ -447,7 +517,7 @@ def get_product_link(id):
 # else:
 #     print 'wrong'
 
-
+'''
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
@@ -462,8 +532,9 @@ class Item(Base):
     source_url = Column(String)
     message = Column(String)
     pin_count = Column(Integer, default=0)
+'''
 
-    '''
+'''
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     image = models.ImageField(upload_to='items')
     source_url = models.TextField()
@@ -473,7 +544,7 @@ class Item(Base):
     # class Meta:
     #    db_table = 'pinterest_example_item'
 
-
+'''
 class Board(Base):
     __tablename__ = 'board'
     id = Column(Integer, primary_key=True)
@@ -481,7 +552,7 @@ class Board(Base):
     name = Column(String)
     description = Column(String)
     slug = Column(String)
-
+'''
 
 '''
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -500,20 +571,16 @@ class Board(Base):
     created_at = models.DateTimeField(auto_now_add=True)
 '''
 
-
+'''
 class Follow(Base):
-    '''
-    A simple table mapping who a user is following.
-    For example, if user is Kyle and Kyle is following Alex,
-    the target would be Alex.
-    '''
+
 
     __tablename__ = 'Follow'
     id = Column(Integer, primary_key=True)
     user = Column(Integer, ForeignKey('user.id'))
     target = Column(Integer, ForeignKey('user.id'))
     created_at = Column(DateTime, default=func.now())
-
+'''
 
 '''
     user = models.ForeignKey(
