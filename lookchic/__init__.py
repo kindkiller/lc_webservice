@@ -58,14 +58,20 @@ def main(global_config, **settings):
     config.set_request_factory(request_factory)
 
     #config.add_route('home', '/')
-
-    config.add_route('post', '/post')
-    config.add_route('login', '/login')
-
+    #User Auth Service
     config.add_route('signup', '/signup')
-    config.add_route('main', '/main')
-    config.add_route('search', '/search')
+    config.add_route('login', '/login')
     config.add_route('logout', '/logout')
+
+    #User Post Service
+    config.add_route('main', '/main')
+    config.add_route('post', '/post')
+    config.add_route('addcomment', '/addcomment')
+    config.add_route('addlike', '/addlike')
+
+    #User Search Service
+    config.add_route('search', '/search')
+
 
 
     #config.add_route('add_page', '/add_page/{pagename}')

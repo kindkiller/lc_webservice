@@ -1,23 +1,12 @@
-from pyramid.request import Response
-from pyramid.request import Request
-from pyramid.view import view_config, view_defaults, notfound_view_config
-
-from sqlalchemy.exc import DBAPIError
-import mysql.connector
-import bcrypt, datetime
-
 import os
 import uuid
 import shutil
 
-import cgi
-import re
-#from docutils.core import publish_parts
+from pyramid.request import Response
+from pyramid.view import view_defaults
+from sqlalchemy.exc import DBAPIError
+import bcrypt
 
-from pyramid.httpexceptions import (
-    HTTPFound,
-    HTTPNotFound,
-)
 
 from .models import (
     Userinfo,
@@ -25,18 +14,15 @@ from .models import (
 
 from pyramid.view import (
     view_config,
-    forbidden_view_config,
-    )
+)
 
-from pyramid.security import (
-    remember,
-    forget,
-    )
-
-from .security import USERS
+from sys import exc_info
 
 from dbconnection import Session
 sess=Session()
+
+import postevents
+import json
 
 @view_defaults(renderer='json')
 class Views:
@@ -63,7 +49,6 @@ class Views:
     def login(self):
         request = self.request
         resp = request.response
-        from sys import exc_info
         try:
             user = sess.query(Userinfo).filter(Userinfo.Email == request.json_body.get('email')).first() # request.json_body.get('email')).first()
             if user is None:
@@ -128,7 +113,7 @@ class Views:
     def post(self):
         request = self.request
         resp = request.response
-        from sys import exc_info
+
         # ``filename`` contains the name of the file in string format.
         #
         # WARNING: this example does not deal with the fact that IE sends an
@@ -151,8 +136,8 @@ class Views:
                 # Please note that in a real application you would not use /tmp,
                 # and if you write to an untrusted location you will need to do
                 # some extra work to prevent symlink attacks.
-                RealPath = '/Users/zoe/Desktop/Projects/lc_frontend/app/lookchic/static/img'
-                RelativePath = 'lookchic/static/img'
+                RealPath = 'C:\\LC\\lc_ng\\app\\images\\uploaded'
+                RelativePath = os.path.join('images', 'uploaded')
                 Saved_file_name = '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2]
                 file_path = os.path.join(RealPath, Saved_file_name)
                 Relative_file_path = os.path.join(RelativePath, Saved_file_name)
@@ -170,12 +155,11 @@ class Views:
 
                 os.rename(temp_file_path, file_path)
                 resp.status_code = 200
-                import json
-                user_object=json.loads(request.POST.get('username'))
-                userid=user_object['userid']
 
-                from postevents import addphotoEvent
-                pic_id = addphotoEvent(userid, RelativePath,Saved_file_name)
+                userid=json.loads(request.POST.get('userid'))
+                #userid=user_object['userid']
+
+                pic_id = postevents.addphotoEvent(userid, RelativePath,Saved_file_name)
                 if (pic_id>0):
                     return dict(rc=200, msg="File uploaded")
                 else:
@@ -188,7 +172,7 @@ class Views:
             resp.status_code = 400
             return dict(rc=400, msg="Post Error: unknown error")
 
-    #fetch feeds
+    #Fetch Feeds
     @view_config(route_name='main', request_method='OPTIONS')
     def main_options(self):
         resp = self.request.response
@@ -202,15 +186,10 @@ class Views:
         userid = request.json_body.get('userid')
         page = request.json_body.get('page')
 
-        result=list()
-        #fake1 = dict(username="Yuan",url="images/test_img/sample2.jpg",time="June 18 2015")
-        #fake2 = dict(username="Allen",url="images/test_img/sample4.jpg",time="August 18 2015")
-        #result.append(fake1)
-        #result.append(fake2)
-        from postevents import loaduserFeeds
-        result=loaduserFeeds(userid,page)
+        result = list()
 
-        from sys import exc_info
+        result = postevents.loaduserFeeds(userid,page)
+
         try:
             # fetch feeds by using userid here
             return dict(rc=200, msg="Fetch Feeds Successful", feeds=result)
@@ -229,17 +208,64 @@ class Views:
     def search(self):
         request = self.request
         resp = self.request.response
-        keyword = self.request.params.get('keyword', 'No word Provided')
+        keyword = request.params.get('keyword', 'No word Provided')
         if (keyword=='No word Provided'):
-            return dict(rc=200, msg="No keyword")
+            return resp(json=dict(rc=400, msg="No keyword"), status_code=400)
         else:
             from ProductSearch import SearchProductByKeyword
             result=SearchProductByKeyword(keyword)
             #dict(name=product._productName,price=product._price,url=product._webUrl, brand=product._brand)
             return dict(rc=200, msg="result", results=result)
 
-        return dict(rc=200, msg="result")
+    # Add Comment
+    @view_config(route_name='addcomment', request_method='OPTIONS')
+    def addcomment_options(self):
+        resp = self.request.response
+        return resp
 
+    @view_config(route_name='addcomment', request_method='POST')
+    def addcomment(self):
+        request = self.request
+        resp = self.request.response
+        try:
+            #Add comment to DB
+            user_id = request.json_body.get('userid')
+            pic_id = request.json_body.get('picid')
+            comment = request.json_body.get('comment')
+
+            comm_id = postevents.adduserComment(user_id, pic_id, comment)
+            if (comm_id > 0):
+                return dict(rc=200, msg="Comment Added")
+            else:
+                return dict(rc=400, msg="Comment Added Failed")
+        except:
+            print (exc_info())
+            return resp(json=dict(rc=400, msg="Comment Error: " + exc_info()), status_code=400)
+
+    # Add/Delete Like
+    @view_config(route_name='addlike', request_method='OPTIONS')
+    def addlike_options(self):
+        resp = self.request.response
+        return resp
+
+    @view_config(route_name='addlike', request_method='POST')
+    def addlike(self):
+        request = self.request
+        resp = self.request.response
+        try:
+            #Add/Delete like to DB
+            user_id = request.json_body.get('userid')
+            pic_id = request.json_body.get('picid')
+            '''
+            like_id = postevents.adduserComment(user_id, pic_id)
+            if (comm_id>0):
+                return dict(rc=200, msg="Comment Added")
+            else:
+                return dict(rc=400, msg="Comment Added Failed")
+          '''
+        except:
+            print (exc_info())
+            return resp(json=dict(rc=400, msg="Comment Error: " + exc_info()), status_code=400)
 
 conn_err_msg = """
 Pyramid is having a problem using your SQL database.  The problem
