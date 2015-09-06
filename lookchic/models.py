@@ -266,6 +266,76 @@ def CheckUser(Username, Pword):
     else:
         return False
     return False
+
+def followerCount(uid):
+    if uid == 0:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql=("select count(user1ID) from userrelation"
+             " where User2ID=%(uid)s")
+        data={"uid":uid}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+    except:
+        print (exc_info())
+    finally:
+        cursor.close()
+    if result is not None and len(result)>0:
+        return (result[0][0]-1)
+
+def followingCount(uid):
+    if uid == 0:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql=("select count(user2ID) from userrelation"
+             " where User1ID=%(uid)s")
+        data={"uid":uid}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+    except:
+        print (exc_info())
+    finally:
+        cursor.close()
+    if result is not None and len(result)>0:
+        return (result[0][0]-1)
+
+def postCount(uid):
+    if uid == 0:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql=("select count(*) from userdb.Photos"
+             " where uid=%(uid)s")
+        data={"uid":uid}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+    except:
+        print (exc_info())
+    finally:
+        cursor.close()
+    if result is not None and len(result)>0:
+        return (result[0][0])
+
+def getUserFavioritePic(uid):
+    result=list()
+    cursor=conn.cursor()
+    try:
+        sql=("select photoid from Favorite "
+             " where userid=%(uid)s")
+        data={"uid":uid}
+        cursor.execute(sql,data)
+        rows=cursor.fetchall()
+    except:
+        print (exc_info())
+    finally:
+        cursor.close()
+    if rows is not None and len(rows)>0:
+        for e in rows:
+            result.append(e[0])
+    return result
+
 #endregion
 
 
@@ -347,7 +417,7 @@ def UnlikePic(UID,PID):
     try:
         cursor = conn.cursor()
         args = [UID, PID, 0]
-        result_args = cursor.callproc('uspAddLike', args)
+        result_args = cursor.callproc('uspCancelLike', args)
         conn.commit()
         cursor.close()
         return True

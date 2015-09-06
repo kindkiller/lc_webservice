@@ -20,9 +20,9 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/lookchic$ProductSearch.coverage" NAME="ProductSearch Coverage Results" MODIFIED="1439957818875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
     <SUITE FILE_PATH="coverage/lookchic$enrichlist.coverage" NAME="enrichlist Coverage Results" MODIFIED="1440873306083" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
-    <SUITE FILE_PATH="coverage/lookchic$models.coverage" NAME="models Coverage Results" MODIFIED="1440969611965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
+    <SUITE FILE_PATH="coverage/lookchic$models.coverage" NAME="models Coverage Results" MODIFIED="1441507428836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
+    <SUITE FILE_PATH="coverage/lookchic$postevents.coverage" NAME="postevents Coverage Results" MODIFIED="1441507436073" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
     <SUITE FILE_PATH="coverage/lookchic$lookchic.coverage" NAME="lookchic Coverage Results" MODIFIED="1441503887724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/lookchic$postevents.coverage" NAME="postevents Coverage Results" MODIFIED="1440382872187" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
     <SUITE FILE_PATH="coverage/lookchic$feed_managers.coverage" NAME="feed_managers Coverage Results" MODIFIED="1439954496762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
     <SUITE FILE_PATH="coverage/lookchic$unitTest.coverage" NAME="unitTest Coverage Results" MODIFIED="1439092813148" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
   </component>
@@ -39,9 +39,9 @@
         <entry file="file://$PROJECT_DIR$/lookchic/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="211" column="0" selection-start-line="211" selection-start-column="0" selection-end-line="211" selection-end-column="0" />
+              <caret line="264" column="13" selection-start-line="264" selection-start-column="13" selection-end-line="264" selection-end-column="13" />
               <folding>
-                <element signature="e#0#36#0" expanded="true" />
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -60,8 +60,8 @@
       <file leaf-file-name="postevents.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lookchic/postevents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.104575165">
-              <caret line="50" column="6" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.7385621">
+              <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -93,29 +93,35 @@
         <entry file="file://$PROJECT_DIR$/lookchic/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="291" column="28" selection-start-line="291" selection-start-column="28" selection-end-line="291" selection-end-column="28" />
+              <caret line="339" column="0" selection-start-line="339" selection-start-column="0" selection-end-line="339" selection-end-column="0" />
               <folding>
                 <element signature="e#24#34#0" expanded="true" />
-                <element signature="e#5415#5438#0" expanded="false" />
-                <marker date="1441503365000" expanded="true" signature="6958:7021" placeholder="select user1..userrelation..." />
-                <marker date="1441503365000" expanded="true" signature="9264:9291" placeholder="Delete FROM ..." />
-                <marker date="1441503365000" expanded="true" signature="9264:9301" placeholder="Delete FROM ..." />
-                <marker date="1441503365000" expanded="true" signature="11243:11411" placeholder="select photo..photos..." />
-                <marker date="1441503365000" expanded="true" signature="11304:11380" placeholder="select userr..userrelation..." />
-                <marker date="1441503365000" expanded="true" signature="11777:12136" placeholder="select ID, B..Products..." />
-                <marker date="1441503365000" expanded="true" signature="11862:11946" placeholder="select ID fr..Brands..." />
-                <marker date="1441503365000" expanded="true" signature="11978:12135" placeholder="select Produ..productTypes..." />
-                <marker date="1441503365000" expanded="true" signature="12495:12562" placeholder="select Value..productdetail..." />
-                <marker date="1441503365000" expanded="true" signature="12887:12941" placeholder="select brand..brands..." />
-                <marker date="1441503365000" expanded="true" signature="13266:13314" placeholder="select Url f..links..." />
-                <marker date="1441503365000" expanded="true" signature="13685:13702" placeholder="select * fro..fav..." />
-                <marker date="1441503365000" expanded="true" signature="13685:13721" placeholder="select * fro..favorite..." />
-                <marker date="1441503365000" expanded="true" signature="13685:13722" placeholder="select * fro..favorite..." />
-                <marker date="1441503365000" expanded="true" signature="13685:13741" placeholder="select * fro..favorite..." />
-                <marker date="1441503365000" expanded="true" signature="13685:13750" placeholder="select * fro..favorite..." />
-                <marker date="1441503365000" expanded="true" signature="13972:13992" placeholder="Insert into ..." />
-                <marker date="1441503365000" expanded="true" signature="13972:14051" placeholder="Insert into ..." />
-                <marker date="1441503365000" expanded="true" signature="16834:16917" placeholder="select * fro..test_usertable..." />
+                <element signature="e#5490#5950#0" expanded="false" />
+                <element signature="e#6064#6831#0" expanded="false" />
+                <element signature="e#7869#8191#0" expanded="false" />
+                <marker date="1441507428000" expanded="true" signature="6958:7021" placeholder="select user1..userrelation..." />
+                <marker date="1441507428000" expanded="true" signature="8302:8372" placeholder="select count..userrelation..." />
+                <marker date="1441507428000" expanded="true" signature="8736:8806" placeholder="select count..userrelation..." />
+                <marker date="1441507428000" expanded="true" signature="9165:9226" placeholder="select count..userrelation..." />
+                <marker date="1441507428000" expanded="true" signature="9574:9633" placeholder="select count..Photos..." />
+                <marker date="1441507428000" expanded="true" signature="10994:11021" placeholder="Delete FROM ..." />
+                <marker date="1441507428000" expanded="true" signature="10994:11031" placeholder="Delete FROM ..." />
+                <marker date="1441507428000" expanded="true" signature="12976:13144" placeholder="select photo..photos..." />
+                <marker date="1441507428000" expanded="true" signature="13037:13113" placeholder="select userr..userrelation..." />
+                <marker date="1441507428000" expanded="true" signature="13510:13869" placeholder="select ID, B..Products..." />
+                <marker date="1441507428000" expanded="true" signature="13595:13679" placeholder="select ID fr..Brands..." />
+                <marker date="1441507428000" expanded="true" signature="13711:13868" placeholder="select Produ..productTypes..." />
+                <marker date="1441507428000" expanded="true" signature="14228:14295" placeholder="select Value..productdetail..." />
+                <marker date="1441507428000" expanded="true" signature="14620:14674" placeholder="select brand..brands..." />
+                <marker date="1441507428000" expanded="true" signature="14999:15047" placeholder="select Url f..links..." />
+                <marker date="1441507428000" expanded="true" signature="15418:15435" placeholder="select * fro..fav..." />
+                <marker date="1441507428000" expanded="true" signature="15418:15454" placeholder="select * fro..favorite..." />
+                <marker date="1441507428000" expanded="true" signature="15418:15455" placeholder="select * fro..favorite..." />
+                <marker date="1441507428000" expanded="true" signature="15418:15474" placeholder="select * fro..favorite..." />
+                <marker date="1441507428000" expanded="true" signature="15418:15483" placeholder="select * fro..favorite..." />
+                <marker date="1441507428000" expanded="true" signature="15705:15725" placeholder="Insert into ..." />
+                <marker date="1441507428000" expanded="true" signature="15705:15784" placeholder="Insert into ..." />
+                <marker date="1441507428000" expanded="true" signature="18567:18650" placeholder="select * fro..test_usertable..." />
               </folding>
             </state>
           </provider>
@@ -191,6 +197,7 @@
         <option value="allenyao0702 &lt;allenyao0702@gmail.com&gt;" />
       </list>
     </option>
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="FORCE_PUSH_ALLOWED" value="true" />
@@ -210,8 +217,8 @@
         <option value="$PROJECT_DIR$/lookchic/dbconnection.py" />
         <option value="$PROJECT_DIR$/lookchic/__init__.py" />
         <option value="$PROJECT_DIR$/lookchic/ProductSearch.py" />
-        <option value="$PROJECT_DIR$/lookchic/views.py" />
         <option value="$PROJECT_DIR$/lookchic/enrichlist.py" />
+        <option value="$PROJECT_DIR$/lookchic/views.py" />
         <option value="$PROJECT_DIR$/lookchic/models.py" />
         <option value="$PROJECT_DIR$/lookchic/postevents.py" />
       </list>
@@ -317,7 +324,118 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="425" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
-  <component name="RunManager" selected="Pyramid server.lookchic">
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/lookchic/__init__.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/lookchic/views.py</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
+  </component>
+  <component name="RunManager" selected="Python.postevents">
     <configuration default="false" name="models" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -668,9 +786,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.models" />
-        <item index="1" class="java.lang.String" itemvalue="Python.enrichlist" />
-        <item index="2" class="java.lang.String" itemvalue="Python.postevents" />
+        <item index="0" class="java.lang.String" itemvalue="Python.postevents" />
+        <item index="1" class="java.lang.String" itemvalue="Python.models" />
+        <item index="2" class="java.lang.String" itemvalue="Python.enrichlist" />
         <item index="3" class="java.lang.String" itemvalue="Python.ProductSearch" />
         <item index="4" class="java.lang.String" itemvalue="Python.feed_managers" />
       </list>
@@ -867,7 +985,13 @@
       <option name="project" value="LOCAL" />
       <updated>1441502441558</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="0905&#10;update unlike photo&#10;fix bug in models">
+      <created>1441504043169</created>
+      <option name="number" value="00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1441504043169</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TodoView">
@@ -885,10 +1009,10 @@
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3328767" sideWeight="0.5201939" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3328767" sideWeight="0.47980613" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3328767" sideWeight="0.5169628" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3328767" sideWeight="0.48303714" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2714055" sideWeight="0.5062167" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25068492" sideWeight="0.4676898" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24931507" sideWeight="0.4644588" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -952,25 +1076,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/lookchic/views.py</url>
-          <line>75</line>
+          <line>60</line>
           <option name="timeStamp" value="148" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/lookchic/models.py</url>
-          <line>617</line>
+          <line>687</line>
           <option name="timeStamp" value="162" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/lookchic/models.py</url>
-          <line>601</line>
+          <line>671</line>
           <option name="timeStamp" value="177" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/lookchic/models.py</url>
-          <line>502</line>
+          <line>572</line>
           <option name="timeStamp" value="189" />
         </line-breakpoint>
       </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -978,7 +1105,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="193" />
+      <option name="time" value="196" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Python.PyramidServer">
@@ -1004,7 +1131,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1028,7 +1155,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1052,7 +1179,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1358,16 +1485,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/ProductSearch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="e#20#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid/config/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1397,12 +1514,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/ProductSearch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lookchic/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="211" column="0" selection-start-line="211" selection-start-column="0" selection-end-line="211" selection-end-column="0" />
+          <caret line="264" column="13" selection-start-line="264" selection-start-column="13" selection-end-line="264" selection-end-column="13" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1410,37 +1537,43 @@
     <entry file="file://$PROJECT_DIR$/lookchic/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="291" column="28" selection-start-line="291" selection-start-column="28" selection-end-line="291" selection-end-column="28" />
+          <caret line="339" column="0" selection-start-line="339" selection-start-column="0" selection-end-line="339" selection-end-column="0" />
           <folding>
             <element signature="e#24#34#0" expanded="true" />
-            <element signature="e#5415#5438#0" expanded="false" />
-            <marker date="1441503365000" expanded="true" signature="6958:7021" placeholder="select user1..userrelation..." />
-            <marker date="1441503365000" expanded="true" signature="9264:9291" placeholder="Delete FROM ..." />
-            <marker date="1441503365000" expanded="true" signature="9264:9301" placeholder="Delete FROM ..." />
-            <marker date="1441503365000" expanded="true" signature="11243:11411" placeholder="select photo..photos..." />
-            <marker date="1441503365000" expanded="true" signature="11304:11380" placeholder="select userr..userrelation..." />
-            <marker date="1441503365000" expanded="true" signature="11777:12136" placeholder="select ID, B..Products..." />
-            <marker date="1441503365000" expanded="true" signature="11862:11946" placeholder="select ID fr..Brands..." />
-            <marker date="1441503365000" expanded="true" signature="11978:12135" placeholder="select Produ..productTypes..." />
-            <marker date="1441503365000" expanded="true" signature="12495:12562" placeholder="select Value..productdetail..." />
-            <marker date="1441503365000" expanded="true" signature="12887:12941" placeholder="select brand..brands..." />
-            <marker date="1441503365000" expanded="true" signature="13266:13314" placeholder="select Url f..links..." />
-            <marker date="1441503365000" expanded="true" signature="13685:13702" placeholder="select * fro..fav..." />
-            <marker date="1441503365000" expanded="true" signature="13685:13721" placeholder="select * fro..favorite..." />
-            <marker date="1441503365000" expanded="true" signature="13685:13722" placeholder="select * fro..favorite..." />
-            <marker date="1441503365000" expanded="true" signature="13685:13741" placeholder="select * fro..favorite..." />
-            <marker date="1441503365000" expanded="true" signature="13685:13750" placeholder="select * fro..favorite..." />
-            <marker date="1441503365000" expanded="true" signature="13972:13992" placeholder="Insert into ..." />
-            <marker date="1441503365000" expanded="true" signature="13972:14051" placeholder="Insert into ..." />
-            <marker date="1441503365000" expanded="true" signature="16834:16917" placeholder="select * fro..test_usertable..." />
+            <element signature="e#5490#5950#0" expanded="false" />
+            <element signature="e#6064#6831#0" expanded="false" />
+            <element signature="e#7869#8191#0" expanded="false" />
+            <marker date="1441507428000" expanded="true" signature="6958:7021" placeholder="select user1..userrelation..." />
+            <marker date="1441507428000" expanded="true" signature="8302:8372" placeholder="select count..userrelation..." />
+            <marker date="1441507428000" expanded="true" signature="8736:8806" placeholder="select count..userrelation..." />
+            <marker date="1441507428000" expanded="true" signature="9165:9226" placeholder="select count..userrelation..." />
+            <marker date="1441507428000" expanded="true" signature="9574:9633" placeholder="select count..Photos..." />
+            <marker date="1441507428000" expanded="true" signature="10994:11021" placeholder="Delete FROM ..." />
+            <marker date="1441507428000" expanded="true" signature="10994:11031" placeholder="Delete FROM ..." />
+            <marker date="1441507428000" expanded="true" signature="12976:13144" placeholder="select photo..photos..." />
+            <marker date="1441507428000" expanded="true" signature="13037:13113" placeholder="select userr..userrelation..." />
+            <marker date="1441507428000" expanded="true" signature="13510:13869" placeholder="select ID, B..Products..." />
+            <marker date="1441507428000" expanded="true" signature="13595:13679" placeholder="select ID fr..Brands..." />
+            <marker date="1441507428000" expanded="true" signature="13711:13868" placeholder="select Produ..productTypes..." />
+            <marker date="1441507428000" expanded="true" signature="14228:14295" placeholder="select Value..productdetail..." />
+            <marker date="1441507428000" expanded="true" signature="14620:14674" placeholder="select brand..brands..." />
+            <marker date="1441507428000" expanded="true" signature="14999:15047" placeholder="select Url f..links..." />
+            <marker date="1441507428000" expanded="true" signature="15418:15435" placeholder="select * fro..fav..." />
+            <marker date="1441507428000" expanded="true" signature="15418:15454" placeholder="select * fro..favorite..." />
+            <marker date="1441507428000" expanded="true" signature="15418:15455" placeholder="select * fro..favorite..." />
+            <marker date="1441507428000" expanded="true" signature="15418:15474" placeholder="select * fro..favorite..." />
+            <marker date="1441507428000" expanded="true" signature="15418:15483" placeholder="select * fro..favorite..." />
+            <marker date="1441507428000" expanded="true" signature="15705:15725" placeholder="Insert into ..." />
+            <marker date="1441507428000" expanded="true" signature="15705:15784" placeholder="Insert into ..." />
+            <marker date="1441507428000" expanded="true" signature="18567:18650" placeholder="select * fro..test_usertable..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lookchic/postevents.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.104575165">
-          <caret line="50" column="6" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.7385621">
+          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding />
         </state>
       </provider>

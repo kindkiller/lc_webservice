@@ -69,5 +69,33 @@ def addPhotoFavorite(userid, photoid):
         result=addPhotoFavoriteToDB(userid, photoid)
         return result
 
+def getUserProfilePage(userid):
+    if userid<=0:
+        return None;
+    else:
+        from models import followerCount,followingCount,postCount
+        followers=followerCount(userid)
+        followings=followingCount(userid)
+        posts=postCount(userid)
+        favorites=getUserFavorite(userid)
+        result=dict(followers=followers,followings=followings,posts=posts, favorites=favorites)
+        return result
+
+def getUserFavorite(userid):
+    result=list()
+    if userid<=0:
+        return None
+    else:
+        from models import getUserFavioritePic
+        from enrichlist import UserContent, richUserPictures
+        favioriteList=getUserFavioritePic(userid)
+        if favioriteList is not None:
+            content = richUserPictures(favioriteList,userid)
+        for pic in content.pics:
+            feed = dict(picid=pic.pic_id, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked)
+            result.append(feed)
+    return result
+
+
 ##result=removeuserComment(1,87,2)
 #print result
