@@ -300,7 +300,7 @@ def addcomment(CText, UID, PID):
         result_args = cursor.callproc('uspAddComment', args)
         conn.commit()
         #print(result_args[4])
-        return result_args[4]
+        return result_args[3]
     except Error as e:
         conn.rollback()
         print(e)

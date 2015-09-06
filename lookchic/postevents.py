@@ -55,7 +55,7 @@ def loaduserFeeds(userid, page):
         from models import getFeedsFromDb
         from enrichlist import UserContent, richUserPictures
         db_feedList = getFeedsFromDb(userid)
-        content = richUserPictures(db_feedList)
+        content = richUserPictures(db_feedList,userid)
         for pic in content.pics:
             feed = dict(picid=pic.pic_id, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked)
             result.append(feed)
@@ -67,8 +67,7 @@ def addPhotoFavorite(userid, photoid):
     else:
         from models import addPhotoFavoriteToDB
         result=addPhotoFavoriteToDB(userid, photoid)
-        return result;
-
+        return result
 
 ##result=removeuserComment(1,87,2)
 #print result
