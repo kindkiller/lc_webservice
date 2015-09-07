@@ -225,12 +225,14 @@ def get_user_follower_ids_fromDB(uid):
         data={"uid":uid}
         cursor.execute(sql,data)
         result=cursor.fetchall()
+        if result is not None and len(result)>0:
+            return result
     except:
         print (exc_info())
+        return None
     finally:
         cursor.close()
-    if result is not None and len(result)>0:
-        return result
+
 
 def checkAvailableUsername(username):
     if (username is None):
@@ -277,12 +279,14 @@ def followerCount(uid):
         data={"uid":uid}
         cursor.execute(sql,data)
         result=cursor.fetchall()
+        if result is not None and len(result)>0:
+            return (result[0][0]-1)
     except:
         print (exc_info())
+        return 0;
     finally:
         cursor.close()
-    if result is not None and len(result)>0:
-        return (result[0][0]-1)
+
 
 def followingCount(uid):
     if uid == 0:
@@ -294,12 +298,14 @@ def followingCount(uid):
         data={"uid":uid}
         cursor.execute(sql,data)
         result=cursor.fetchall()
+        if result is not None and len(result)>0:
+            return (result[0][0]-1)
     except:
         print (exc_info())
+        return 0;
     finally:
         cursor.close()
-    if result is not None and len(result)>0:
-        return (result[0][0]-1)
+
 
 def postCount(uid):
     if uid == 0:
@@ -311,12 +317,73 @@ def postCount(uid):
         data={"uid":uid}
         cursor.execute(sql,data)
         result=cursor.fetchall()
+        if result is not None and len(result)>0:
+            return (result[0][0])
+    except:
+        print (exc_info())
+        return None
+    finally:
+        cursor.close()
+
+def getUserProfilePhoto(uid):
+    if uid==0:
+        return None
+    try:
+        cursor = conn.cursor()
+        sql = ("select Path, Filename,UID from userdb.photos "
+               "where ID = (select photoid from userdb.profilePhoto where userid=%(uid)s)")
+        data = {'uid':uid}
+        cursor.execute(sql,data)
+        Pics=cursor.fetchall()
+        cursor.close()
+    except:
+        print (exc_info())
+    if len(Pics)>0:
+        for pic in Pics:
+            import os
+            url=os.path.join(pic[0],pic[1])
+            return url
+
+def getUserProfile(uid):
+    if uid==0:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql=("select username,location,brithday,Gender,Occupation,Height,Weight from userdb.userdetails"
+             " where userdetails.id=%(uid)s")
+        data={"uid":uid}
+        cursor.execute(sql,data)
+        row=cursor.fetchall()
+        result=dict(username=row[0][0],location=row[0][1],brithday=row[0][2],Gender=row[0][3],Occupation=row[0][4],
+                    Height=row[0][5],Weight=row[0][6])
+    except:
+        print (exc_info())
+        return None
+    finally:
+        cursor.close()
+    return result
+
+
+def getUserPosts(uid):
+    result=list()
+    if uid == 0:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql=("select id from userdb.Photos"
+             " where uid=%(uid)s")
+        data={"uid":uid}
+        cursor.execute(sql,data)
+        rows=cursor.fetchall()
+        if rows is not None and len(rows)>0:
+            for e in rows:
+                result.append(e[0])
     except:
         print (exc_info())
     finally:
         cursor.close()
-    if result is not None and len(result)>0:
-        return (result[0][0])
+
+    return result
 
 def getUserFavioritePic(uid):
     result=list()
@@ -327,13 +394,14 @@ def getUserFavioritePic(uid):
         data={"uid":uid}
         cursor.execute(sql,data)
         rows=cursor.fetchall()
+        if rows is not None and len(rows)>0:
+            for e in rows:
+                result.append(e[0])
     except:
         print (exc_info())
     finally:
         cursor.close()
-    if rows is not None and len(rows)>0:
-        for e in rows:
-            result.append(e[0])
+
     return result
 
 #endregion

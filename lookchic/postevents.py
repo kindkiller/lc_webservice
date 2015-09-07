@@ -73,13 +73,25 @@ def getUserProfilePage(userid):
     if userid<=0:
         return None;
     else:
-        from models import followerCount,followingCount,postCount
+        from models import followerCount,followingCount,postCount,getUserPosts,getUserProfile,getUserProfilePhoto
+        from enrichlist import UserContent, richUserPictures
+        userProfile=getUserProfile(userid)
         followers=followerCount(userid)
         followings=followingCount(userid)
         posts=postCount(userid)
         favorites=getUserFavorite(userid)
-        result=dict(followers=followers,followings=followings,posts=posts, favorites=favorites)
+        userPosts=getUserPosts(userid)
+        userProfilePhoto=getUserProfilePhoto(userid)
+        feeds=list()
+        if (userPosts is not None):
+            content = richUserPictures(userPosts,userid)
+        for pic in content.pics:
+            feed = dict(picid=pic.pic_id, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked)
+            feeds.append(feed)
+        result=dict(userProfile=userProfile,userProfileUrl=userProfilePhoto,followers=followers,followings=followings,posts=posts, favorites=favorites,userFeeds=feeds)
         return result
+
+
 
 def getUserFavorite(userid):
     result=list()
@@ -96,6 +108,7 @@ def getUserFavorite(userid):
             result.append(feed)
     return result
 
-
+aa=getUserProfilePage(2)
+print aa
 ##result=removeuserComment(1,87,2)
 #print result
