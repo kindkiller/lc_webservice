@@ -68,6 +68,12 @@ def main(global_config, **settings):
     config.add_route('post', '/post')
     config.add_route('addcomment', '/addcomment')
     config.add_route('addlike', '/addlike')
+    config.add_route('addfavorite', '/addfavorite')
+
+    #User Profile Service
+    config.add_route('userprofile', '/userprofile')
+    config.add_route('userposts', '/userposts')
+    config.add_route('userfav', '/userfav')
 
     #User Search Service
     config.add_route('search', '/search')

@@ -267,6 +267,85 @@ class Views:
             print (exc_info())
             return resp(json=dict(rc=400, msg="Comment Error: " + exc_info()), status_code=400)
 
+    #Add Favorite
+    @view_config(route_name='addfavorite', request_method='OPTIONS')
+    def addfavorite_options(self):
+        resp = self.request.response
+        return resp
+
+    @view_config(route_name='addfavorite', request_method='POST')
+    def addfavorite(self):
+        request = self.request
+        resp = self.request.response
+        try:
+            #Add/Delete like to DB
+            user_id = request.json_body.get('userid')
+            pic_id = request.json_body.get('picid')
+
+            fav = postevents.addPhotoFavorite(user_id, pic_id)
+
+            if(fav):
+                return dict(rc=200, msg="Favorite Added")
+            else:
+                return dict(rc=400, msg="Favorite Added Failed")
+        except:
+            print (exc_info())
+            return resp(json=dict(rc=400, msg="add favorite Error: " + exc_info()), status_code=400)
+
+    # Get User Profile
+    @view_config(route_name='userprofile', request_method='OPTIONS')
+    def userprofile_options(self):
+        resp = self.request.response
+        return resp
+
+    @view_config(route_name='userprofile', request_method='GET')
+    def userprofile(self):
+        request = self.request
+        resp = self.request.response
+
+        try:
+            userid = request.params.get('userid')
+
+        except:
+            print (exc_info())
+            return resp(json=dict(rc=400, msg="User Profile Error: " + exc_info()), status_code=400)
+
+    # Get User Posts
+    @view_config(route_name='userposts', request_method='OPTIONS')
+    def userposts_options(self):
+        resp = self.request.response
+        return resp
+
+    @view_config(route_name='userposts', request_method='GET')
+    def userposts(self):
+        request = self.request
+        resp = self.request.response
+
+        try:
+            userid = request.params.get('userid')
+
+        except:
+            print (exc_info())
+            return resp(json=dict(rc=400, msg="User Post Error: " + exc_info()), status_code=400)
+
+    # Get User Fav
+    @view_config(route_name='userfav', request_method='OPTIONS')
+    def userfav_options(self):
+        resp = self.request.response
+        return resp
+
+    @view_config(route_name='userfav', request_method='GET')
+    def userfav(self):
+        request = self.request
+        resp = self.request.response
+
+        try:
+            userid = request.params.get('userid')
+
+        except:
+            print (exc_info())
+            return resp(json=dict(rc=400, msg="User Fav Error: " + exc_info()), status_code=400)
+
 conn_err_msg = """
 Pyramid is having a problem using your SQL database.  The problem
 might be caused by one of the following things:
