@@ -6,7 +6,7 @@ from pyramid.request import Response
 from pyramid.view import view_defaults
 from sqlalchemy.exc import DBAPIError
 import bcrypt
-
+from Authentication import generateToken,authenticateUser
 
 from .models import (
     Userinfo,
@@ -59,11 +59,13 @@ class Views:
                 #request.session.save()
                 #headers = remember(request, request.json_body.get('email'))
                 #headers.append(('X-CSRF-token', request.session.new_csrf_token()))
-
+                userSecreat=user.Salt
+                userid=user.ID
+                userToken=generateToken(userid,user.Password)
                 resp.status_code = 200
                 #(json=dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID), status_code=200)
                 #resp.headerlist.append(('Access-Control-Allow-Origin', '*'))
-                return dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID)
+                return dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID, accessToken=userToken)
 
             #sess.remove()
             #resp.status_code = 400
@@ -97,9 +99,14 @@ class Views:
         from models import AddNewUser
         Uid=AddNewUser(username,pwd,email,salt)
         if Uid>0:
-            return Response(json=dict(rc=200, msg="Sign up: Sign up successful"), status_code=200)
+            from Authentication import generateUserKeys,generateToken
+            from models import getUserPubkey
+            if generateUserKeys(Uid):
+                userToken=generateToken(Uid,pwd)
+
+                return Response(json=dict(rc=200, msg="Sign up: Sign up successful"), status_code=200,accessToken=userToken)
         else:
-            return Response(json=dict(rc=200, msg="Sign up: Sign up fail"), status_code=200)
+            return Response(json=dict(rc=200, msg="Sign up: Sign up fail"), status_code=200,userToken=None,userPubKey=None)
 
     # save a posted image
 
@@ -113,12 +120,19 @@ class Views:
     def post(self):
         request = self.request
         resp = request.response
+        userToken=json.loads(request.POST.get('accessToken'))
+        userid=json.loads(request.POST.get('userid'))
+        if not authenticateUser(userid,userToken):
+            return
+            #TODO: redirect to login page
 
         # ``filename`` contains the name of the file in string format.
         #
         # WARNING: this example does not deal with the fact that IE sends an
         # absolute file *path* as the filename.  This example is naive; it
         # trusts user input.
+
+        #TODO:change the filename filter
         try:
             filename = request.POST['file'].filename
 
@@ -136,7 +150,8 @@ class Views:
                 # Please note that in a real application you would not use /tmp,
                 # and if you write to an untrusted location you will need to do
                 # some extra work to prevent symlink attacks.
-                RealPath = 'C:\\LC\\lc_ng\\app\\images\\uploaded'
+                RealPath='/Users/zoe/Desktop/Projects/lc_frontend/app/images/uploaded'
+                #RealPath = 'C:\\LC\\lc_ng\\app\\images\\uploaded'
                 RelativePath = os.path.join('images', 'uploaded')
                 Saved_file_name = '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2]
                 file_path = os.path.join(RealPath, Saved_file_name)

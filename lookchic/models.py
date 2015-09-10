@@ -240,7 +240,7 @@ def checkAvailableUsername(username):
     else:
         try:
             cursor=conn.cursor()
-            sql="select username in userdb.userinfo where username ==%(user)s "
+            sql="select username in userdb.userinfo where username =%(user)s "
             data={"user":username}
             cursor.execute(sql,data)
             if (cursor.rowcount>0):
@@ -268,6 +268,109 @@ def CheckUser(Username, Pword):
     else:
         return False
     return False
+
+def getUserPasswordByID(userid):
+    if userid<1:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql="SELECT Password FROM userdb.userinfo WHERE ID =%(uid)s "
+        data={"uid":userid}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+        if result is not None:
+            cursor.close()
+            return result[0][0]
+        else:
+            cursor.close()
+            return None;
+    except:
+        print(exc_info())
+        cursor.close()
+        return None;
+
+def getUserPasswordByName(username):
+    if username<1:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql="SELECT Password FROM userdb.userinfo WHERE Username =%(uname)s "
+        data={"uname":username}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+        if result is not None:
+            cursor.close()
+            return result[0][0]
+        else:
+            cursor.close()
+            return None;
+    except:
+        print(exc_info())
+        cursor.close()
+        return None;
+
+def saveUserKeys(userid,priv_pem,pub_pem):
+    if userid<1:
+        return False
+    cursor=conn.cursor()
+    try:
+        sql=("Update userdb.userinfo "
+             " SET Private_key=%(prv)s, Public_key=%(pub)s "
+             " WHERE ID=%(uid)s")
+        data={'uid':userid, 'prv':priv_pem,'pub':pub_pem}
+        cursor.execute(sql,data)
+        result=cursor.rowcount
+        conn.commit()
+        cursor.close()
+        if (result>0):
+            return true
+        else:
+            return false
+    except:
+        print (exc_info())
+        conn.rollback()
+        cursor.close()
+        return False;
+
+def getUserPubkey(userid):
+    if userid<1:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql="SELECT Public_key FROM userdb.userinfo WHERE ID =%(uid)s "
+        data={"uid":userid}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+        if result is not None:
+            cursor.close()
+            return result[0][0]
+        else:
+            cursor.close()
+            return None;
+    except:
+        print(exc_info())
+        cursor.close()
+        return None;
+
+def getUserPrivatekey(userid):
+    if userid<1:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql="SELECT Private_key FROM userdb.userinfo WHERE ID =%(uid)s "
+        data={"uid":userid}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+        if result is not None:
+            cursor.close()
+            return result[0][0]
+        else:
+            cursor.close()
+            return None;
+    except:
+        print(exc_info())
+        cursor.close()
+        return None;
 
 def followerCount(uid):
     if uid == 0:
@@ -324,6 +427,46 @@ def postCount(uid):
         return None
     finally:
         cursor.close()
+
+def getUserToken(userid):
+    cursor=conn.cursor()
+    try:
+        sql=("select accessToken from userdb.userinfo "
+            "where ID =%(uid)s)")
+        data={'uid':userid}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+        cursor.close()
+        return result[0][0]
+    except:
+        print (exc_info())
+        cursor.close()
+        return None
+
+def updateUserToken(userid, token):
+    if userid<0:
+        return False
+    else:
+        cursor=conn.cursor()
+        try:
+            sql=("Update userdb.userinfo "
+                 " SET accessToken=%(token)s "
+                 " WHERE ID=%(uid)s")
+            data={'uid':userid, 'token':token}
+            cursor.execute(sql,data)
+            result=cursor.rowcount
+            conn.commit()
+            cursor.close()
+            if (result>0):
+                return True
+            else:
+                return False
+        except:
+            print (exc_info())
+            conn.rollback()
+            cursor.close()
+            return False;
+
 
 def getUserProfilePhoto(uid):
     if uid==0:
@@ -628,6 +771,7 @@ def addPhotoFavoriteToDB(userid, photoid):
                 data={'uid':userid, 'pic':photoid,'time':datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
                 cursor.execute(sql,data)
                 result=cursor.rowcount
+                conn.commit()
                 cursor.close()
                 if (result>0):
                     return true
@@ -635,6 +779,7 @@ def addPhotoFavoriteToDB(userid, photoid):
                     return false;
     except:
         print (exc_info())
+        conn.rollback()
         cursor.close()
         return false
 
