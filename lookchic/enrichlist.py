@@ -15,11 +15,13 @@ class richPicture(object):
     likeCount=0
     liked=0
     commentList=list()
+    tags=list()
     def __init__(self,id,url,UID, userid):
         self.pic_id=id
         self.pic_url=url
         self.pic_uid=UID
         self.userid=userid
+
         #print self.pic_id
 
         self.pic_userName=self.getUsername()
@@ -27,6 +29,7 @@ class richPicture(object):
         self.commentList=self.getPicComments()
         self.likeCount=self.getlistcount()
         self.liked=self.isLiked()
+        self.tags=self.getPhotoTags()
 
     def getUsername(self):
         try:
@@ -72,6 +75,25 @@ class richPicture(object):
                 for comment in comments:
                     com=dict(username=comment[0],comment=comment[1],time=comment[2].strftime("%Y-%m-%d %H:%M:%S"))
                     pic_comments.append(com)
+        except:
+            print (exc_info())
+            pic_comments=list()
+        return pic_comments
+
+    def getPhotoTags(self):
+        try:
+            tags=list()
+            cursor = conn.cursor()
+            sql = ("select Tag_Text, LeftX, TopY from userdb.PhotoTags,Tags"
+                    "where PhotoTags.TagID=Tags.ID and PhotoTags.PhotoID=%(pid)s")
+            data = {'pid':self.pic_id}
+            cursor.execute(sql,data)
+            rows=cursor.fetchall()
+            cursor.close()
+            if len(rows) >0:
+                for row in rows:
+                    com=dict(text=row[0],left=row[1],top=row[2])
+                    tags.append(com)
         except:
             print (exc_info())
             pic_comments=list()

@@ -7,6 +7,7 @@ from sqlalchemy.orm import relationship
 import pytz
 from mysql.connector import MySQLConnection, Error
 from sys import exc_info
+from datetime import datetime
 
 from dbconnection import db_uri,userDB_engine, productDB_engine, Session, conn, productConn, Base
 
@@ -17,6 +18,9 @@ class Userinfo(Base):
     Email = Column(String, primary_key=True, default="")
     Password = Column(String(50))
     Salt = Column(VARBINARY(50))
+    Private_key=Column(String(255))
+    Public_Key=Column(String(255))
+    accessToken=Column(String(255))
     Active = Column(Integer)
     LastLoginTime = Column(DateTime)
 
@@ -173,6 +177,8 @@ class Pin(Base):
         )
 
         return activity
+
+
 
 #region: User Operation
 
@@ -506,6 +512,55 @@ def getUserProfile(uid):
         cursor.close()
     return result
 
+def addUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight):
+    if uid==0:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql=("insert into userdb.userDetails (UserId,username,location,brithday,Gender,Occupation,Height,Weight)"
+            " Values(%(uid)s, %(uname)s, %(loca)s, %(brith)s, %(Gender)s, %(Occup)s, %(Height)s, %(Weight)s)")
+        data={"uid":uid, "uname":Uname,"loca":Location,"brith":datetime.strptime(brithday,'%Y-%m-%d'),"Gender":Gender,"Occup":Occupation,"Height":Height,"Weight":Weight}
+        cursor.execute(sql,data)
+        row=cursor.rowcount
+        conn.commit();
+        cursor.close()
+        if row >0:
+            return true;
+        else:
+            return false;
+    except:
+        print (exc_info())
+        conn.rollback()
+        cursor.close()
+        return false;
+
+def updateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight):
+    if uid==0:
+        return None
+    cursor=conn.cursor()
+    try:
+        sql=("Update userdetails "
+            "set Username=%(uname)s,Location=%(loca)s,Brithday=%(brith)s,Gender=%(Gender)s,Occupation=%(Occup)s,"
+	        "Height=%(Height)s,Weight=%(Weight)s "
+            "Where UserID=%(uid)s")
+        data={"uid":uid, "uname":Uname,"loca":Location,"brith":datetime.strptime(brithday,'%Y-%m-%d'),"Gender":Gender,"Occup":Occupation,"Height":Height,"Weight":Weight}
+        cursor.execute(sql,data)
+        row=cursor.rowcount
+        conn.commit();
+        cursor.close()
+        if row >0:
+            return true;
+        else:
+            return false;
+    except:
+        print (exc_info())
+        conn.rollback()
+        cursor.close()
+        return false;
+
+#addUserProfile(4,"test1","ny","1982-07-02","M","worker","180","150")
+
+#updateUserProfile(4,"test1","ny","2001-01-01","F","Test","190","160")
 
 def getUserPosts(uid):
     result=list()
@@ -566,8 +621,43 @@ def addphoto(UID, PName, PDesc, PPath, FiName):
         newCursor.close()
     return 0;
 
+def addphotoTags(Pid,Tags):
+    newCursor=conn.cursor();
+    try:
+        for tag in Tags:
+            tagid=tag['tagid']
+            if (tagid == 0):
+                tagid=addNewTag(tag['text'])
+            sql=("Insert into PhotoTags (PhotoID,TagID,LeftX,TopY)"
+                     "Values(%(pic)s, %(tag)s, %(x)s,%(y)s)")
+            data={'pic':Pid, 'tag':tagid,'x':tag['left'],'y':tag['top']}
+            newCursor.execute(sql,data)
+            result=newCursor.rowcount
+        conn.commit()
+        newCursor.close()
+        return true
+    except Error as e:
+        conn.rollback()
+        print (e)
+        newCursor.close()
+    return false;
 
-# addphoto('TestInsert1','','TestPath:','')
+def addNewTag(tagText):
+    newCursor=conn.cursor();
+    try:
+        args = [tagText, 0]
+        result_args = newCursor.callproc('uspAddTag', args)
+        conn.commit()
+        if result_args[1]>0:
+            return result_args[1]
+    except Error as e:
+        conn.rollback()
+        print (e)
+        newCursor.close()
+    return 0;
+
+
+
 
 def addcomment(CText, UID, PID):
     if UID==0 or PID==0 or CText is None:

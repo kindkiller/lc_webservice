@@ -2,11 +2,13 @@ __author__ = 'zoe'
 from sys import exc_info
 
 
-def addphotoEvent(userid, RelativePath, Saved_file_name):
+def addphotoEvent(userid, RelativePath, Saved_file_name, tags):
     if userid > 0 and RelativePath != '' and Saved_file_name != '':
-        from models import addphoto
+        from models import addphoto, addphotoTags
         pic_id = addphoto(userid, 'photoname', 'photoDescription', RelativePath, Saved_file_name)
         if pic_id>0:
+            addphotoTags(userid,pic_id,)
+
             from pin_feed import User
             user_pin = User(userid)
             # user_pin.add_pic(pic_id)
@@ -108,7 +110,11 @@ def getUserFavorite(userid):
             result.append(feed)
     return result
 
-aa=getUserProfilePage(2)
-print aa
-##result=removeuserComment(1,87,2)
-#print result
+def UpdateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight):
+    if (uid==0):
+        return False
+    else:
+        from models import updateUserProfile
+        result=updateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight)
+        return result
+

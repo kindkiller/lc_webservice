@@ -50,10 +50,10 @@ class Views:
         request = self.request
         resp = request.response
         try:
-            user = sess.query(Userinfo).filter(Userinfo.Email == request.json_body.get('email')).first() # request.json_body.get('email')).first()
+            user = sess.query(Userinfo).filter(Userinfo.Email ==request.json_body.get('email')).first() # request.POST.get('email')).first() # request.json_body.get('email')).first()
             if user is None:
                 return Response(json=dict(rc=400, msg="Login Error: no such user"), status_code=400)
-            if user.Password == request.json_body.get('password'):
+            if user.Password == request.json_body.get('password'): #request.POST.get('password'):
                 #user.pwhash == bcrypt.hashpw(bytes(request.POST.get('password'), 'utf-8'), user.salt):
                 #request.sess[request.POST.get('email')] = 'sessionstart'
                 #request.session.save()
@@ -135,7 +135,7 @@ class Views:
         #TODO:change the filename filter
         try:
             filename = request.POST['file'].filename
-
+            tags=request.POST['tags']
             # ``input_file`` contains the actual file data which needs to be
             # stored somewhere.
             if (filename):
@@ -174,7 +174,8 @@ class Views:
                 userid=json.loads(request.POST.get('userid'))
                 #userid=user_object['userid']
 
-                pic_id = postevents.addphotoEvent(userid, RelativePath,Saved_file_name)
+                pic_id = postevents.addphotoEvent(userid, RelativePath,Saved_file_name,tags)
+
                 if (pic_id>0):
                     return dict(rc=200, msg="File uploaded")
                 else:
