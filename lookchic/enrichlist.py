@@ -85,7 +85,7 @@ class richPicture(object):
             tags=list()
             cursor = conn.cursor()
             sql = ("select Tag_Text, LeftX, TopY from userdb.PhotoTags,Tags"
-                    "where PhotoTags.TagID=Tags.ID and PhotoTags.PhotoID=%(pid)s")
+                    " where PhotoTags.TagID=Tags.ID and PhotoTags.PhotoID=%(pid)s")
             data = {'pid':self.pic_id}
             cursor.execute(sql,data)
             rows=cursor.fetchall()
@@ -96,8 +96,8 @@ class richPicture(object):
                     tags.append(com)
         except:
             print (exc_info())
-            pic_comments=list()
-        return pic_comments
+            tags=list()
+        return tags
 
     def getlistcount(self):
         try:

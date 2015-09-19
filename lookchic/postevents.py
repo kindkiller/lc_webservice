@@ -7,7 +7,7 @@ def addphotoEvent(userid, RelativePath, Saved_file_name, tags):
         from models import addphoto, addphotoTags
         pic_id = addphoto(userid, 'photoname', 'photoDescription', RelativePath, Saved_file_name)
         if pic_id>0:
-            addphotoTags(userid,pic_id,)
+            addphotoTags(pic_id,tags)
 
             from pin_feed import User
             user_pin = User(userid)
@@ -59,7 +59,7 @@ def loaduserFeeds(userid, page):
         db_feedList = getFeedsFromDb(userid)
         content = richUserPictures(db_feedList,userid)
         for pic in content.pics:
-            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked)
+            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked, tags=pic.tags)
             result.append(feed)
     return result
 

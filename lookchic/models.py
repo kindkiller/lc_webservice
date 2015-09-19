@@ -808,7 +808,7 @@ def get_product_detail(id):
         cursor.execute(sql,data)
         result=cursor.fetchall()
         cursor.close()
-        return result;
+        return result
     except:
         print (exc_info())
         cursor.close()

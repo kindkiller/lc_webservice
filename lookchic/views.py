@@ -120,10 +120,11 @@ class Views:
     def post(self):
         request = self.request
         resp = request.response
-        userToken=json.loads(request.POST.get('accessToken'))
-        userid=json.loads(request.POST.get('userid'))
-        if not authenticateUser(userid,userToken):
-            return
+        #TODO: authentication of user request
+        #userToken=json.loads(request.POST.get('accessToken'))
+        #userid=json.loads(request.POST.get('userid'))
+        #if not authenticateUser(userid,userToken):
+        #    return
             #TODO: redirect to login page
 
         # ``filename`` contains the name of the file in string format.
@@ -135,12 +136,20 @@ class Views:
         #TODO:change the filename filter
         try:
             filename = request.POST['file'].filename
-            tags=request.POST['tags']
+            tagString=request.POST['tags']
+            tags=list()
+            if (tagString is not None):
+                import json
+                try:
+                    tags=json.loads(tagString)
+                except:
+                    tags=list()
+            else:
+                tags=list()
             # ``input_file`` contains the actual file data which needs to be
             # stored somewhere.
             if (filename):
                 input_file = request.POST['file'].file
-
                 # strip leading path from file name to avoid directory traversal attacks
                 fn = os.path.basename(filename)
                 # open('../static/img/' + fn, 'wb').write(input_file.file.read())
