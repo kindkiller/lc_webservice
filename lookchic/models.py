@@ -226,6 +226,7 @@ def get_user_follower_ids_fromDB(uid):
         return None
     cursor=conn.cursor()
     try:
+
         sql=("select user1ID from userrelation"
              " where User2ID=%(uid)s")
         data={"uid":uid}
@@ -254,7 +255,7 @@ def checkAvailableUsername(username):
                 return False
             else:
                 cursor.close()
-                return true;
+                return True;
         except:
             print(exc_info())
             cursor.close()
@@ -300,15 +301,16 @@ def getUserPasswordByName(username):
         return None
     cursor=conn.cursor()
     try:
-        sql="SELECT Password FROM userdb.userinfo WHERE Username =%(uname)s "
-        data={"uname":username}
-        cursor.execute(sql,data)
-        result=cursor.fetchall()
+        args = [username,0]
+        result_args = cursor.callproc('uspgetuserpasswordByName', args)
+        #sql="SELECT Password FROM userdb.userinfo WHERE Username =%(uname)s "
+        #data={"uname":username}
+        #cursor.execute(sql,data)
+        cursor.close()
+        result=result_args[1]
         if result is not None:
-            cursor.close()
-            return result[0][0]
+            return result
         else:
-            cursor.close()
             return None;
     except:
         print(exc_info())
@@ -320,18 +322,20 @@ def saveUserKeys(userid,priv_pem,pub_pem):
         return False
     cursor=conn.cursor()
     try:
-        sql=("Update userdb.userinfo "
-             " SET Private_key=%(prv)s, Public_key=%(pub)s "
-             " WHERE ID=%(uid)s")
-        data={'uid':userid, 'prv':priv_pem,'pub':pub_pem}
-        cursor.execute(sql,data)
+        args = [priv_pem,pub_pem,userid]
+        result_args = cursor.callproc('uspsaveUserKeys', args)
+        # sql=("Update userdb.userinfo "
+        #      " SET Private_key=%(prv)s, Public_key=%(pub)s "
+        #      " WHERE ID=%(uid)s")
+        # data={'uid':userid, 'prv':priv_pem,'pub':pub_pem}
+        # cursor.execute(sql,data)
         result=cursor.rowcount
         conn.commit()
         cursor.close()
         if (result>0):
-            return true
+            return True
         else:
-            return false
+            return False
     except:
         print (exc_info())
         conn.rollback()
@@ -343,33 +347,38 @@ def getUserPubkey(userid):
         return None
     cursor=conn.cursor()
     try:
-        sql="SELECT Public_key FROM userdb.userinfo WHERE ID =%(uid)s "
-        data={"uid":userid}
-        cursor.execute(sql,data)
-        result=cursor.fetchall()
+        args = [userid,0]
+        result_args = cursor.callproc('uspgetUserPubkey', args)
+        # sql="SELECT Public_key FROM userdb.userinfo WHERE ID =%(uid)s "
+        # data={"uid":userid}
+        # cursor.execute(sql,data)
+        result=result_args[1]
         if result is not None:
             cursor.close()
-            return result[0][0]
+            return result
         else:
             cursor.close()
-            return None;
+            return None
     except:
         print(exc_info())
         cursor.close()
-        return None;
+        return None
+
 
 def getUserPrivatekey(userid):
     if userid<1:
         return None
     cursor=conn.cursor()
     try:
-        sql="SELECT Private_key FROM userdb.userinfo WHERE ID =%(uid)s "
-        data={"uid":userid}
-        cursor.execute(sql,data)
-        result=cursor.fetchall()
+        args = [userid,0]
+        result_args = cursor.callproc('uspgetUserPrivatekey', args)
+        # sql="SELECT Private_key FROM userdb.userinfo WHERE ID =%(uid)s "
+        # data={"uid":userid}
+        # cursor.execute(sql,data)
+        result=result_args[1]
         if result is not None:
             cursor.close()
-            return result[0][0]
+            return result
         else:
             cursor.close()
             return None;
@@ -383,16 +392,20 @@ def followerCount(uid):
         return None
     cursor=conn.cursor()
     try:
-        sql=("select count(user1ID) from userrelation"
-             " where User2ID=%(uid)s")
-        data={"uid":uid}
-        cursor.execute(sql,data)
-        result=cursor.fetchall()
-        if result is not None and len(result)>0:
-            return (result[0][0]-1)
+        args = [uid,0]
+        result_args = cursor.callproc('uspgetUserPrivatekey', args)
+        # sql=("select count(user1ID) from userrelation"
+        #      " where User2ID=%(uid)s")
+        # data={"uid":uid}
+        # cursor.execute(sql,data)
+        result=result_args[1]
+        if result is not None and result>0:
+            return (result-1)
+        else:
+            return 0
     except:
         print (exc_info())
-        return 0;
+        return 0
     finally:
         cursor.close()
 
@@ -402,16 +415,20 @@ def followingCount(uid):
         return None
     cursor=conn.cursor()
     try:
-        sql=("select count(user2ID) from userrelation"
-             " where User1ID=%(uid)s")
-        data={"uid":uid}
-        cursor.execute(sql,data)
-        result=cursor.fetchall()
-        if result is not None and len(result)>0:
-            return (result[0][0]-1)
+        args = [uid,0]
+        result_args = cursor.callproc('uspfollowingCount', args)
+        # sql=("select count(user2ID) from userrelation"
+        #      " where User1ID=%(uid)s")
+        # data={"uid":uid}
+        # cursor.execute(sql,data)
+        result=result_args[1]
+        if result is not None and result>0:
+            return (result-1)
+        else:
+            return 0
     except:
         print (exc_info())
-        return 0;
+        return 0
     finally:
         cursor.close()
 
@@ -421,13 +438,15 @@ def postCount(uid):
         return None
     cursor=conn.cursor()
     try:
-        sql=("select count(*) from userdb.Photos"
-             " where uid=%(uid)s")
-        data={"uid":uid}
-        cursor.execute(sql,data)
-        result=cursor.fetchall()
-        if result is not None and len(result)>0:
-            return (result[0][0])
+        args = [uid,0]
+        result_args = cursor.callproc('usppostCount', args)
+        # sql=("select count(*) from userdb.Photos"
+        #      " where uid=%(uid)s")
+        # data={"uid":uid}
+        # cursor.execute(sql,data)
+        result=result_args[1]
+        if result is not None and result>0:
+            return result
     except:
         print (exc_info())
         return None
@@ -437,13 +456,15 @@ def postCount(uid):
 def getUserToken(userid):
     cursor=conn.cursor()
     try:
-        sql=("select accessToken from userdb.userinfo "
-            "where ID =%(uid)s)")
-        data={'uid':userid}
-        cursor.execute(sql,data)
-        result=cursor.fetchall()
+        args = [userid,0]
+        result_args = cursor.callproc('uspgetUserToken', args)
+        # sql=("select accessToken from userdb.userinfo "
+        #     "where ID =%(uid)s)")
+        # data={'uid':userid}
+        # cursor.execute(sql,data)
+        result=result_args
         cursor.close()
-        return result[0][0]
+        return result
     except:
         print (exc_info())
         cursor.close()
@@ -455,11 +476,13 @@ def updateUserToken(userid, token):
     else:
         cursor=conn.cursor()
         try:
-            sql=("Update userdb.userinfo "
-                 " SET accessToken=%(token)s "
-                 " WHERE ID=%(uid)s")
-            data={'uid':userid, 'token':token}
-            cursor.execute(sql,data)
+            args = [token, userid]
+            result_args = cursor.callproc('uspupdateUserToken', args)
+            # sql=("Update userdb.userinfo "
+            #      " SET accessToken=%(token)s "
+            #      " WHERE ID=%(uid)s")
+            # data={'uid':userid, 'token':token}
+            # cursor.execute(sql,data)
             result=cursor.rowcount
             conn.commit()
             cursor.close()
@@ -474,37 +497,47 @@ def updateUserToken(userid, token):
             return False;
 
 
+
 def getUserProfilePhoto(uid):
     if uid==0:
         return None
     try:
         cursor = conn.cursor()
-        sql = ("select Path, Filename,UID from userdb.photos "
-               "where ID = (select photoid from userdb.profilePhoto where userid=%(uid)s)")
-        data = {'uid':uid}
-        cursor.execute(sql,data)
-        Pics=cursor.fetchall()
+        args = [uid,'','',0]
+        result_args = cursor.callproc('uspgetUserProfilePhoto', args)
+        # sql = ("select Path, Filename,UID from userdb.photos "
+        #        "where ID = (select photoid from userdb.profilePhoto where userid=%(uid)s)")
+        # data = {'uid':uid}
+        # cursor.execute(sql,data)
+        #Pics=cursor.fetchall()
         cursor.close()
     except:
         print (exc_info())
-    if len(Pics)>0:
-        for pic in Pics:
-            import os
-            url=os.path.join(pic[0],pic[1])
-            return url
+    if result_args[1] is not None and  result_args[2] is not None:
+        import os
+        url=os.path.join(result_args[1],result_args[2])
+        return url
+    else:
+        return '' #should return default profile img
+
+
 
 def getUserProfile(uid):
     if uid==0:
         return None
     cursor=conn.cursor()
     try:
-        sql=("select username,location,brithday,Gender,Occupation,Height,Weight from userdb.userdetails"
-             " where userdetails.id=%(uid)s")
-        data={"uid":uid}
-        cursor.execute(sql,data)
-        row=cursor.fetchall()
-        result=dict(username=row[0][0],location=row[0][1],brithday=row[0][2],Gender=row[0][3],Occupation=row[0][4],
-                    Height=row[0][5],Weight=row[0][6])
+        args = [uid,'','','','','','','']
+        result_args = cursor.callproc('uspgetUserProfile', args)
+
+        # sql=("select username,location,brithday,Gender,Occupation,Height,Weight from userdb.userdetails"
+        #      " where userdetails.id=%(uid)s")
+        # data={"uid":uid}
+        # cursor.execute(sql,data)
+        #row=cursor.fetchall()
+        if result_args is not None:
+            result=dict(username=result_args[1],location=result_args[2],brithday=result_args[3],Gender=result_args[4],
+                        Occupation=result_args[5],Height=result_args[6],Weight=result_args[7])
     except:
         print (exc_info())
         return None
@@ -512,51 +545,62 @@ def getUserProfile(uid):
         cursor.close()
     return result
 
+
+
 def addUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight):
     if uid==0:
         return None
     cursor=conn.cursor()
     try:
-        sql=("insert into userdb.userDetails (UserId,username,location,brithday,Gender,Occupation,Height,Weight)"
-            " Values(%(uid)s, %(uname)s, %(loca)s, %(brith)s, %(Gender)s, %(Occup)s, %(Height)s, %(Weight)s)")
-        data={"uid":uid, "uname":Uname,"loca":Location,"brith":datetime.strptime(brithday,'%Y-%m-%d'),"Gender":Gender,"Occup":Occupation,"Height":Height,"Weight":Weight}
-        cursor.execute(sql,data)
-        row=cursor.rowcount
-        conn.commit();
+        isExist=0
+        args = [uid,Uname,Location,brithday,Gender,Occupation,Height,Weight,isExist]
+        result_args = cursor.callproc('uspaddUserProfile', args)
+        conn.commit()
         cursor.close()
-        if row >0:
-            return true;
+        # sql=("insert into userdb.userDetails (UserId,username,location,brithday,Gender,Occupation,Height,Weight)"
+        #     " Values(%(uid)s, %(uname)s, %(loca)s, %(brith)s, %(Gender)s, %(Occup)s, %(Height)s, %(Weight)s)")
+        # data={"uid":uid, "uname":Uname,"loca":Location,"brith":datetime.strptime(brithday,'%Y-%m-%d'),"Gender":Gender,"Occup":Occupation,"Height":Height,"Weight":Weight}
+        # cursor.execute(sql,data)
+        # row=cursor.rowcount
+        if result_args[8] is not None:
+            isExist=result_args[8]
         else:
-            return false;
+            isExist=False
+
+
+        if isExist == 0:
+            return True
+        else:
+            return False
     except:
         print (exc_info())
         conn.rollback()
         cursor.close()
-        return false;
+        return False
 
 def updateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight):
     if uid==0:
         return None
     cursor=conn.cursor()
     try:
-        sql=("Update userdetails "
-            "set Username=%(uname)s,Location=%(loca)s,Brithday=%(brith)s,Gender=%(Gender)s,Occupation=%(Occup)s,"
-	        "Height=%(Height)s,Weight=%(Weight)s "
-            "Where UserID=%(uid)s")
-        data={"uid":uid, "uname":Uname,"loca":Location,"brith":datetime.strptime(brithday,'%Y-%m-%d'),"Gender":Gender,"Occup":Occupation,"Height":Height,"Weight":Weight}
-        cursor.execute(sql,data)
-        row=cursor.rowcount
-        conn.commit();
+        args = [uid,Uname,Location,brithday,Gender,Occupation,Height,Weight]
+        result_args = cursor.callproc('uspupdateUserProfile', args)
+
+        # sql=("Update userdetails "
+        #     "set Username=%(uname)s,Location=%(loca)s,Brithday=%(brith)s,Gender=%(Gender)s,Occupation=%(Occup)s,"
+	     #    "Height=%(Height)s,Weight=%(Weight)s "
+        #     "Where UserID=%(uid)s")
+        # data={"uid":uid, "uname":Uname,"loca":Location,"brith":datetime.strptime(brithday,'%Y-%m-%d'),"Gender":Gender,"Occup":Occupation,"Height":Height,"Weight":Weight}
+        # cursor.execute(sql,data)
+        # row=cursor.rowcount
+        conn.commit()
         cursor.close()
-        if row >0:
-            return true;
-        else:
-            return false;
+        return True
     except:
         print (exc_info())
         conn.rollback()
         cursor.close()
-        return false;
+        return False
 
 #addUserProfile(4,"test1","ny","1982-07-02","M","worker","180","150")
 
@@ -568,6 +612,8 @@ def getUserPosts(uid):
         return None
     cursor=conn.cursor()
     try:
+        #cannot use stored procedure, the procedure cannot return multiple rows in this case, or create a temp table in the procedure and select from that temp table.
+        #todo: need to improvde the procedure
         sql=("select id from userdb.Photos"
              " where uid=%(uid)s")
         data={"uid":uid}
@@ -587,6 +633,8 @@ def getUserFavioritePic(uid):
     result=list()
     cursor=conn.cursor()
     try:
+        #cannot use stored procedure, the procedure cannot return multiple rows in this case, or create a temp table in the procedure and select from that temp table.
+        #todo: need to improvde the procedure
         sql=("select photoid from Favorite "
              " where userid=%(uid)s")
         data={"uid":uid}
@@ -610,6 +658,8 @@ def getUserFavioritePic(uid):
 def addphoto(UID, PName, PDesc, PPath, FiName):
     newCursor = conn.cursor();
     try:
+        if (UID <= 0):
+            return 0;
         args = [UID, PName, PDesc, PPath, FiName, 0]
         result_args = newCursor.callproc('uspAddPhoto', args)
         conn.commit()
@@ -628,19 +678,21 @@ def addphotoTags(Pid,Tags):
             tagid=tag['tagid']
             if (tagid == 0):
                 tagid=addNewTag(tag['text'])
-            sql=("Insert into PhotoTags (PhotoID,TagID,LeftX,TopY)"
-                     "Values(%(pic)s, %(tag)s, %(x)s,%(y)s)")
-            data={'pic':Pid, 'tag':tagid,'x':tag['left'],'y':tag['top']}
-            newCursor.execute(sql,data)
+            args = [Pid,tagid,tag['left'],tag['top']]
+            result_args = newCursor.callproc('uspaddphotoTags', args)
+            # sql=("Insert into PhotoTags (PhotoID,TagID,LeftX,TopY)"
+            #          "Values(%(pic)s, %(tag)s, %(x)s,%(y)s)")
+            # data={'pic':Pid, 'tag':tagid,'x':tag['left'],'y':tag['top']}
+            # newCursor.execute(sql,data)
             result=newCursor.rowcount
         conn.commit()
         newCursor.close()
-        return true
+        return True
     except Error as e:
         conn.rollback()
         print (e)
         newCursor.close()
-    return false;
+    return False;
 
 def addNewTag(tagText):
     newCursor=conn.cursor();
@@ -683,16 +735,20 @@ def removeComment(userid, pic_id, comment_id):
         return False;
     try:
         cursor=conn.cursor()
-        sql="Delete FROM userdb.comments where ID=%(c_id)s"
-        data={'c_id':comment_id}
-        cursor.execute(sql,data)
+        args = [comment_id]
+        result_args = cursor.callproc('uspremoveComment', args)
+        # sql="Delete FROM userdb.comments where ID=%(c_id)s"
+        # data={'c_id':comment_id}
+        # cursor.execute(sql,data)
         #result=cursor.fetchall()
         cursor.close()
+        conn.commit()
         return True
     except:
         print (exc_info())
+        conn.rollback()
         return False
-    return False
+
 
 def AddLike(UID, PID):
     if UID==0 or PID==0:
@@ -849,29 +905,34 @@ def addPhotoFavoriteToDB(userid, photoid):
     from datetime import datetime
     try:
         if cursor is not None:
-            sql = ("select * from favorite where Userid=%(uid)s and Photoid=%(pic)s")
-            data={'uid':userid, 'pic':photoid}
-            cursor.execute(sql,data)
-            result=cursor.fetchall()
-            if (len(result)>0):
-                return true
-            else:
-                sql=("Insert into favorite "
-                     "Values(%(uid)s, %(pic)s, %(time)s)")
-                data={'uid':userid, 'pic':photoid,'time':datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-                cursor.execute(sql,data)
-                result=cursor.rowcount
-                conn.commit()
-                cursor.close()
-                if (result>0):
-                    return true
-                else:
-                    return false;
+            args = [userid, photoid, 0]
+            result_args = cursor.callproc('uspaddPhotoFavoriteToDB', args)
+            conn.commit()
+            cursor.close()
+            return True
+            # sql = ("select * from favorite where Userid=%(uid)s and Photoid=%(pic)s")
+            # data={'uid':userid, 'pic':photoid}
+            # cursor.execute(sql,data)
+            # result=cursor.fetchall()
+            # if (len(result)>0):
+            #     return True
+            # else:
+            #     sql=("Insert into favorite "
+            #          "Values(%(uid)s, %(pic)s, %(time)s)")
+            #     data={'uid':userid, 'pic':photoid,'time':datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+            #     cursor.execute(sql,data)
+            #     result=cursor.rowcount
+            #     conn.commit()
+            #     cursor.close()
+            #     if (result>0):
+            #         return True
+            #     else:
+            #         return False;
     except:
         print (exc_info())
         conn.rollback()
         cursor.close()
-        return false
+        return False
 
 #addPhotoFavoriteToDB(2,91)
 
