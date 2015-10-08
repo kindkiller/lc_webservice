@@ -20,6 +20,19 @@ def addphotoEvent(userid, RelativePath, Saved_file_name, tags):
     else:
         return 0
 
+def removePhotoEvent(userid, pic_id):
+    if (userid>0 and pic_id>0):
+        from models import removePhoto
+        result=removePhoto(userid,pic_id)
+        if result is True:
+            from pin_feed import User
+            user_pin = User(userid)
+            from feed_managers import manager
+            manager.remove_user_activity(userid,user_pin.add_pic(pic_id))
+            return True
+        else:
+            return False
+
 
 def adduserComment(userid, pic_id, comment):
     from models import addcomment

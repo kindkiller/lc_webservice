@@ -615,7 +615,7 @@ def getUserPosts(uid):
         #cannot use stored procedure, the procedure cannot return multiple rows in this case, or create a temp table in the procedure and select from that temp table.
         #todo: need to improvde the procedure
         sql=("select id from userdb.Photos"
-             " where uid=%(uid)s")
+             " where uid=%(uid)s and removed=0")
         data={"uid":uid}
         cursor.execute(sql,data)
         rows=cursor.fetchall()
@@ -671,6 +671,22 @@ def addphoto(UID, PName, PDesc, PPath, FiName):
         newCursor.close()
     return 0;
 
+def removePhoto(UID, Pic_id):
+    newCursor=conn.cursor();
+    try:
+        if (UID <= 0):
+            return False
+        args = [UID, Pic_id]
+        result_args=newCursor.callproc('uspRemovePhoto',args)
+        conn.commit()
+        newCursor.close()
+        return True
+    except Error as e:
+        conn.rollback()
+        print e
+        newCursor.close()
+    return False
+
 def addphotoTags(Pid,Tags):
     newCursor=conn.cursor();
     try:
@@ -693,6 +709,7 @@ def addphotoTags(Pid,Tags):
         print (e)
         newCursor.close()
     return False;
+
 
 def addNewTag(tagText):
     newCursor=conn.cursor();
@@ -826,7 +843,7 @@ def getFeedsFromDb(uid):
     try:
         cursor = conn.cursor()
         sql=("select photos.id as PhotoId from photos where photos.uid in (select userrelation.user2ID from userrelation"
-             " where User1ID=%(uid)s) order by PAddDate desc")
+             " where User1ID=%(uid)s) and removed=0 order by PAddDate desc")
         data={"uid":uid}
         cursor.execute(sql,data)
         rows=cursor.fetchall()

@@ -152,7 +152,7 @@ class richUserPictures(object):
     def enrichPicture(self,pic_id):
         try:
             cursor = conn.cursor()
-            sql = ("select Path, Filename,UID from userdb.photos where ID = %(pid)s")
+            sql = ("select Path, Filename,UID from userdb.photos where ID = %(pid)s and removed=0")
             data = {'pid':pic_id}
             cursor.execute(sql,data)
             Pics=cursor.fetchall()

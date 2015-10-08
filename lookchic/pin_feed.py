@@ -71,6 +71,9 @@ class User(UserPinFeed):
         from stream_framework.verbs.base import Follow,Add,Love,Comment
         return Activity(self.user_id,Add,pic_id)
 
+
+
+
     def Follow(self,target_id):
         return Activity(self.user_id, verbFollow,target_id)
 
