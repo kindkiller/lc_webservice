@@ -64,7 +64,7 @@ def loaduserFeeds(userid, page):
         user = UserContent(userid)
         content = richUserPictures(user.Pop())
         for pic in content.pics:
-            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time,comments=pic.commentList, likeCount=pic.likeCount,  liked=pic.liked)
+            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time,comments=pic.commentList, likeCount=pic.likeCount,  liked=pic.liked,tags=pic.tags)
             result.append(feed)
     else:
         from models import getFeedsFromDb
@@ -101,7 +101,7 @@ def getUserProfilePage(userid):
         if (userPosts is not None):
             content = richUserPictures(userPosts,userid)
         for pic in content.pics:
-            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked)
+            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked, tags=pic.tags)
             feeds.append(feed)
         result=dict(userProfile=userProfile,userProfileUrl=userProfilePhoto,followers=followers,followings=followings,posts=posts, favorites=favorites,userFeeds=feeds)
         return result
