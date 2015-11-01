@@ -11,6 +11,7 @@ class richPicture(object):
     pic_url=''
     pic_uid=0
     pic_userName=''
+    pic_userProfileimg=''
     pic_time=''
     likeCount=0
     liked=0
@@ -25,6 +26,7 @@ class richPicture(object):
         #print self.pic_id
 
         self.pic_userName=self.getUsername()
+        self.pic_userProfileimg=getUserProfilePhoto(UID)
         self.pic_time=self.getTime()
         self.commentList=self.getPicComments()
         self.likeCount=self.getlistcount()
@@ -106,7 +108,7 @@ class richPicture(object):
             data={'pic':self.pic_id}
             cursor.execute(sql, data)
             result=cursor.fetchall()
-            cursor.close
+            cursor.close()
             if (len(result))>0 and len(result)==1:
                 return result[0][0]
         except:
@@ -157,15 +159,16 @@ class richUserPictures(object):
             cursor.execute(sql,data)
             Pics=cursor.fetchall()
             cursor.close()
+            if len(Pics)>0:
+                for pic in Pics:
+                    import os
+                    url=os.path.join(pic[0],pic[1])
+                    picture=richPicture(pic_id,url,pic[2], self.userid)
+                    return picture
         except:
             print (exc_info())
-
-        if len(Pics)>0:
-            for pic in Pics:
-                import os
-                url=os.path.join(pic[0],pic[1])
-                picture=richPicture(pic_id,url,pic[2], self.userid)
-                return picture
+            cursor.close()
+            return None
 
     def enrichPictures(self,pic_ids):
         self.pics=list()

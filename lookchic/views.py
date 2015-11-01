@@ -258,11 +258,11 @@ class Views:
             pic_id = request.json_body.get('picid')
             comment = request.json_body.get('comment')
 
-            comm_id = postevents.adduserComment(user_id, pic_id, comment)
-            if (comm_id > 0):
-                return dict(rc=200, msg="Comment Added")
+            comms = postevents.adduserComment(user_id, pic_id, comment)
+            if (comms is not None):
+                return dict(rc=200, msg="Comment Added", comments=comms)
             else:
-                return dict(rc=400, msg="Comment Added Failed")
+                return dict(rc=400, msg="Comment Added Failed", comments=None)
         except:
             print (exc_info())
             return resp(json=dict(rc=400, msg="Comment Error: " + exc_info()), status_code=400)
@@ -278,16 +278,17 @@ class Views:
         request = self.request
         resp = self.request.response
         try:
+            from postevents import addUserLikePhoto
             #Add/Delete like to DB
+
             user_id = request.json_body.get('userid')
             pic_id = request.json_body.get('picid')
-            '''
-            like_id = postevents.adduserComment(user_id, pic_id)
-            if (comm_id>0):
-                return dict(rc=200, msg="Comment Added")
+            result=addUserLikePhoto(user_id,pic_id)
+            if (result is not None):
+                return dict(rc=200, msg="likes Added",likeCount=result)
             else:
-                return dict(rc=400, msg="Comment Added Failed")
-          '''
+                return dict(rc=400, msg="Likes Added Failed")
+
         except:
             print (exc_info())
             return resp(json=dict(rc=400, msg="Comment Error: " + exc_info()), status_code=400)

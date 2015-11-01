@@ -33,26 +33,36 @@ def removePhotoEvent(userid, pic_id):
         else:
             return False
 
-
+#todo: return comment list after add comment
 def adduserComment(userid, pic_id, comment):
-    from models import addcomment
+    from models import addcomment,getPicComments
     if (userid > 0 and pic_id > 0 and comment != ''):
         try:
-            result = addcomment(comment, userid, pic_id)
-            return result
+            result=addcomment(comment, userid, pic_id)
+            if result is True:
+                newCommentList=getPicComments(pic_id)
+                return newCommentList
+            else:
+                return None
         except:
             print (exc_info())
-            return 0
+            return None
 
+#todo: return comment list after remove comment
 def removeuserComment(userid, pic_id,comment_id):
-    from models import removeComment
+    from models import removeComment,getPicComments
     if (userid>0 and pic_id>0):
         try:
             result=removeComment(userid, pic_id,comment_id)
-            return result
+            if result is True:
+                newCommentlist=getPicComments(pic_id)
+                return newCommentlist
+            else:
+                return None
         except:
             print (exc_info())
-            return False
+            return None
+
 
 def loaduserFeeds(userid, page):
     result = list()
@@ -63,18 +73,15 @@ def loaduserFeeds(userid, page):
         from enrichlist import UserContent, richUserPictures
         user = UserContent(userid)
         content = richUserPictures(user.Pop())
-        for pic in content.pics:
-            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time,comments=pic.commentList, likeCount=pic.likeCount,  liked=pic.liked,tags=pic.tags)
-            result.append(feed)
+        result.extend(generateFeeds(content.pics))
     else:
         from models import getFeedsFromDb
         from enrichlist import UserContent, richUserPictures
         db_feedList = getFeedsFromDb(userid)
         content = richUserPictures(db_feedList,userid)
-        for pic in content.pics:
-            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked, tags=pic.tags)
-            result.append(feed)
+        result.extend(generateFeeds(content.pics))
     return result
+
 
 def addPhotoFavorite(userid, photoid):
     if userid <=0 or photoid<=0:
@@ -84,28 +91,36 @@ def addPhotoFavorite(userid, photoid):
         result=addPhotoFavoriteToDB(userid, photoid)
         return result
 
+
 def getUserProfilePage(userid):
     if userid<=0:
         return None;
     else:
         from models import followerCount,followingCount,postCount,getUserPosts,getUserProfile,getUserProfilePhoto
         from enrichlist import UserContent, richUserPictures
-        userProfile=getUserProfile(userid)
-        followers=followerCount(userid)
-        followings=followingCount(userid)
-        posts=postCount(userid)
-        favorites=getUserFavorite(userid)
-        userPosts=getUserPosts(userid)
-        userProfilePhoto=getUserProfilePhoto(userid)
+        userProfile = getUserProfile(userid)
+        followers = followerCount(userid)
+        followings = followingCount(userid)
+        posts = postCount(userid)
+        favorites = getUserFavorite(userid)
+        userPosts = getUserPosts(userid)
+        userProfilePhoto = getUserProfilePhoto(userid)
         feeds=list()
         if (userPosts is not None):
             content = richUserPictures(userPosts,userid)
-        for pic in content.pics:
-            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked, tags=pic.tags)
-            feeds.append(feed)
-        result=dict(userProfile=userProfile,userProfileUrl=userProfilePhoto,followers=followers,followings=followings,posts=posts, favorites=favorites,userFeeds=feeds)
+            feeds.extend( generateFeeds(content.pics))
+        result = dict(userProfile=userProfile,userProfileUrl=userProfilePhoto,followers=followers,followings=followings,posts=posts, favorites=favorites,userFeeds=feeds)
         return result
 
+def addUserLikePhoto(userid, photoid):
+    if userid is not None and photoid is not None:
+        from models import AddLike,getlistcount
+        result=AddLike(userid,photoid)
+        if result is True:
+            count=getlistcount(photoid)
+            return count
+    else:
+        return None
 
 
 def getUserFavorite(userid):
@@ -118,9 +133,8 @@ def getUserFavorite(userid):
         favioriteList=getUserFavioritePic(userid)
         if favioriteList is not None:
             content = richUserPictures(favioriteList,userid)
-        for pic in content.pics:
-            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked)
-            result.append(feed)
+            feeds=generateFeeds(content.pics)
+            result.extend(feeds)
     return result
 
 def UpdateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight):
@@ -131,3 +145,11 @@ def UpdateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weigh
         result=updateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight)
         return result
 
+def generateFeeds(pics):
+    result=list()
+    if pics is not None:
+        for pic in pics:
+            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, avator=pic.pic_userProfileimg, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked)
+            result.append(feed)
+
+    return result

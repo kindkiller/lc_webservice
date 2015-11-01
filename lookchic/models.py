@@ -766,6 +766,25 @@ def removeComment(userid, pic_id, comment_id):
         conn.rollback()
         return False
 
+def getPicComments(pic_id):
+        try:
+            pic_comments=list()
+            cursor = conn.cursor()
+            sql = ("select Username, Context, comments.AddDate from userdb.comments,userdb.userinfo "
+                   "where PhotoID = %(pid)s and userinfo.id=comments.UserID")
+            data = {'pid':pic_id}
+            cursor.execute(sql,data)
+            comments=cursor.fetchall()
+            cursor.close()
+            if len(comments) >0:
+                for comment in comments:
+                    com=dict(username=comment[0],comment=comment[1],time=comment[2].strftime("%Y-%m-%d %H:%M:%S"))
+                    pic_comments.append(com)
+        except:
+            print (exc_info())
+            pic_comments=list()
+        return pic_comments
+
 
 def AddLike(UID, PID):
     if UID==0 or PID==0:
@@ -801,6 +820,20 @@ def UnlikePic(UID,PID):
         print(e)
         cursor.close()
         return False
+
+def getlistcount(pic_id):
+        try:
+            cursor=conn.cursor()
+            sql=("select count(id) from likes where PhotoID=%(pic)s")
+            data={'pic':pic_id}
+            cursor.execute(sql, data)
+            result=cursor.fetchall()
+            cursor.close()
+            if (len(result))>0 and len(result)==1:
+                return result[0][0]
+        except:
+            print (exc_info())
+            return 0;
 
 #endregion
 
