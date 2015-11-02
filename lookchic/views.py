@@ -159,8 +159,8 @@ class Views:
                 # Please note that in a real application you would not use /tmp,
                 # and if you write to an untrusted location you will need to do
                 # some extra work to prevent symlink attacks.
-                RealPath='/Users/zoe/Desktop/Projects/lc_frontend/app/images/uploaded'
-                #RealPath = 'C:\\LC\\lc_ng\\app\\images\\uploaded'
+                #RealPath='/Users/zoe/Desktop/Projects/lc_frontend/app/images/uploaded'
+                RealPath = 'C:\\LC\\lc_ng\\app\\images\\uploaded'
                 RelativePath = os.path.join('images', 'uploaded')
                 Saved_file_name = '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2]
                 file_path = os.path.join(RealPath, Saved_file_name)
@@ -332,9 +332,27 @@ class Views:
         try:
             userid = request.params.get('userid')
 
+            profile = postevents.getUserProfilePage(userid)
+
+            return dict(rc=200, msg="Get Profile Successful", profile=profile)
         except:
             print (exc_info())
-            return resp(json=dict(rc=400, msg="User Profile Error: " + exc_info()), status_code=400)
+            return dict(rc=400, msg="User Profile Error: " + exc_info(), status_code=400)
+
+    @view_config(route_name='updateprofile', request_method='POST')
+    def updateprofile(self):
+        request = self.request
+        resp = self.request.response
+
+        try:
+            userid = request.params.get('userid')
+
+            profile = postevents.getUserProfilePage(userid)
+
+            return dict(rc=200, msg="Update Profile Successful", profile=profile)
+        except:
+            print (exc_info())
+            return dict(rc=400, msg="Update User Profile Error: " + exc_info(), status_code=400)
 
     # Get User Posts
     @view_config(route_name='userposts', request_method='OPTIONS')

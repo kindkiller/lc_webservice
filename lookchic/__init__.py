@@ -75,6 +75,9 @@ def main(global_config, **settings):
     config.add_route('userposts', '/userposts')
     config.add_route('userfav', '/userfav')
 
+    #User Profile Service
+    config.add_route('updateprofile', '/updateprofile')
+
     #User Search Service
     config.add_route('search', '/search')
 
