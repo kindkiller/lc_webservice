@@ -19,7 +19,8 @@ def request_factory(environ):
     #request.response.headerlist = []
     request.response.headerlist.extend(
         (
-            ("Access-Control-Allow-Origin", "http://localhost:8000"),
+            #("Access-Control-Allow-Origin", "http://localhost:8000"),
+            ("Access-Control-Allow-Origin", "http://www.lukchic.com"),
             #("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE"),
             #("Access-Control-Expose-Headers", "Authorization"),
             #("Access-Control-Allow-Credentials", 'true'),

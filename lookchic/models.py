@@ -538,12 +538,12 @@ def getUserProfile(uid):
         if result_args is not None:
             result=dict(username=result_args[1],location=result_args[2],brithday=result_args[3],Gender=result_args[4],
                         Occupation=result_args[5],Height=result_args[6],Weight=result_args[7])
+            cursor.close()
+            return result
     except:
         print (exc_info())
-        return None
-    finally:
         cursor.close()
-    return result
+        return None
 
 
 
@@ -614,7 +614,7 @@ def getUserPosts(uid):
     try:
         #cannot use stored procedure, the procedure cannot return multiple rows in this case, or create a temp table in the procedure and select from that temp table.
         #todo: need to improvde the procedure
-        sql=("select id from userdb.Photos"
+        sql=("select id from userdb.photos"
              " where uid=%(uid)s and removed=0")
         data={"uid":uid}
         cursor.execute(sql,data)
@@ -623,7 +623,7 @@ def getUserPosts(uid):
             for e in rows:
                 result.append(e[0])
     except:
-        print (exc_info())
+        print ("getUserPosts"+exc_info())
     finally:
         cursor.close()
 
@@ -635,7 +635,7 @@ def getUserFavioritePic(uid):
     try:
         #cannot use stored procedure, the procedure cannot return multiple rows in this case, or create a temp table in the procedure and select from that temp table.
         #todo: need to improvde the procedure
-        sql=("select photoid from Favorite "
+        sql=("select photoid from favorite "
              " where userid=%(uid)s")
         data={"uid":uid}
         cursor.execute(sql,data)
