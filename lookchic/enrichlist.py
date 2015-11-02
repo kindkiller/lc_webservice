@@ -86,8 +86,8 @@ class richPicture(object):
         try:
             tags=list()
             cursor = conn.cursor()
-            sql = ("select Tag_Text, LeftX, TopY from userdb.PhotoTags,Tags"
-                    " where PhotoTags.TagID=Tags.ID and PhotoTags.PhotoID=%(pid)s")
+            sql = ("select Tag_Text, LeftX, TopY from userdb.PhotoTags,tags"
+                    " where PhotoTags.TagID=tags.ID and PhotoTags.PhotoID=%(pid)s")
             data = {'pid':self.pic_id}
             cursor.execute(sql,data)
             rows=cursor.fetchall()
