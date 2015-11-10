@@ -744,6 +744,7 @@ def addcomment(CText, UID, PID):
     except Error as e:
         conn.rollback()
         print(e)
+        return None
     finally:
         cursor.close()
 

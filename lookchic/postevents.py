@@ -36,10 +36,11 @@ def removePhotoEvent(userid, pic_id):
 #todo: return comment list after add comment
 def adduserComment(userid, pic_id, comment):
     from models import addcomment,getPicComments
+    newCommentList=list()
     if (userid > 0 and pic_id > 0 and comment != ''):
         try:
             result=addcomment(comment, userid, pic_id)
-            if result is True:
+            if result is not None:
                 newCommentList=getPicComments(pic_id)
                 return newCommentList
             else:
@@ -47,6 +48,7 @@ def adduserComment(userid, pic_id, comment):
         except:
             print (exc_info())
             return None
+
 
 #todo: return comment list after remove comment
 def removeuserComment(userid, pic_id,comment_id):
@@ -149,7 +151,7 @@ def generateFeeds(pics):
     result=list()
     if pics is not None:
         for pic in pics:
-            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, avator=pic.pic_userProfileimg, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked)
+            feed = dict(picid=pic.pic_id, picuid=pic.pic_uid, username=pic.pic_userName, avator=pic.pic_userProfileimg, url=pic.pic_url, time=pic.pic_time, comments=pic.commentList, likeCount=pic.likeCount, liked=pic.liked, tags=pic.tags)
             result.append(feed)
 
     return result

@@ -47,10 +47,12 @@ class Views:
 
     @view_config(route_name='login',  request_method='POST')
     def login(self):
+        print "Recieve Post request"
         request = self.request
         resp = request.response
         try:
             user = sess.query(Userinfo).filter(Userinfo.Email ==request.json_body.get('email')).first() # request.POST.get('email')).first() # request.json_body.get('email')).first()
+            print "After query DB"
             if user is None:
                 return Response(json=dict(rc=400, msg="Login Error: no such user"), status_code=400)
             if user.Password == request.json_body.get('password'): #request.POST.get('password'):
@@ -61,7 +63,9 @@ class Views:
                 #headers.append(('X-CSRF-token', request.session.new_csrf_token()))
                 userSecreat=user.Salt
                 userid=user.ID
+
                 userToken=generateToken(userid,user.Password)
+
                 resp.status_code = 200
                 #(json=dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID), status_code=200)
                 #resp.headerlist.append(('Access-Control-Allow-Origin', '*'))

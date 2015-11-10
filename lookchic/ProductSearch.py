@@ -43,3 +43,4 @@ def SearchProductByKeyword(keyword):
 
     return resultList
 
+re=SearchProductByKeyword("Manolo")
