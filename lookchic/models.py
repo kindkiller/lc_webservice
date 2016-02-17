@@ -182,6 +182,23 @@ class Pin(Base):
 
 #region: User Operation
 
+def getUserForLogin(userName):
+    cursor=conn.cursor()
+    try:
+        sql = "Select * from userdb.userinfo where Email = %(uname)s "
+        data = {'uname':userName}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+        cursor.close()
+        if result is not None and len(result)>0:
+            return result[0]
+    except:
+        print (exc_info())
+        return None
+    finally:
+        cursor.close()
+
+
 def AddNewUser(Username, Pword, salt, email):
     from datetime import datetime
     try:
@@ -892,9 +909,42 @@ def getFeedsFromDb(uid):
 def searchProduct(keyword):
     try:
         cursor=productConn.cursor()
-        sql=("select ID, Brand_id, ProductType_id, Name from productdb.Products where Brand_ID in (select Brand_ID from productdb.Brands where BrandName like CONCAT('%', %(key)s, '%'))"
-						"or	ProductType_ID in (select ProductType_ID from productdb.productTypes where TypeName like concat('%',%(key)s,'%')"
-                        "or  Name like concat('%',%(key)s,'%'))")
+        sql=("SELECT DISTINCT a.ID, a.Name, a.Website, a.outUrl, a.ProductID, e.color, c.BrandName, g.RetailPrice,g.SalePrice "
+             "    FROM productdb.products a "
+             " INNER JOIN productdb.ProductImage b ON a.ID = b.Productid "
+             " INNER JOIN productdb.ProductColors d ON a.ID = d.ProductID "
+             " INNER JOIN productdb.color e on e.Color_ID = d.ColorID "
+             " INNER JOIN productdb.brands c on c.Brand_ID = a.Brand_ID "
+             " INNER JOIN productdb.productdetail g on g.ProductID = a.ID "
+             " where a.id in(select DISTINCT productid "
+             " from productdb.ProductCategory "
+             " where ProductCategory in (select DISTINCT id "
+             "           from Category where CategoryName like CONCAT('%', %(key)s, '%'))) "
+             "  AND length((TRIM(a.Name))) >= 1 "
+             " union "
+             " SELECT DISTINCT a.ID, a.Name ,a.Website ,a.outUrl ,a.ProductID , e.color , c.BrandName, g.RetailPrice,g.SalePrice "
+             " FROM productdb.products a "
+             " INNER JOIN productdb.ProductImage b ON a.ID = b.Productid"
+             " INNER JOIN productdb.ProductColors d ON a.ID = d.ProductID "
+             " INNER JOIN productdb.color e on e.Color_ID = d.ColorID "
+             " INNER JOIN productdb.brands c on c.Brand_ID = a.Brand_ID "
+             " INNER JOIN productdb.productdetail g on g.ProductID = a.ID "
+             " where a.Brand_ID in (select DISTINCT Brand_ID from productdb.brands "
+             " where BrandName like CONCAT('%', %(key)s, '%'))  AND length((TRIM(a.Name))) >= 1"
+             " union "
+             " SELECT DISTINCT a.ID ,a.Name ,a.Website ,a.outUrl ,a.ProductID, e.color , c.BrandName, g.RetailPrice,g.SalePrice "
+             " FROM productdb.products a "
+             " INNER JOIN productdb.ProductImage b"
+             " ON a.ID = b.Productid "
+             " INNER JOIN productdb.ProductColors d ON a.ID = d.ProductID "
+             " INNER JOIN productdb.color e on e.Color_ID = d.ColorID "
+             " INNER JOIN productdb.brands c on c.Brand_ID = a.Brand_ID "
+             " INNER JOIN productdb.productdetail g on g.ProductID = a.ID "
+             " where a.id in(select DISTINCT productid "
+             " from productdb.ProductColors "
+             " where ColorID in ("
+             " select DISTINCT Color_ID from productdb.color where Color like CONCAT('%', %(key)s, '%')))"
+             "  AND length((TRIM(a.Name))) >= 1;")
         data={"key":keyword}
         cursor.execute(sql,data)
         result=cursor.fetchall()
@@ -910,45 +960,76 @@ def get_product_detail(id):
         return
     try:
         cursor=productConn.cursor()
-        sql=("select Value as price from Productdb.productdetail where ProductID=%(pid)s")
+        sql=("select RetailPrice as price from Productdb.productdetail where ProductID=%(pid)s")
         data={"pid":id}
         cursor.execute(sql,data)
         result=cursor.fetchall()
         cursor.close()
-        return result
+        if len(result)>0:
+            return result[0][0]
     except:
         print (exc_info())
         cursor.close()
 
 def get_product_brand(id):
+    cursor=productConn.cursor()
     if (id<1):
         return
     try:
-        cursor=productConn.cursor()
+
         sql=("select brandname from productdb.brands where brand_id=%(bid)s")
         data ={"bid":id}
         cursor.execute(sql,data)
         result=cursor.fetchall()
         cursor.close()
+        if len(result)>0:
+            return result[0][0]
+    except:
+        print (exc_info())
+        cursor.close()
+    finally:
+        cursor.close()
+
+def get_product_image(id):
+    cursor=productConn.cursor()
+    if (id<1):
+        return
+    try:
+
+        sql=(" SELECT Path, Filename  FROM productdb.photos a "
+             " inner join productdb.ProductImage b on b.ImageID=a.ID "
+             " inner Join productdb.Products c on c.ID= b.ProductID "
+             " where c.ID= %(pid)s and a.Path is not null limit 1")
+        data ={"pid":id}
+        cursor.execute(sql,data)
+        result=cursor.fetchall()
+        cursor.close()
+        if len(result)>0:
+            return str(result[0][0])+str(result[0][1])
         return result
     except:
         print (exc_info())
         cursor.close()
+    finally:
+        cursor.close()
 
 def get_product_link(id):
-
+    cursor=productConn.cursor()
     if (id<1):
         return
     try:
-        cursor=productConn.cursor()
-        sql=("select Url from Productdb.links where ProductID=%(pid)s")
+
+        sql=("select outUrl from Productdb.Products where ID=%(pid)s")
         data={"pid":id}
         cursor.execute(sql,data)
         result=cursor.fetchall()
         cursor.close()
-        return result;
+        if len(result)>0:
+            return result[0][0]
     except:
         print (exc_info())
+        cursor.close()
+    finally:
         cursor.close()
 
 def addPhotoFavoriteToDB(userid, photoid):

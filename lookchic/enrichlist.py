@@ -67,7 +67,7 @@ class richPicture(object):
         try:
             pic_comments=list()
             cursor = conn.cursor()
-            sql = ("select Username, Context, comments.AddDate from userdb.comments,userdb.userinfo "
+            sql = ("select Username, Context, comments.AddDate, comments.UserID from userdb.comments,userdb.userinfo "
                    "where PhotoID = %(pid)s and userinfo.id=comments.UserID")
             data = {'pid':self.pic_id}
             cursor.execute(sql,data)
@@ -75,7 +75,8 @@ class richPicture(object):
             cursor.close()
             if len(comments) >0:
                 for comment in comments:
-                    com=dict(username=comment[0],comment=comment[1],time=comment[2].strftime("%Y-%m-%d %H:%M:%S"))
+                    com=dict(username=comment[0],comment=comment[1],time=comment[2].strftime("%Y-%m-%d %H:%M:%S"),
+                             userid=comment[3])
                     pic_comments.append(com)
         except:
             print (exc_info())

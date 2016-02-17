@@ -19,12 +19,12 @@ def request_factory(environ):
     #request.response.headerlist = []
     request.response.headerlist.extend(
         (
-            #("Access-Control-Allow-Origin", "http://localhost:8000"),
-            ("Access-Control-Allow-Origin", "http://www.lukchic.com"),
-            #("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE"),
-            #("Access-Control-Expose-Headers", "Authorization"),
+            #("Access-Control-Allow-Origin", "http://www.lukchic.com"),
+            ("Access-Control-Allow-Origin", "http://192.168.56.101:8080"),
+            ("Access-Control-Allow-Methods", "GET, PUT, POST"),
+            ("Access-Control-Allow-Headers","Access-Control-Allow-Origin")
             #("Access-Control-Allow-Credentials", 'true'),
-            ("Access-Control-Allow-Headers", "Authorization")
+            #("Access-Control-Allow-Headers", "Authorization")
         )
     )
     return request
@@ -68,6 +68,7 @@ def main(global_config, **settings):
     config.add_route('main', '/main')
     config.add_route('post', '/post')
     config.add_route('addcomment', '/addcomment')
+    config.add_route('delcomment', '/delcomment')
     config.add_route('addlike', '/addlike')
     config.add_route('addfavorite', '/addfavorite')
 
@@ -82,7 +83,9 @@ def main(global_config, **settings):
     #User Search Service
     config.add_route('search', '/search')
 
-
+    #Weibo Login Service
+    config.add_route('weibologin', '/weibologin')
+    config.add_route('weibocallback', '/weibocallback')
 
     #config.add_route('add_page', '/add_page/{pagename}')
     #config.add_route('edit_page', '/{pagename}/edit_page')

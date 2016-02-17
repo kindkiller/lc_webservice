@@ -110,7 +110,7 @@ def getUserProfilePage(userid):
         feeds=list()
         if (userPosts is not None):
             content = richUserPictures(userPosts,userid)
-            feeds.extend( generateFeeds(content.pics))
+            feeds.extend(generateFeeds(content.pics))
         result = dict(userProfile=userProfile,userProfileUrl=userProfilePhoto,followers=followers,followings=followings,posts=posts, favorites=favorites,userFeeds=feeds)
         return result
 

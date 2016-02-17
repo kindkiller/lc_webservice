@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0fec777d-b2d1-42e8-bf28-e171f87ae734" name="Default" comment="">
+    <list default="true" id="0fec777d-b2d1-42e8-bf28-e171f87ae734" name="Default" comment="0216">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lookchic/ProductSearch.py" afterPath="$PROJECT_DIR$/lookchic/ProductSearch.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lookchic.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/lookchic.egg-info/SOURCES.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lookchic/__init__.py" afterPath="$PROJECT_DIR$/lookchic/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lookchic/dbconnection.py" afterPath="$PROJECT_DIR$/lookchic/dbconnection.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lookchic/enrichlist.py" afterPath="$PROJECT_DIR$/lookchic/enrichlist.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lookchic/events.py" afterPath="$PROJECT_DIR$/lookchic/events.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lookchic/models.py" afterPath="$PROJECT_DIR$/lookchic/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lookchic/postevents.py" afterPath="$PROJECT_DIR$/lookchic/postevents.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lookchic.egg-info/requires.txt" afterPath="$PROJECT_DIR$/lookchic.egg-info/requires.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lookchic/views.py" afterPath="$PROJECT_DIR$/lookchic/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="lookchic.iws" />
@@ -18,13 +26,14 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/lookchic$ProductSearch.coverage" NAME="ProductSearch Coverage Results" MODIFIED="1439957818875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
+    <SUITE FILE_PATH="coverage/lookchic$ProductSearch.coverage" NAME="ProductSearch Coverage Results" MODIFIED="1449340116305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
     <SUITE FILE_PATH="coverage/lookchic$enrichlist.coverage" NAME="enrichlist Coverage Results" MODIFIED="1440873306083" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
-    <SUITE FILE_PATH="coverage/lookchic$models.coverage" NAME="models Coverage Results" MODIFIED="1441507428836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
-    <SUITE FILE_PATH="coverage/lookchic$postevents.coverage" NAME="postevents Coverage Results" MODIFIED="1441507436073" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
-    <SUITE FILE_PATH="coverage/lookchic$lookchic.coverage" NAME="lookchic Coverage Results" MODIFIED="1441503887724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/lookchic$models.coverage" NAME="models Coverage Results" MODIFIED="1443382462709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
+    <SUITE FILE_PATH="coverage/lookchic$postevents.coverage" NAME="postevents Coverage Results" MODIFIED="1446525624116" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
+    <SUITE FILE_PATH="coverage/lookchic$lookchic.coverage" NAME="lookchic Coverage Results" MODIFIED="1451612148459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/lookchic$feed_managers.coverage" NAME="feed_managers Coverage Results" MODIFIED="1439954496762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
     <SUITE FILE_PATH="coverage/lookchic$unitTest.coverage" NAME="unitTest Coverage Results" MODIFIED="1439092813148" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
+    <SUITE FILE_PATH="coverage/lookchic$Authentication.coverage" NAME="Authentication Coverage Results" MODIFIED="1441829457751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lookchic" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="$PROJECT_DIR$" />
@@ -38,53 +47,11 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lookchic/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="264" column="13" selection-start-line="264" selection-start-column="13" selection-end-line="264" selection-end-column="13" />
+            <state vertical-scroll-proportion="-9.518518">
+              <caret line="294" column="10" selection-start-line="294" selection-start-column="10" selection-end-line="294" selection-end-column="10" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid/config/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="477" column="0" selection-start-line="477" selection-start-column="0" selection-end-line="477" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="postevents.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lookchic/postevents.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7385621">
-              <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProductSearch.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lookchic/ProductSearch.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-              <folding>
-                <element signature="e#20#30#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="feed_managers.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lookchic/feed_managers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -93,81 +60,63 @@
         <entry file="file://$PROJECT_DIR$/lookchic/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="339" column="0" selection-start-line="339" selection-start-column="0" selection-end-line="339" selection-end-column="0" />
+              <caret line="198" column="0" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
               <folding>
-                <element signature="e#24#34#0" expanded="true" />
-                <element signature="e#5490#5950#0" expanded="false" />
-                <element signature="e#6064#6831#0" expanded="false" />
-                <element signature="e#7869#8191#0" expanded="false" />
-                <marker date="1441507428000" expanded="true" signature="6958:7021" placeholder="select user1..userrelation..." />
-                <marker date="1441507428000" expanded="true" signature="8302:8372" placeholder="select count..userrelation..." />
-                <marker date="1441507428000" expanded="true" signature="8736:8806" placeholder="select count..userrelation..." />
-                <marker date="1441507428000" expanded="true" signature="9165:9226" placeholder="select count..userrelation..." />
-                <marker date="1441507428000" expanded="true" signature="9574:9633" placeholder="select count..Photos..." />
-                <marker date="1441507428000" expanded="true" signature="10994:11021" placeholder="Delete FROM ..." />
-                <marker date="1441507428000" expanded="true" signature="10994:11031" placeholder="Delete FROM ..." />
-                <marker date="1441507428000" expanded="true" signature="12976:13144" placeholder="select photo..photos..." />
-                <marker date="1441507428000" expanded="true" signature="13037:13113" placeholder="select userr..userrelation..." />
-                <marker date="1441507428000" expanded="true" signature="13510:13869" placeholder="select ID, B..Products..." />
-                <marker date="1441507428000" expanded="true" signature="13595:13679" placeholder="select ID fr..Brands..." />
-                <marker date="1441507428000" expanded="true" signature="13711:13868" placeholder="select Produ..productTypes..." />
-                <marker date="1441507428000" expanded="true" signature="14228:14295" placeholder="select Value..productdetail..." />
-                <marker date="1441507428000" expanded="true" signature="14620:14674" placeholder="select brand..brands..." />
-                <marker date="1441507428000" expanded="true" signature="14999:15047" placeholder="select Url f..links..." />
-                <marker date="1441507428000" expanded="true" signature="15418:15435" placeholder="select * fro..fav..." />
-                <marker date="1441507428000" expanded="true" signature="15418:15454" placeholder="select * fro..favorite..." />
-                <marker date="1441507428000" expanded="true" signature="15418:15455" placeholder="select * fro..favorite..." />
-                <marker date="1441507428000" expanded="true" signature="15418:15474" placeholder="select * fro..favorite..." />
-                <marker date="1441507428000" expanded="true" signature="15418:15483" placeholder="select * fro..favorite..." />
-                <marker date="1441507428000" expanded="true" signature="15705:15725" placeholder="Insert into ..." />
-                <marker date="1441507428000" expanded="true" signature="15705:15784" placeholder="Insert into ..." />
-                <marker date="1441507428000" expanded="true" signature="18567:18650" placeholder="select * fro..test_usertable..." />
+                <element signature="e#25003#25401#0" expanded="false" />
+                <element signature="e#25430#25711#0" expanded="false" />
+                <marker date="1447650461000" expanded="true" signature="5659:5703" placeholder="Select * fro..userinfo..." />
+                <marker date="1447650461000" expanded="true" signature="7532:7595" placeholder="select user1..userrelation..." />
+                <marker date="1447650461000" expanded="true" signature="8912:8959" placeholder="SELECT Passw..userinfo..." />
+                <marker date="1447650461000" expanded="true" signature="18875:18951" placeholder="select id fr..photos..." />
+                <marker date="1447650461000" expanded="true" signature="19570:19629" placeholder="select photo..favorite..." />
+                <marker date="1447650461000" expanded="true" signature="23059:23216" placeholder="select Usern..comments..." />
+                <marker date="1447650461000" expanded="true" signature="24604:24646" placeholder="select count..likes..." />
+                <marker date="1447650461000" expanded="true" signature="25846:26028" placeholder="select photo..photos..." />
+                <marker date="1447650461000" expanded="true" signature="25907:25983" placeholder="select userr..userrelation..." />
+                <marker date="1447650461000" expanded="true" signature="26394:27234" placeholder="SELECT DISTI..products..." />
+                <marker date="1447650461000" expanded="true" signature="26394:28865" placeholder="SELECT DISTI..." />
+                <marker date="1447650461000" expanded="true" signature="26956:27183" placeholder="select DISTI..ProductCategory..." />
+                <marker date="1447650461000" expanded="true" signature="27073:27182" placeholder="select DISTI..Category..." />
+                <marker date="1447650461000" expanded="true" signature="27275:27986" placeholder="SELECT DISTI..products..." />
+                <marker date="1447650461000" expanded="true" signature="27842:27952" placeholder="select DISTI..brands..." />
+                <marker date="1447650461000" expanded="true" signature="28026:28865" placeholder="SELECT DISTI..products..." />
+                <marker date="1447650461000" expanded="true" signature="28602:28815" placeholder="select DISTI..ProductColors..." />
+                <marker date="1447650461000" expanded="true" signature="28726:28814" placeholder="select DISTI..color..." />
+                <marker date="1447650461000" expanded="true" signature="29225:29298" placeholder="select Retai..productdetail..." />
+                <marker date="1447650461000" expanded="true" signature="29655:29709" placeholder="select brand..brands..." />
+                <marker date="1447650461000" expanded="true" signature="30104:30359" placeholder="SELECT Path,..photos..." />
+                <marker date="1447650461000" expanded="true" signature="30790:30837" placeholder="select outUr..Products..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="unitTest.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lookchic/unitTest.py">
+      <file leaf-file-name="postevents.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lookchic/postevents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="143" selection-end-column="55" />
-              <folding>
-                <element signature="e#60#73#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cursor.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/mysql/connector/cursor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="823" column="0" selection-start-line="823" selection-start-column="0" selection-end-line="823" selection-end-column="0" />
+            <state vertical-scroll-proportion="-6.6666665">
+              <caret line="35" column="6" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enrichlist.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lookchic/enrichlist.py">
+      <file leaf-file-name="dbconnection.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lookchic/dbconnection.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-              <folding>
-                <element signature="e#20#40#0" expanded="true" />
-                <marker date="1440968302000" expanded="true" signature="732:780" placeholder="select usern..userinfo..." />
-                <marker date="1440968302000" expanded="true" signature="1188:1234" placeholder="select PAddD..photos..." />
-                <marker date="1440968302000" expanded="true" signature="1704:1715" placeholder="select UserI..comments..." />
-                <marker date="1440968302000" expanded="true" signature="1704:1822" placeholder="select Usern..comments..." />
-                <marker date="1440968302000" expanded="true" signature="1704:1861" placeholder="select Usern..comments..." />
-                <marker date="1440968302000" expanded="true" signature="2440:2482" placeholder="select count..likes..." />
-                <marker date="1440968302000" expanded="true" signature="2440:2487" placeholder="select count..likes..." />
-                <marker date="1440968302000" expanded="true" signature="2440:2488" placeholder="select count..likes..." />
-                <marker date="1440968302000" expanded="true" signature="2873:2915" placeholder="select count..likes..." />
-                <marker date="1440968302000" expanded="true" signature="2873:2934" placeholder="select count..likes..." />
-                <marker date="1440968302000" expanded="true" signature="3793:3849" placeholder="select Path,..photos..." />
-              </folding>
+              <caret line="20" column="39" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Authentication.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lookchic/Authentication.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -176,8 +125,40 @@
         <entry file="file://$PROJECT_DIR$/lookchic/pin_feed.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
+              <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/stream_framework/activity.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lookchic/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.63268894">
+              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -202,25 +183,29 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="FORCE_PUSH_ALLOWED" value="true" />
     <option name="PUSH_TAGS">
-      <GitPushTagMode />
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/setup.py" />
-        <option value="$PROJECT_DIR$/lookchic/events.py" />
         <option value="$PROJECT_DIR$/lookchic/settings.py" />
-        <option value="$PROJECT_DIR$/lookchic/pin_feed.py" />
         <option value="$PROJECT_DIR$/lookchic/unitTest.py" />
         <option value="$PROJECT_DIR$/lookchic/feed_managers.py" />
+        <option value="$PROJECT_DIR$/lookchic/Authentication.py" />
+        <option value="$PROJECT_DIR$/lookchic/pin_feed.py" />
         <option value="$PROJECT_DIR$/lookchic/dbconnection.py" />
-        <option value="$PROJECT_DIR$/lookchic/__init__.py" />
-        <option value="$PROJECT_DIR$/lookchic/ProductSearch.py" />
-        <option value="$PROJECT_DIR$/lookchic/enrichlist.py" />
-        <option value="$PROJECT_DIR$/lookchic/views.py" />
         <option value="$PROJECT_DIR$/lookchic/models.py" />
         <option value="$PROJECT_DIR$/lookchic/postevents.py" />
+        <option value="$PROJECT_DIR$/lookchic/enrichlist.py" />
+        <option value="$PROJECT_DIR$/lookchic/events.py" />
+        <option value="$PROJECT_DIR$/lookchic/ProductSearch.py" />
+        <option value="$PROJECT_DIR$/lookchic/views.py" />
+        <option value="$PROJECT_DIR$/lookchic/__init__.py" />
       </list>
     </option>
   </component>
@@ -232,8 +217,9 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="800" />
+    <option name="height" value="736" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -246,7 +232,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="1" />
+    <option name="STATE" value="2" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -261,7 +247,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -297,16 +282,17 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/development.ini" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="FullScreen" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="40" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="80" />
@@ -324,118 +310,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="425" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/lookchic/__init__.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/lookchic/views.py</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
-  </component>
-  <component name="RunManager" selected="Python.postevents">
+  <component name="RunManager" selected="Pyramid server.lookchic">
     <configuration default="false" name="models" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -450,24 +325,6 @@
       <module name="lookchic" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lookchic/models.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="feed_managers" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lookchic" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="lookchic" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lookchic/feed_managers.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -522,6 +379,24 @@
       <module name="lookchic" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lookchic/postevents.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Authentication" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lookchic" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="lookchic" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lookchic/Authentication.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -779,18 +654,18 @@
       <item index="0" class="java.lang.String" itemvalue="Pyramid server.lookchic" />
       <item index="1" class="java.lang.String" itemvalue="Python tests.Tests in setup.py" />
       <item index="2" class="java.lang.String" itemvalue="Python.models" />
-      <item index="3" class="java.lang.String" itemvalue="Python.feed_managers" />
-      <item index="4" class="java.lang.String" itemvalue="Python.enrichlist" />
-      <item index="5" class="java.lang.String" itemvalue="Python.ProductSearch" />
-      <item index="6" class="java.lang.String" itemvalue="Python.postevents" />
+      <item index="3" class="java.lang.String" itemvalue="Python.enrichlist" />
+      <item index="4" class="java.lang.String" itemvalue="Python.ProductSearch" />
+      <item index="5" class="java.lang.String" itemvalue="Python.postevents" />
+      <item index="6" class="java.lang.String" itemvalue="Python.Authentication" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.postevents" />
-        <item index="1" class="java.lang.String" itemvalue="Python.models" />
-        <item index="2" class="java.lang.String" itemvalue="Python.enrichlist" />
-        <item index="3" class="java.lang.String" itemvalue="Python.ProductSearch" />
-        <item index="4" class="java.lang.String" itemvalue="Python.feed_managers" />
+        <item index="0" class="java.lang.String" itemvalue="Python.ProductSearch" />
+        <item index="1" class="java.lang.String" itemvalue="Python.postevents" />
+        <item index="2" class="java.lang.String" itemvalue="Python.models" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Authentication" />
+        <item index="4" class="java.lang.String" itemvalue="Python.enrichlist" />
       </list>
     </recent_temporary>
   </component>
@@ -991,7 +866,79 @@
       <option name="project" value="LOCAL" />
       <updated>1441504043169</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="0905&#10;add user profile backend">
+      <created>1441507665722</created>
+      <option name="number" value="00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1441507665722</updated>
+    </task>
+    <task id="LOCAL-00033" summary="0905&#10;add user profile backend">
+      <created>1441661053618</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1441661053618</updated>
+    </task>
+    <task id="LOCAL-00034" summary="0909&#10;add Authentication functions for authentication and authorization&#10;add picuid in each feed&#10;The view needs to update the authentication of user in each reqeust.">
+      <created>1441848519431</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1441848519431</updated>
+    </task>
+    <task id="LOCAL-00035" summary="0920&#10;Update user profiles and photo tags">
+      <created>1442684181429</created>
+      <option name="number" value="00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1442684181429</updated>
+    </task>
+    <task id="LOCAL-00036" summary="0919&#10;Update fetch tag functions">
+      <created>1442689468837</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1442689468838</updated>
+    </task>
+    <task id="LOCAL-00037" summary="0927&#10;Change dbaccess to procedures">
+      <created>1443376337117</created>
+      <option name="number" value="00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1443376337117</updated>
+    </task>
+    <task id="LOCAL-00038" summary="1007&#10;add remove photo, remove comment functions">
+      <created>1444274257533</created>
+      <option name="number" value="00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1444274257533</updated>
+    </task>
+    <task id="LOCAL-00039" summary="0909&#10;add Authentication functions for authentication and authorization">
+      <created>1444363236040</created>
+      <option name="number" value="00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1444363236040</updated>
+    </task>
+    <task id="LOCAL-00040" summary="1031&#10;update delete comment, add comment, add like">
+      <created>1446355286635</created>
+      <option name="number" value="00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1446355286635</updated>
+    </task>
+    <task id="LOCAL-00041" summary="1101&#10;fix bug in enrichlist.py.&#10;DB table name Case senstive.">
+      <created>1446435879245</created>
+      <option name="number" value="00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1446435879246</updated>
+    </task>
+    <task id="LOCAL-00042" summary="1031&#10;update delete comment, add comment, add like">
+      <created>1446443082117</created>
+      <option name="number" value="00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1446443082117</updated>
+    </task>
+    <task id="LOCAL-00043" summary="1031&#10;update delete comment, add comment, add like">
+      <created>1447175975805</created>
+      <option name="number" value="00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1447175975805</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1004,29 +951,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="736" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.49676898" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3328767" sideWeight="0.5169628" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3328767" sideWeight="0.48303714" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2714055" sideWeight="0.5062167" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24931507" sideWeight="0.4644588" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2746365" sideWeight="0.4937833" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32914287" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24931507" sideWeight="0.48303714" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18416801" sideWeight="0.4937833" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2714055" sideWeight="0.5062167" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.072981365" sideWeight="0.35864297" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2704918" sideWeight="0.4739186" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32786885" sideWeight="0.4676898" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34472048" sideWeight="0.43537965" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33074534" sideWeight="0.641357" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.49676898" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24931507" sideWeight="0.48303714" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1054,7 +1001,16 @@
     <MESSAGE value="0827" />
     <MESSAGE value="0829&#10;change add new user to use &quot;uspAddUser&quot; stored precedure&#10;input: username, password, salt key, email, addtime&#10;output user id" />
     <MESSAGE value="0905&#10;update unlike photo&#10;fix bug in models" />
-    <option name="LAST_COMMIT_MESSAGE" value="0905&#10;update unlike photo&#10;fix bug in models" />
+    <MESSAGE value="0905&#10;add user profile backend" />
+    <MESSAGE value="0909&#10;add Authentication functions for authentication and authorization&#10;add picuid in each feed&#10;The view needs to update the authentication of user in each reqeust." />
+    <MESSAGE value="0920&#10;Update user profiles and photo tags" />
+    <MESSAGE value="0919&#10;Update fetch tag functions" />
+    <MESSAGE value="0927&#10;Change dbaccess to procedures" />
+    <MESSAGE value="1007&#10;add remove photo, remove comment functions" />
+    <MESSAGE value="0909&#10;add Authentication functions for authentication and authorization" />
+    <MESSAGE value="1101&#10;fix bug in enrichlist.py.&#10;DB table name Case senstive." />
+    <MESSAGE value="1031&#10;update delete comment, add comment, add like" />
+    <option name="LAST_COMMIT_MESSAGE" value="1031&#10;update delete comment, add comment, add like" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1075,24 +1031,89 @@
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
-          <line>60</line>
-          <option name="timeStamp" value="148" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/lookchic/models.py</url>
-          <line>687</line>
-          <option name="timeStamp" value="162" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/lookchic/models.py</url>
-          <line>671</line>
+          <line>1167</line>
           <option name="timeStamp" value="177" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/lookchic/models.py</url>
-          <line>572</line>
-          <option name="timeStamp" value="189" />
+          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
+          <line>146</line>
+          <option name="timeStamp" value="236" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
+          <line>131</line>
+          <option name="timeStamp" value="237" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
+          <line>245</line>
+          <option name="timeStamp" value="256" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/events.py</url>
+          <line>4</line>
+          <option name="timeStamp" value="279" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/ProductSearch.py</url>
+          <line>73</line>
+          <option name="timeStamp" value="288" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
+          <line>323</line>
+          <option name="timeStamp" value="290" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
+          <line>307</line>
+          <option name="timeStamp" value="292" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
+          <line>318</line>
+          <option name="timeStamp" value="293" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
+          <line>313</line>
+          <option name="timeStamp" value="294" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/utility_views.py</url>
+          <line>86</line>
+          <option name="timeStamp" value="299" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
+          <line>236</line>
+          <option name="timeStamp" value="300" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
+          <line>242</line>
+          <option name="timeStamp" value="301" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
+          <line>107</line>
+          <option name="timeStamp" value="302" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/postevents.py</url>
+          <line>15</line>
+          <option name="timeStamp" value="303" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
+          <line>94</line>
+          <option name="timeStamp" value="304" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/lookchic/views.py</url>
+          <line>54</line>
+          <option name="timeStamp" value="305" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1105,7 +1126,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="196" />
+      <option name="time" value="306" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Python.PyramidServer">
@@ -1119,85 +1140,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="25" selection-start-line="44" selection-start-column="25" selection-end-line="44" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/development.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/development.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/scripts/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/scripts/initializedb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.4297694">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/production.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.5383104">
@@ -1205,52 +1147,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/utility_views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/development.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/paste/deploy/loadwsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="392" column="0" selection-start-line="392" selection-start-column="0" selection-end-line="392" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/waitress/task.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33173078">
-          <caret line="412" column="0" selection-start-line="412" selection-start-column="0" selection-end-line="412" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid/tweens.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid_debugtoolbar/panels/performance.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid_debugtoolbar/toolbar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="264" column="27" selection-start-line="264" selection-start-column="27" selection-end-line="264" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1268,27 +1168,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/verbs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/stream_framework/activity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33271027">
-          <caret line="61" column="8" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/sqlalchemy/orm/session.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1248" column="0" selection-start-line="1248" selection-start-column="0" selection-end-line="1248" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/stream_framework/feeds/redis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1300,20 +1179,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="133" column="11" selection-start-line="133" selection-start-column="11" selection-end-line="133" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -1335,20 +1200,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="271" column="0" selection-start-line="271" selection-start-column="0" selection-end-line="271" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/mysql/connector/connection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3319672">
-          <caret line="1240" column="0" selection-start-line="1240" selection-start-column="0" selection-end-line="1240" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/stream_framework/feed_managers/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3319672">
-          <caret line="112" column="29" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -1391,27 +1242,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid/router.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="182" column="0" selection-start-line="182" selection-start-column="0" selection-end-line="182" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid_tm/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/stream_framework/verbs/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="6" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/sqlalchemy/sql/expression.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.599567">
@@ -1419,51 +1249,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/events.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09825327">
-          <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/dbconnection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="50" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="50" />
-          <folding>
-            <element signature="e#21#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/pin_feed.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/security.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09803922">
-          <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/mysql/connector/cursor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="823" column="0" selection-start-line="823" selection-start-column="0" selection-end-line="823" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1472,109 +1261,316 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="143" selection-end-column="55" />
           <folding>
-            <element signature="e#60#73#0" expanded="true" />
+            <element signature="e#60#73#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/jwt/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3325359">
+          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/Crypto/PublicKey/RSA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="274" column="0" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/mysql/connector/connection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1416" column="0" selection-start-line="1416" selection-start-column="0" selection-end-line="1416" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/webob/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="775" column="0" selection-start-line="775" selection-start-column="0" selection-end-line="775" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/stream_framework/verbs/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54330707">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/stream_framework/verbs/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33070865">
+          <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/stream_framework/feed_managers/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33228347">
+          <caret line="155" column="46" selection-start-line="155" selection-start-column="46" selection-end-line="155" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lookchic/feed_managers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-          <folding />
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid/config/views.py">
+    <entry file="file://$PROJECT_DIR$/development.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="477" column="0" selection-start-line="477" selection-start-column="0" selection-end-line="477" selection-end-column="0" />
-          <folding />
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/sqlalchemy/orm/session.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1248" column="0" selection-start-line="1248" selection-start-column="0" selection-end-line="1248" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/webob/response.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33236575">
+          <caret line="302" column="13" selection-start-line="302" selection-start-column="13" selection-end-line="302" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/waitress/task.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="412" column="0" selection-start-line="412" selection-start-column="0" selection-end-line="412" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid/response.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11392405">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/scripts/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/scripts/initializedb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/verbs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lookchic/enrichlist.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-          <folding>
-            <element signature="e#20#40#0" expanded="true" />
-            <marker date="1440968302000" expanded="true" signature="732:780" placeholder="select usern..userinfo..." />
-            <marker date="1440968302000" expanded="true" signature="1188:1234" placeholder="select PAddD..photos..." />
-            <marker date="1440968302000" expanded="true" signature="1704:1715" placeholder="select UserI..comments..." />
-            <marker date="1440968302000" expanded="true" signature="1704:1822" placeholder="select Usern..comments..." />
-            <marker date="1440968302000" expanded="true" signature="1704:1861" placeholder="select Usern..comments..." />
-            <marker date="1440968302000" expanded="true" signature="2440:2482" placeholder="select count..likes..." />
-            <marker date="1440968302000" expanded="true" signature="2440:2487" placeholder="select count..likes..." />
-            <marker date="1440968302000" expanded="true" signature="2440:2488" placeholder="select count..likes..." />
-            <marker date="1440968302000" expanded="true" signature="2873:2915" placeholder="select count..likes..." />
-            <marker date="1440968302000" expanded="true" signature="2873:2934" placeholder="select count..likes..." />
-            <marker date="1440968302000" expanded="true" signature="3793:3849" placeholder="select Path,..photos..." />
-          </folding>
+          <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/security.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/events.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="86" selection-start-line="4" selection-start-column="85" selection-end-line="4" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/utility_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid_tm/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid/tweens.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid_debugtoolbar/panels/performance.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid_debugtoolbar/toolbar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="268" column="0" selection-start-line="268" selection-start-column="0" selection-end-line="268" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid/router.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="218" column="0" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lookchic/ProductSearch.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="e#20#30#0" expanded="true" />
-          </folding>
+          <caret line="61" column="20" selection-start-line="61" selection-start-column="20" selection-end-line="61" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lookchic/views.py">
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/stream_framework/activity.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="264" column="13" selection-start-line="264" selection-start-column="13" selection-end-line="264" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/pin_feed.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/Authentication.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid/config/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-51.481388">
+          <caret line="596" column="0" selection-start-line="596" selection-start-column="0" selection-end-line="596" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../FeedVirtualEnv/foobar/lib/python2.7/site-packages/pyramid/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="233" column="0" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/dbconnection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="39" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lookchic/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="339" column="0" selection-start-line="339" selection-start-column="0" selection-end-line="339" selection-end-column="0" />
+          <caret line="198" column="0" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
           <folding>
-            <element signature="e#24#34#0" expanded="true" />
-            <element signature="e#5490#5950#0" expanded="false" />
-            <element signature="e#6064#6831#0" expanded="false" />
-            <element signature="e#7869#8191#0" expanded="false" />
-            <marker date="1441507428000" expanded="true" signature="6958:7021" placeholder="select user1..userrelation..." />
-            <marker date="1441507428000" expanded="true" signature="8302:8372" placeholder="select count..userrelation..." />
-            <marker date="1441507428000" expanded="true" signature="8736:8806" placeholder="select count..userrelation..." />
-            <marker date="1441507428000" expanded="true" signature="9165:9226" placeholder="select count..userrelation..." />
-            <marker date="1441507428000" expanded="true" signature="9574:9633" placeholder="select count..Photos..." />
-            <marker date="1441507428000" expanded="true" signature="10994:11021" placeholder="Delete FROM ..." />
-            <marker date="1441507428000" expanded="true" signature="10994:11031" placeholder="Delete FROM ..." />
-            <marker date="1441507428000" expanded="true" signature="12976:13144" placeholder="select photo..photos..." />
-            <marker date="1441507428000" expanded="true" signature="13037:13113" placeholder="select userr..userrelation..." />
-            <marker date="1441507428000" expanded="true" signature="13510:13869" placeholder="select ID, B..Products..." />
-            <marker date="1441507428000" expanded="true" signature="13595:13679" placeholder="select ID fr..Brands..." />
-            <marker date="1441507428000" expanded="true" signature="13711:13868" placeholder="select Produ..productTypes..." />
-            <marker date="1441507428000" expanded="true" signature="14228:14295" placeholder="select Value..productdetail..." />
-            <marker date="1441507428000" expanded="true" signature="14620:14674" placeholder="select brand..brands..." />
-            <marker date="1441507428000" expanded="true" signature="14999:15047" placeholder="select Url f..links..." />
-            <marker date="1441507428000" expanded="true" signature="15418:15435" placeholder="select * fro..fav..." />
-            <marker date="1441507428000" expanded="true" signature="15418:15454" placeholder="select * fro..favorite..." />
-            <marker date="1441507428000" expanded="true" signature="15418:15455" placeholder="select * fro..favorite..." />
-            <marker date="1441507428000" expanded="true" signature="15418:15474" placeholder="select * fro..favorite..." />
-            <marker date="1441507428000" expanded="true" signature="15418:15483" placeholder="select * fro..favorite..." />
-            <marker date="1441507428000" expanded="true" signature="15705:15725" placeholder="Insert into ..." />
-            <marker date="1441507428000" expanded="true" signature="15705:15784" placeholder="Insert into ..." />
-            <marker date="1441507428000" expanded="true" signature="18567:18650" placeholder="select * fro..test_usertable..." />
+            <element signature="e#25003#25401#0" expanded="false" />
+            <element signature="e#25430#25711#0" expanded="false" />
+            <marker date="1447650461000" expanded="true" signature="5659:5703" placeholder="Select * fro..userinfo..." />
+            <marker date="1447650461000" expanded="true" signature="7532:7595" placeholder="select user1..userrelation..." />
+            <marker date="1447650461000" expanded="true" signature="8912:8959" placeholder="SELECT Passw..userinfo..." />
+            <marker date="1447650461000" expanded="true" signature="18875:18951" placeholder="select id fr..photos..." />
+            <marker date="1447650461000" expanded="true" signature="19570:19629" placeholder="select photo..favorite..." />
+            <marker date="1447650461000" expanded="true" signature="23059:23216" placeholder="select Usern..comments..." />
+            <marker date="1447650461000" expanded="true" signature="24604:24646" placeholder="select count..likes..." />
+            <marker date="1447650461000" expanded="true" signature="25846:26028" placeholder="select photo..photos..." />
+            <marker date="1447650461000" expanded="true" signature="25907:25983" placeholder="select userr..userrelation..." />
+            <marker date="1447650461000" expanded="true" signature="26394:27234" placeholder="SELECT DISTI..products..." />
+            <marker date="1447650461000" expanded="true" signature="26394:28865" placeholder="SELECT DISTI..." />
+            <marker date="1447650461000" expanded="true" signature="26956:27183" placeholder="select DISTI..ProductCategory..." />
+            <marker date="1447650461000" expanded="true" signature="27073:27182" placeholder="select DISTI..Category..." />
+            <marker date="1447650461000" expanded="true" signature="27275:27986" placeholder="SELECT DISTI..products..." />
+            <marker date="1447650461000" expanded="true" signature="27842:27952" placeholder="select DISTI..brands..." />
+            <marker date="1447650461000" expanded="true" signature="28026:28865" placeholder="SELECT DISTI..products..." />
+            <marker date="1447650461000" expanded="true" signature="28602:28815" placeholder="select DISTI..ProductColors..." />
+            <marker date="1447650461000" expanded="true" signature="28726:28814" placeholder="select DISTI..color..." />
+            <marker date="1447650461000" expanded="true" signature="29225:29298" placeholder="select Retai..productdetail..." />
+            <marker date="1447650461000" expanded="true" signature="29655:29709" placeholder="select brand..brands..." />
+            <marker date="1447650461000" expanded="true" signature="30104:30359" placeholder="SELECT Path,..photos..." />
+            <marker date="1447650461000" expanded="true" signature="30790:30837" placeholder="select outUr..Products..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.518518">
+          <caret line="294" column="10" selection-start-line="294" selection-start-column="10" selection-end-line="294" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lookchic/postevents.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7385621">
-          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+        <state vertical-scroll-proportion="-6.6666665">
+          <caret line="35" column="6" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="6" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lookchic/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.63268894">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

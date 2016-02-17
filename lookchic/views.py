@@ -7,6 +7,7 @@ from pyramid.view import view_defaults
 from sqlalchemy.exc import DBAPIError
 import bcrypt
 from Authentication import generateToken,authenticateUser
+from weibo import APIClient, APIError
 
 from .models import (
     Userinfo,
@@ -39,7 +40,7 @@ class Views:
             #return False
         return True
 
-    #login
+    # login
     @view_config(route_name='login', request_method='OPTIONS')
     def login_options(self):
         resp = self.request.response
@@ -51,25 +52,28 @@ class Views:
         request = self.request
         resp = request.response
         try:
-            user = sess.query(Userinfo).filter(Userinfo.Email ==request.json_body.get('email')).first() # request.POST.get('email')).first() # request.json_body.get('email')).first()
+            from models import getUserForLogin
+            user=getUserForLogin(request.json_body.get('email'))
+            #user = sess.query(Userinfo).filter(Userinfo.Email ==request.json_body.get('email')).first() # request.POST.get('email')).first() # request.json_body.get('email')).first()
             print "After query DB"
             if user is None:
                 return Response(json=dict(rc=400, msg="Login Error: no such user"), status_code=400)
-            if user.Password == request.json_body.get('password'): #request.POST.get('password'):
+            if user[2] == request.json_body.get('password'): #request.POST.get('password'):
                 #user.pwhash == bcrypt.hashpw(bytes(request.POST.get('password'), 'utf-8'), user.salt):
                 #request.sess[request.POST.get('email')] = 'sessionstart'
                 #request.session.save()
                 #headers = remember(request, request.json_body.get('email'))
                 #headers.append(('X-CSRF-token', request.session.new_csrf_token()))
-                userSecreat=user.Salt
-                userid=user.ID
+                userSecreat=user[5] #.Salt
+                userid=user[0]
 
-                userToken=generateToken(userid,user.Password)
+                userToken=generateToken(userid,user[2])
 
                 resp.status_code = 200
-                #(json=dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID), status_code=200)
-                #resp.headerlist.append(('Access-Control-Allow-Origin', '*'))
-                return dict(rc=200, msg="Login Successful", user=user.Email, userid=user.ID, accessToken=userToken)
+                resp.json=dict(rc=200, msg="Login Successful", user=user[6], userid=user[0], accessToken=userToken)
+
+                return resp
+                #dict(rc=200, msg="Login Successful", user=user[6], userid=user[0], accessToken=userToken)
 
             #sess.remove()
             #resp.status_code = 400
@@ -163,8 +167,8 @@ class Views:
                 # Please note that in a real application you would not use /tmp,
                 # and if you write to an untrusted location you will need to do
                 # some extra work to prevent symlink attacks.
-                #RealPath='/Users/zoe/Desktop/Projects/lc_frontend/app/images/uploaded'
-                RealPath = 'C:\\LC\\lc_ng\\app\\images\\uploaded'
+                RealPath='/Users/zoe/Desktop/Projects/lc_frontend/app/images/uploaded'
+                #RealPath = 'C:\\LC\\lc_ng\\app\\images\\uploaded'
                 RelativePath = os.path.join('images', 'uploaded')
                 Saved_file_name = '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2]
                 file_path = os.path.join(RealPath, Saved_file_name)
@@ -207,7 +211,7 @@ class Views:
         resp = self.request.response
         return resp
 
-    @view_config(route_name='main')
+    @view_config(route_name='main', request_method='POST')
     def main(self):
         request = self.request
         resp = request.response
@@ -271,6 +275,63 @@ class Views:
             print (exc_info())
             return resp(json=dict(rc=400, msg="Comment Error: " + exc_info()), status_code=400)
 
+    # Delete Comment
+    @view_config(route_name='delcomment', request_method='OPTIONS')
+    def delcomment_options(self):
+        resp = self.request.response
+        return resp
+
+    @view_config(route_name='delcomment', request_method='POST')
+    def delcomment(self):
+        request = self.request
+        resp = self.request.response
+        try:
+            #Add comment to DB
+            user_id = request.json_body.get('userid')
+            pic_id = request.json_body.get('picid')
+            commentid = request.json_body.get('commentid')
+
+            comms = postevents.removeuserComment(user_id, pic_id, commentid)
+            if (comms is not None):
+                return dict(rc=200, msg="Comment Added", comments=comms)
+            else:
+                return dict(rc=400, msg="Comment Added Failed", comments=None)
+        except:
+            print (exc_info())
+            return resp(json=dict(rc=400, msg="Comment Error: " + exc_info()), status_code=400)
+
+
+
+    # Weibo Login
+    @view_config(route_name='weibologin', request_method='OPTIONS')
+    def weibo_login(self):
+        resp=self.request.response
+        return resp
+
+    @view_config(route_name='weibologin', request_method='GET')
+    def webo_login(self):
+        client=create_weibo_client()
+        return client.get_authorize_url()
+
+    #Weibo Login callback
+    @view_config(route_name='weibocallback', request_method='OPTIONS')
+    def weibo_login(self):
+        resp=self.request.response
+        return resp
+
+    @view_config(route_name='weibocallback', request_method='GET')
+    def weibo_callback(self):
+        request = self.request
+        print request
+        code=request.params.get('code')
+        print code
+        client = create_weibo_client()
+        weiboresp = client.request_access_token(code)
+        access_token, expires_in, uid = weiboresp.access_token, weiboresp.expires_in, weiboresp.uid
+        client.set_access_token(access_token, expires_in)
+        u = client.users.show.get(uid=uid)
+        return
+
     # Add/Delete Like
     @view_config(route_name='addlike', request_method='OPTIONS')
     def addlike_options(self):
@@ -295,7 +356,7 @@ class Views:
 
         except:
             print (exc_info())
-            return resp(json=dict(rc=400, msg="Comment Error: " + exc_info()), status_code=400)
+            return resp(json=dict(rc=400, msg="addlike Error: " + exc_info()), status_code=400)
 
     #Add Favorite
     @view_config(route_name='addfavorite', request_method='OPTIONS')
@@ -393,6 +454,12 @@ class Views:
         except:
             print (exc_info())
             return resp(json=dict(rc=400, msg="User Fav Error: " + exc_info()), status_code=400)
+
+_APP_ID='1467773316'
+_APP_SECRET='4b021dd485b92fee0ad999536703030f'
+
+def create_weibo_client():
+    return APIClient(_APP_ID, _APP_SECRET, 'http://www.instyleglobal.com:6543/weibocallback')
 
 conn_err_msg = """
 Pyramid is having a problem using your SQL database.  The problem
