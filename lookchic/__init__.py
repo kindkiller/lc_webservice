@@ -20,9 +20,10 @@ def request_factory(environ):
     request.response.headerlist.extend(
         (
             #("Access-Control-Allow-Origin", "http://www.lukchic.com"),
-            ("Access-Control-Allow-Origin", "http://192.168.56.101:8080"),
-            ("Access-Control-Allow-Methods", "GET, PUT, POST"),
-            ("Access-Control-Allow-Headers","Access-Control-Allow-Origin")
+            #("Access-Control-Allow-Origin", "http://192.168.56.101:8080"),
+            ("Access-Control-Allow-Origin", "http://localhost:8000"),
+            #("Access-Control-Allow-Methods", "GET, PUT, POST"),
+            ("Access-Control-Allow-Headers", "Access-Control-Allow-Origin,Authorization")
             #("Access-Control-Allow-Credentials", 'true'),
             #("Access-Control-Allow-Headers", "Authorization")
         )

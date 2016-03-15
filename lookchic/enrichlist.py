@@ -47,7 +47,6 @@ class richPicture(object):
         except:
             print (exc_info())
 
-
     def getTime(self):
         try:
             cursor = conn.cursor()
@@ -67,7 +66,7 @@ class richPicture(object):
         try:
             pic_comments=list()
             cursor = conn.cursor()
-            sql = ("select Username, Context, comments.AddDate, comments.UserID from userdb.comments,userdb.userinfo "
+            sql = ("select Username, Context, comments.AddDate, comments.UserID, comments.ID from userdb.comments,userdb.userinfo "
                    "where PhotoID = %(pid)s and userinfo.id=comments.UserID")
             data = {'pid':self.pic_id}
             cursor.execute(sql,data)
@@ -76,7 +75,7 @@ class richPicture(object):
             if len(comments) >0:
                 for comment in comments:
                     com=dict(username=comment[0],comment=comment[1],time=comment[2].strftime("%Y-%m-%d %H:%M:%S"),
-                             userid=comment[3])
+                             userid=comment[3], commentid=comment[4])
                     pic_comments.append(com)
         except:
             print (exc_info())
@@ -141,7 +140,6 @@ class richComment(object):
 
 class richUserPictures(object):
 
-
     def __init__(self, pic_ids, userid):
         self.pics=list()
         self.userid=userid
@@ -151,13 +149,12 @@ class richUserPictures(object):
         except:
             print (exc_info())
 
-
-    def enrichPicture(self,pic_id):
+    def enrichPicture(self, pic_id):
         try:
             cursor = conn.cursor()
             sql = ("select Path, Filename,UID from userdb.photos where ID = %(pid)s and removed=0")
-            data = {'pid':pic_id}
-            cursor.execute(sql,data)
+            data = {'pid': pic_id}
+            cursor.execute(sql, data)
             Pics=cursor.fetchall()
             cursor.close()
             if len(Pics)>0:
@@ -171,7 +168,7 @@ class richUserPictures(object):
             cursor.close()
             return None
 
-    def enrichPictures(self,pic_ids):
+    def enrichPictures(self, pic_ids):
         self.pics=list()
         for pic_id in pic_ids:
             pic=self.enrichPicture(pic_id)

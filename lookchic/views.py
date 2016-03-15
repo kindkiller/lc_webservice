@@ -7,7 +7,7 @@ from pyramid.view import view_defaults
 from sqlalchemy.exc import DBAPIError
 import bcrypt
 from Authentication import generateToken,authenticateUser
-from weibo import APIClient, APIError
+#from weibo import APIClient, APIError
 
 from .models import (
     Userinfo,
@@ -167,8 +167,8 @@ class Views:
                 # Please note that in a real application you would not use /tmp,
                 # and if you write to an untrusted location you will need to do
                 # some extra work to prevent symlink attacks.
-                RealPath='/Users/zoe/Desktop/Projects/lc_frontend/app/images/uploaded'
-                #RealPath = 'C:\\LC\\lc_ng\\app\\images\\uploaded'
+                #RealPath='/Users/zoe/Desktop/Projects/lc_frontend/app/images/uploaded'
+                RealPath = 'C:\\LC\\lc_ng\\app\\images\\uploaded'
                 RelativePath = os.path.join('images', 'uploaded')
                 Saved_file_name = '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2]
                 file_path = os.path.join(RealPath, Saved_file_name)
