@@ -894,7 +894,7 @@ def getFeedsFromDb(uid):
     try:
         cursor = conn.cursor()
         sql=("select photos.id as PhotoId from photos where photos.uid in (select userrelation.user2ID from userrelation"
-             " where User1ID=%(uid)s) and removed=0 order by PAddDate desc")
+             " where User1ID=%(uid)s) and removed=0 order by PAddDate")
         data={"uid":uid}
         cursor.execute(sql,data)
         rows=cursor.fetchall()

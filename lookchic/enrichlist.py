@@ -57,7 +57,7 @@ class richPicture(object):
             cursor.close()
             if times is not None:
                 time=times.pop()
-                return time[0].strftime("%B,%d,%Y")
+                return time[0].strftime("%m,%d,%Y")
         except:
             print (exc_info())
             return null

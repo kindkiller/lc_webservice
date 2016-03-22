@@ -116,11 +116,12 @@ def getUserProfilePage(userid):
 
 def addUserLikePhoto(userid, photoid):
     if userid is not None and photoid is not None:
-        from models import AddLike,getlistcount
+        from models import AddLike,getlistcount,UnlikePic
         result=AddLike(userid,photoid)
         if result is True:
             count=getlistcount(photoid)
             return count
+
     else:
         return None
 
