@@ -632,7 +632,7 @@ def getUserPosts(uid):
         #cannot use stored procedure, the procedure cannot return multiple rows in this case, or create a temp table in the procedure and select from that temp table.
         #todo: need to improvde the procedure
         sql=("select id from userdb.photos"
-             " where uid=%(uid)s and removed=0")
+             " where uid=%(uid)s and removed=0 order by PAddDate Desc")
         data={"uid":uid}
         cursor.execute(sql,data)
         rows=cursor.fetchall()
@@ -894,7 +894,7 @@ def getFeedsFromDb(uid):
     try:
         cursor = conn.cursor()
         sql=("select photos.id as PhotoId from photos where photos.uid in (select userrelation.user2ID from userrelation"
-             " where User1ID=%(uid)s) and removed=0 order by PAddDate")
+             " where User1ID=%(uid)s) and removed=0 order by PAddDate desc")
         data={"uid":uid}
         cursor.execute(sql,data)
         rows=cursor.fetchall()
