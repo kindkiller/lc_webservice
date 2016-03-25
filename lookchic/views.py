@@ -110,11 +110,11 @@ class Views:
             from Authentication import generateUserKeys,generateToken
             from models import getUserPubkey
             if generateUserKeys(Uid):
-                userToken=generateToken(Uid,pwd)
+                userToken = generateToken(Uid, pwd)
 
-                return Response(json=dict(rc=200, msg="Sign up: Sign up successful"), status_code=200,accessToken=userToken)
+                return Response(json=dict(rc=200, msg="Sign up: Sign up successful"), status_code=200, userid=Uid, accessToken=userToken)
         else:
-            return Response(json=dict(rc=200, msg="Sign up: Sign up fail"), status_code=200,userToken=None,userPubKey=None)
+            return Response(json=dict(rc=400, msg="Sign up: Sign up fail"), status_code=400, userToken=None,userPubKey=None)
 
     # save a posted image
 
@@ -303,34 +303,34 @@ class Views:
 
 
     # Weibo Login
-    @view_config(route_name='weibologin', request_method='OPTIONS')
-    def weibo_login(self):
-        resp=self.request.response
-        return resp
+    # @view_config(route_name='weibologin', request_method='OPTIONS')
+    # def weibo_login(self):
+    #     resp=self.request.response
+    #     return resp
 
-    @view_config(route_name='weibologin', request_method='GET')
-    def webo_login(self):
-        client=create_weibo_client()
-        return client.get_authorize_url()
+    # @view_config(route_name='weibologin', request_method='GET')
+    # def webo_login(self):
+    #     client=create_weibo_client()
+    #     return client.get_authorize_url()
 
     #Weibo Login callback
-    @view_config(route_name='weibocallback', request_method='OPTIONS')
-    def weibo_login(self):
-        resp=self.request.response
-        return resp
+    # @view_config(route_name='weibocallback', request_method='OPTIONS')
+    # def weibo_login(self):
+    #     resp=self.request.response
+    #     return resp
 
-    @view_config(route_name='weibocallback', request_method='GET')
-    def weibo_callback(self):
-        request = self.request
-        print request
-        code=request.params.get('code')
-        print code
-        client = create_weibo_client()
-        weiboresp = client.request_access_token(code)
-        access_token, expires_in, uid = weiboresp.access_token, weiboresp.expires_in, weiboresp.uid
-        client.set_access_token(access_token, expires_in)
-        u = client.users.show.get(uid=uid)
-        return
+    # @view_config(route_name='weibocallback', request_method='GET')
+    # def weibo_callback(self):
+    #     request = self.request
+    #     print request
+    #     code=request.params.get('code')
+    #     print code
+    #     client = create_weibo_client()
+    #     weiboresp = client.request_access_token(code)
+    #     access_token, expires_in, uid = weiboresp.access_token, weiboresp.expires_in, weiboresp.uid
+    #     client.set_access_token(access_token, expires_in)
+    #     u = client.users.show.get(uid=uid)
+    #     return
 
     # Add/Delete Like
     @view_config(route_name='addlike', request_method='OPTIONS')
@@ -458,8 +458,8 @@ class Views:
 _APP_ID='1467773316'
 _APP_SECRET='4b021dd485b92fee0ad999536703030f'
 
-def create_weibo_client():
-    return APIClient(_APP_ID, _APP_SECRET, 'http://www.instyleglobal.com:6543/weibocallback')
+#def create_weibo_client():
+    #return APIClient(_APP_ID, _APP_SECRET, 'http://www.instyleglobal.com:6543/weibocallback')
 
 conn_err_msg = """
 Pyramid is having a problem using your SQL database.  The problem
