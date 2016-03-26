@@ -112,9 +112,9 @@ class Views:
             if generateUserKeys(Uid):
                 userToken = generateToken(Uid, pwd)
 
-                return Response(json=dict(rc=200, msg="Sign up: Sign up successful"), status_code=200, userid=Uid, accessToken=userToken)
+                return dict(rc=200, msg="Sign up: Sign up successful", status_code=200, userid=Uid, accessToken=userToken)
         else:
-            return Response(json=dict(rc=400, msg="Sign up: Sign up fail"), status_code=400, userToken=None,userPubKey=None)
+            return dict(rc=400, msg="Sign up: Sign up fail", status_code=400, userToken=None, userPubKey=None)
 
     # save a posted image
 
