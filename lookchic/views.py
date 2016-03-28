@@ -404,6 +404,13 @@ class Views:
             print (exc_info())
             return dict(rc=400, msg="User Profile Error: " + exc_info(), status_code=400)
 
+    # Get User Profile
+    @view_config(route_name='updateprofile', request_method='OPTIONS')
+    def updateprofile_options(self):
+        resp = self.request.response
+        return resp
+
+
     @view_config(route_name='updateprofile', request_method='POST')
     def updateprofile(self):
         request = self.request
@@ -411,10 +418,19 @@ class Views:
 
         try:
             userid = request.params.get('userid')
+            Uname = request.params.get('username')
+            Location = request.params.get('location')
+            brithday = request.params.get('brithday')
+            Gender = request.params.get('gender')
+            Occupation = request.params.get('occupation')
+            Height = request.params.get('height')
+            Weight = request.params.get('weight')
 
-            profile = postevents.getUserProfilePage(userid)
-
-            return dict(rc=200, msg="Update Profile Successful", profile=profile)
+            result=postevents.UpdateUserProfile(userid,Uname,Location,brithday,Gender,Occupation,Height,Weight)
+            if (result):
+                return dict(rc=200, msg="Update Profile Successful")
+            else:
+                return dict(rc=400, msg="Update Profile Failed.")
         except:
             print (exc_info())
             return dict(rc=400, msg="Update User Profile Error: " + exc_info(), status_code=400)
