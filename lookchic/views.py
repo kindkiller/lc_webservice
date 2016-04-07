@@ -48,7 +48,7 @@ class Views:
 
     @view_config(route_name='login',  request_method='POST')
     def login(self):
-        print "Recieve Post request"
+        print "Recieve login request"
         request = self.request
         resp = request.response
         try:
@@ -82,7 +82,7 @@ class Views:
             return resp(conn_err_msg, content_type='text/plain', status_int=400)
         except:
             print (exc_info())
-            return resp(json=dict(rc=400, msg="Login Error: unknown error"), status_code=400)
+            return resp(json=dict(rc=400, msg="Login Error: unknown error",status_code=400))
 
     #Signup
     @view_config(route_name='signup', request_method='OPTIONS')
@@ -418,6 +418,7 @@ class Views:
 
         try:
             userid = request.params.get('userid')
+            email = request.params.get('email')
             Uname = request.params.get('username')
             Location = request.params.get('location')
             brithday = request.params.get('brithday')
@@ -426,11 +427,42 @@ class Views:
             Height = request.params.get('height')
             Weight = request.params.get('weight')
 
-            result=postevents.UpdateUserProfile(userid,Uname,Location,brithday,Gender,Occupation,Height,Weight)
-            if (result):
-                return dict(rc=200, msg="Update Profile Successful")
+            filename = request.POST['file'].filename
+            if(filename):
+                input_file = request.POST['file'].file
+                # strip leading path from file name to avoid directory traversal attacks
+                fn = os.path.basename(filename)
+                RealPath = 'C:\\LC\\lc_ng\\app\\images\\uploaded'
+                RelativePath = os.path.join('images', 'uploaded')
+                Saved_file_name = '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2]
+                file_path = os.path.join(RealPath, Saved_file_name)
+                Relative_file_path = os.path.join(RelativePath, Saved_file_name)
+                # We first write to a temporary file to prevent incomplete files from
+                # being used.
+
+                temp_file_path = file_path + '~'
+
+                # Finally write the data to a temporary file
+                input_file.seek(0)
+                with open(temp_file_path, 'wb') as output_file:
+                    shutil.copyfileobj(input_file, output_file)
+
+                # Now that we know the file has been fully saved to disk move it into place.
+
+                os.rename(temp_file_path, file_path)
+                resp.status_code = 200
+
+                userid=json.loads(request.POST.get('userid'))
+                pic_id = postevents.addUserProfilePhotoEvent(userid, RelativePath,Saved_file_name)
+
+
+            result=postevents.UpdateUserProfile(userid,Uname,Location,brithday,Gender,Occupation,Height,Weight, email)
+
+
+            if (result and pic_id > 0):
+                return dict(rc=200, msg="Update Profile Photo Successful")
             else:
-                return dict(rc=400, msg="Update Profile Failed.")
+                return dict(rc=400, msg="Update Profile Photo Failed.")
         except:
             print (exc_info())
             return dict(rc=400, msg="Update User Profile Error: " + exc_info(), status_code=400)

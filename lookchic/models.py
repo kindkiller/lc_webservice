@@ -595,12 +595,12 @@ def addUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight):
         cursor.close()
         return False
 
-def updateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight):
+def updateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight, Email):
     if uid==0:
         return None
     cursor=conn.cursor()
     try:
-        args = [uid,Uname,Location,brithday,Gender,Occupation,Height,Weight]
+        args = [uid,Uname,Location,brithday,Gender,Occupation,Height,Weight, Email]
         result_args = cursor.callproc('uspupdateUserProfile', args)
 
         # sql=("Update userdetails "
@@ -682,6 +682,22 @@ def addphoto(UID, PName, PDesc, PPath, FiName):
         conn.commit()
         newCursor.close()
         return (result_args[5])
+    except Error as e:
+        conn.rollback()
+        print(e)
+        newCursor.close()
+    return 0;
+
+def addUserProfilePhoto(UID, PName, PPath, FiName):
+    newCursor = conn.cursor();
+    try:
+        if (UID <= 0):
+            return 0;
+        args = [UID, PName, 'UserProfile',PPath, FiName, 0]
+        result_args = newCursor.callproc('uspAddUserProfilePhoto', args)
+        conn.commit()
+        newCursor.close()
+        return result_args[5]
     except Error as e:
         conn.rollback()
         print(e)

@@ -20,6 +20,14 @@ def addphotoEvent(userid, RelativePath, Saved_file_name, tags):
     else:
         return 0
 
+def addUserProfilePhotoEvent(userid, RelativePath, Saved_file_name):
+    if (userid > 0 and RelativePath != '' and Saved_file_name != ''):
+        from models import addUserProfilePhoto, addphotoTags
+        pic_id = addUserProfilePhoto(userid, 'photoname', RelativePath, Saved_file_name)
+        return pic_id;
+    else:
+        return 0;
+
 def removePhotoEvent(userid, pic_id):
     if (userid>0 and pic_id>0):
         from models import removePhoto
@@ -140,12 +148,12 @@ def getUserFavorite(userid):
             result.extend(feeds)
     return result
 
-def UpdateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight):
+def UpdateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight, Email):
     if (uid==0):
         return False
     else:
         from models import updateUserProfile
-        result=updateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight)
+        result=updateUserProfile(uid,Uname,Location,brithday,Gender,Occupation,Height,Weight, Email)
         return result
 
 def generateFeeds(pics):
