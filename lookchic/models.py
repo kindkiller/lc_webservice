@@ -544,7 +544,7 @@ def getUserProfile(uid):
         return None
     cursor=conn.cursor()
     try:
-        args = [uid,'','','','','','','']
+        args = [uid,'','','','','','','','']
         result_args = cursor.callproc('uspgetUserProfile', args)
 
         # sql=("select username,location,brithday,Gender,Occupation,Height,Weight from userdb.userdetails"
@@ -554,7 +554,7 @@ def getUserProfile(uid):
         #row=cursor.fetchall()
         if result_args is not None:
             result=dict(username=result_args[1],location=result_args[2],brithday=result_args[3],Gender=result_args[4],
-                        Occupation=result_args[5],Height=result_args[6],Weight=result_args[7])
+                        Occupation=result_args[5],Height=result_args[6],Weight=result_args[7], Email=result_args[8])
             cursor.close()
             return result
     except:

@@ -8,6 +8,7 @@ from sqlalchemy.exc import DBAPIError
 import bcrypt
 from Authentication import generateToken,authenticateUser
 #from weibo import APIClient, APIError
+from datetime import datetime
 
 from .models import (
     Userinfo,
@@ -395,7 +396,7 @@ class Views:
         resp = self.request.response
 
         try:
-            userid = request.params.get('userid')
+            userid = int(request.params.get('userid'))
 
             profile = postevents.getUserProfilePage(userid)
 
@@ -417,44 +418,58 @@ class Views:
         resp = self.request.response
 
         try:
-            userid = request.params.get('userid')
+            userid = int(request.params.get('userid'))
             email = request.params.get('email')
             Uname = request.params.get('username')
             Location = request.params.get('location')
-            brithday = request.params.get('brithday')
+            brithday = str(request.params.get('brithday'))
+            if(brithday == 'null'):
+                brithday = datetime.strptime('1900-01-01', '%Y-%m-%d')
+            else:
+                brithday = datetime.strptime(brithday, '%Y-%m-%dT%H:%M:%S.%fZ')
+
             Gender = request.params.get('gender')
             Occupation = request.params.get('occupation')
-            Height = request.params.get('height')
-            Weight = request.params.get('weight')
+            Height = str(request.params.get('height'))
+            if (Height == 'null'):
+                Height = float(0.0)
+            else:
+                Height = float(Height)
 
-            filename = request.POST['file'].filename
-            if(filename):
-                input_file = request.POST['file'].file
-                # strip leading path from file name to avoid directory traversal attacks
-                fn = os.path.basename(filename)
-                RealPath = 'C:\\LC\\lc_ng\\app\\images\\uploaded'
-                RelativePath = os.path.join('images', 'uploaded')
-                Saved_file_name = '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2]
-                file_path = os.path.join(RealPath, Saved_file_name)
-                Relative_file_path = os.path.join(RelativePath, Saved_file_name)
-                # We first write to a temporary file to prevent incomplete files from
-                # being used.
+            Weight = str(request.params.get('weight'))
+            if (Weight == 'null'):
+                Weight = float(0.0)
+            else:
+                Weight = float(Weight)
 
-                temp_file_path = file_path + '~'
+            if(request.POST['file']):
+                filename = request.POST['file'].filename
+                if(filename):
+                    input_file = request.POST['file'].file
+                    # strip leading path from file name to avoid directory traversal attacks
+                    fn = os.path.basename(filename)
+                    RealPath = 'C:\\LC\\lc_ng\\app\\images\\avatars'
+                    RelativePath = os.path.join('images', 'avatars')
+                    Saved_file_name = '%s' % uuid.uuid4() + '.' + fn.rpartition('.')[2]
+                    file_path = os.path.join(RealPath, Saved_file_name)
+                    Relative_file_path = os.path.join(RelativePath, Saved_file_name)
+                    # We first write to a temporary file to prevent incomplete files from
+                    # being used.
 
-                # Finally write the data to a temporary file
-                input_file.seek(0)
-                with open(temp_file_path, 'wb') as output_file:
-                    shutil.copyfileobj(input_file, output_file)
+                    temp_file_path = file_path + '~'
 
-                # Now that we know the file has been fully saved to disk move it into place.
+                    # Finally write the data to a temporary file
+                    input_file.seek(0)
+                    with open(temp_file_path, 'wb') as output_file:
+                        shutil.copyfileobj(input_file, output_file)
 
-                os.rename(temp_file_path, file_path)
-                resp.status_code = 200
+                    # Now that we know the file has been fully saved to disk move it into place.
 
-                userid=json.loads(request.POST.get('userid'))
-                pic_id = postevents.addUserProfilePhotoEvent(userid, RelativePath,Saved_file_name)
+                    os.rename(temp_file_path, file_path)
+                    resp.status_code = 200
 
+                    userid=json.loads(request.POST.get('userid'))
+                    pic_id = postevents.addUserProfilePhotoEvent(userid, RelativePath,Saved_file_name)
 
             result=postevents.UpdateUserProfile(userid,Uname,Location,brithday,Gender,Occupation,Height,Weight, email)
 
